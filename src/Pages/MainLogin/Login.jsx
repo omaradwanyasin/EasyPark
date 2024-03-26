@@ -2,13 +2,14 @@ import React from "react";
 import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
+import "../MainLogin/Signup.css";
 
 function Login() {
   return (
     <div>
       <div className="container">
         <div className="header">
-          <div className="text">Sign up</div>
+          <div className="text">Login</div>
           <div className="underline"></div>
         </div>
         <div className="inputs">
