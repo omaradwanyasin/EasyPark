@@ -2,6 +2,7 @@ import React from "react";
 import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
+import "../MainLogin/Signup.css";
 
 function Signup() {
   return (
@@ -24,7 +25,7 @@ function Signup() {
           <input type="password" placeholder="Password" />
         </div>
       </div>
-      <div className="forget-password">
+      <div style={{marginTop:30}} className="forget-password">
         <span>Forget Password?</span>
       </div>
       <div className="submit_container">
