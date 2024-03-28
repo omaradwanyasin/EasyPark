@@ -2,9 +2,9 @@ import React from "react";
 import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
-import "../MainLogin/Signup.css";
 
-function Signup() {
+import "../MainLogin/Signup.css";
+function GarageOwner() {
   return (
     <div className="container">
       <div className="header">
@@ -24,21 +24,18 @@ function Signup() {
           <img src={password_icon} alt="" />
           <input type="password" placeholder="Password" />
         </div>
+        <div className="input">
+          <input type="text" placeholder="Garage location" />
+        </div>
       </div>
       <div style={{ marginTop: 30 }} className="forget-password">
         <span>Forget Password?</span>
       </div>
       <div className="submit_container">
         <div className="submit">Sign up</div>
-        <div className="Login-As-GarageOwner">
-          {" "}
-          <a href="#">Login as garage owner</a>
-        </div>
-
-        {/* <div className="submit">Login</div> */}
       </div>
     </div>
   );
 }
 
-export default Signup;
+export default GarageOwner;

@@ -106,3 +106,8 @@ code {
 .submit:active {
   transform: translateY(-1px);
 }
+.Login-As-GarageOwner {
+  position: absolute;
+  bottom: 0%;
+  left: 33%;
+}
