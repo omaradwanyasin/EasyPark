@@ -1,0 +1,22 @@
+.Head-section {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin: auto;
+  gap: 100px;
+}
+
+.text-service-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding-top: 30px;
+}
+.seconde-head {
+  padding-top: 250px;
+}
