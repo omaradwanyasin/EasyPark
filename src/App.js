@@ -7,7 +7,7 @@ import Home from "./Pages/Home";
 import Navgation from "./Pages/Navbar/Navgation";
 
 function App() {
-  return <div className="App">{<Navgation />}</div>;
+  return <div className="App">{<Signup />}</div>;
 }
 
 export default App;
