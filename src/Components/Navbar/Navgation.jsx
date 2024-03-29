@@ -1,15 +1,18 @@
 import React from "react";
 import "../Navbar/navStyle.css";
+import "../HomePageBtn";
+import HomePageBtn from "../HomePageBtn";
+import Home from "../../Pages/Home page/Home";
 function Navgation() {
   return (
     <div className="navbar">
       <h1 className="logo">EasyPark</h1>
       <ul>
         <li>
-          <button>Login</button>
+          <HomePageBtn name="Log in " destination="/login"/>
         </li>
         <li>
-          <button>Sign in</button>
+          <HomePageBtn name="Sign up" destination="/signup"/>
         </li>
         <li> Home</li>
         <li> Contact</li>

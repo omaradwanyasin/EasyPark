@@ -20,3 +20,16 @@
 .seconde-head {
   padding-top: 250px;
 }
+.last-section {
+  padding-top: 250px;
+  display: flex;
+  width: 73%;
+  justify-content: center;
+  margin: auto;
+  gap: 50px;
+}
+.subtext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

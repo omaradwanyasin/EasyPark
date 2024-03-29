@@ -3,7 +3,9 @@ import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
 import "../MainLogin/Signup.css";
-
+import LoginBtn from "../../Components/LoginBtn";
+import Home from "../Home page/Home";
+import Navgation from "../../Components/Navbar/Navgation";
 function Signup() {
   return (
     <div className="container">
@@ -29,7 +31,7 @@ function Signup() {
         <span>Forget Password?</span>
       </div>
       <div className="submit_container">
-        <div className="submit">Sign up</div>
+        <div ><LoginBtn name="Sign up" /></div>
         <div className="Login-As-GarageOwner">
           {" "}
           <a href="#">Login as garage owner</a>
