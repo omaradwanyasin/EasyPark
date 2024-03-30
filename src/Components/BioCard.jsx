@@ -28,11 +28,14 @@ export default function BioCard(props) {
           {props.text}
         </Typography>
       </CardContent>
-      <CardOverflow
-        sx={{ bgcolor: props.status === 0 ? "#337357" : "#EE4266" }}
-      >
+      <CardOverflow sx={{ bgcolor: "background.level1" }}>
         <CardActions buttonFlex="1">
-          <LocalParkingIcon style={{ width: "30%" }} />
+          <ButtonGroup
+            variant="outlined"
+            sx={{ bgcolor: "background.surface" }}
+          >
+            <LocalParkingIcon />
+          </ButtonGroup>
         </CardActions>
       </CardOverflow>
     </Card>
