@@ -9,7 +9,10 @@ import BioCard from "../../Components/BioCard";
 import map2 from "../../Images/Group.png";
 import mock from "../../Images/deviceframes.png";
 import Service from "../Service page/Service";
-
+import Login from "../MainLogin/Login";
+import Signup from "../MainLogin/Signup";
+import LoginBtn from "../../Components/LoginBtn";
+import HomePageBtn from "../../Components/HomePageBtn";
 function Home() {
   useEffect(() => {
     Aos.init();
@@ -27,7 +30,8 @@ function Home() {
               a tap. Say goodbye to parking woes and hello to convenience!
             </p>
             <div>
-              <Button>Explore Service</Button>
+                <HomePageBtn name="Serivces" destination="/service"/>
+              {/* <Button>Explore Service</Button> */}
             </div>
           </div>
           <div data-aos="zoom-in">

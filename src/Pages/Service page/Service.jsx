@@ -3,8 +3,10 @@ import "mapbox-gl/dist/mapbox-gl-csp";
 import Map from "react-map-gl";
 import "../../Pages/Service page/Service.css";
 import Navgation from "../../Components/Navbar/Navgation";
+import { useNavigate } from "react-router-dom";
 
 function Service() {
+
   return (
     <div>
       <Navgation />
