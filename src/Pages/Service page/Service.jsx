@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "mapbox-gl/dist/mapbox-gl-csp";
 import Map from "react-map-gl";
 import "../../Pages/Service page/Service.css";
 import Navgation from "../../Components/Navbar/Navgation";
 import { useNavigate } from "react-router-dom";
+import { Marker } from "react-map-gl";
+import park from "./park.json";
+import MapMarker from "../../Components/MapMarker";
+import BioCard from "../../Components/BioCard";
+import BottomActionsCard from "../../Components/BottomActionsCard";
 
 function Service() {
+  const [selectedPark, setSelectedPark] = useState(null);
 
   return (
     <div>
@@ -31,9 +37,39 @@ function Service() {
               // Add the zoom level here if you want to initialize the map with a specific zoom
             }}
             mapStyle={"mapbox://styles/omaradwn/clthk171g009n01qwa8r4en8v"}
-          />
+          >
+            {park.features.map((item) => (
+              <Marker
+                latitude={item.geometry.coordinates[1]}
+                longitude={item.geometry.coordinates[0]}
+              >
+                <button
+                  style={{ all: "unset", cursor: "pointer" }}
+                  onClick={(e) => {
+                    console.log("clicked");
+                    e.preventDefault();
+                    setSelectedPark(item);
+                  }}
+                >
+                  <MapMarker />
+                </button>
+              </Marker>
+            ))}
+          </Map>
+        </div>
+
+        <div className="parking-display">
+          {park.features.map((parkings) => (
+            <BottomActionsCard
+              title={parkings.name}
+              text={parkings.info}
+              status={parkings.status}
+              rating={parkings.rating}
+            />
+          ))}
         </div>
       </div>
+
       <br />
     </div>
   );

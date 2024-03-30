@@ -9,7 +9,7 @@ function HomePageBtn({name,destination}) {
     }
   return (
     <div>
-        <button onClick={handleClick}>{name}</button>
+        <button className='HomePageBtn' onClick={handleClick}>{name}</button>
     </div>
   )
 }
