@@ -57,6 +57,10 @@ code {
   background: #eaeaea;
   border-radius: 6px;
 }
+#map{
+  width: 72%;
+  height: 80%;
+}
 .input img {
   margin: 0px 30px;
 }
