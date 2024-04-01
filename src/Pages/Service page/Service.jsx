@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import "../../Pages/Service page/Service.css";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl-csp";
 import Map from "react-map-gl";
-import "../../Pages/Service page/Service.css";
-import Navgation from "../../Components/Navbar/Navgation";
-import { useNavigate } from "react-router-dom";
-import { Marker } from "react-map-gl";
+import { Marker, Popup } from "react-map-gl";
 import park from "./park.json";
 import MapMarker from "../../Components/MapMarker";
-import BioCard from "../../Components/BioCard";
 import BottomActionsCard from "../../Components/BottomActionsCard";
+import Navgation from "../../Components/Navbar/Navgation";
 
 function Service() {
+  const mapRef = useRef(null);
   const [selectedPark, setSelectedPark] = useState(null);
-  //this i scomment for samer samatre 202011257 61283478193784 32jk4h32kjwewbfkja scknasd vckj sdjkasdbj
-  //this is new commnet
-  //new comment 2024
+
+  useEffect(() => {
+    console.log(selectedPark?.geometry.coordinates);
+  }, [selectedPark]);
+
+  const handleMapTransition = useCallback(({ longitude, latitude }) => {
+    mapRef.current?.flyTo({
+      center: [longitude, latitude],
+      duration: 1000,
+      zoom: 17,
+    });
+  }, []);
+
   return (
     <div>
       <Navgation />
@@ -24,6 +33,7 @@ function Service() {
       >
         <div style={{ width: "80vw", margin: "auto" }}>
           <Map
+            ref={mapRef}
             mapboxAccessToken="pk.eyJ1Ijoib21hcmFkd24iLCJhIjoiY2x1MWE0dHE4MGJtZTJqbW5mZ3p0M3BjdyJ9.TgSibF8OzyeO3mgVef1wNw"
             style={{
               overflow: "hidden",
@@ -32,46 +42,56 @@ function Service() {
               height: "80vh",
               margin: "auto",
             }}
-            initialViewState={{
-              latitude: 32.461,
-              longitude: 35.3,
-              zoom: 14,
-              // Add the zoom level here if you want to initialize the map with a specific zoom
-            }}
+            initialViewState={{ latitude: 32.461, longitude: 35.3, zoom: 14 }}
             mapStyle={"mapbox://styles/omaradwn/clthk171g009n01qwa8r4en8v"}
           >
             {park.features.map((item) => (
               <Marker
+                key={item.id}
                 latitude={item.geometry.coordinates[1]}
                 longitude={item.geometry.coordinates[0]}
               >
                 <button
                   style={{ all: "unset", cursor: "pointer" }}
                   onClick={(e) => {
-                    console.log("clicked");
                     e.preventDefault();
-                    setSelectedPark(item);
+                    setSelectedPark(selectedPark === item ? null : item);
                   }}
                 >
                   <MapMarker />
                 </button>
               </Marker>
             ))}
+            {selectedPark && (
+              <Popup
+                latitude={selectedPark.geometry.coordinates[1]}
+                longitude={selectedPark.geometry.coordinates[0]}
+                closeButton={true}
+                closeOnClick={false}
+              >
+                <p style={{ color: "black" }}>{selectedPark.name}</p>
+              </Popup>
+            )}
           </Map>
         </div>
-
         <div className="parking-display">
           {park.features.map((parkings) => (
             <BottomActionsCard
+              key={parkings.id}
               title={parkings.name}
               text={parkings.info}
               status={parkings.status}
               rating={parkings.rating}
+              onSelectCity={() =>
+                handleMapTransition({
+                  latitude: parkings.geometry.coordinates[1],
+                  longitude: parkings.geometry.coordinates[0],
+                })
+              }
             />
           ))}
         </div>
       </div>
-
       <br />
     </div>
   );
