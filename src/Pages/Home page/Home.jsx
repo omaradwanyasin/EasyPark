@@ -13,6 +13,7 @@ import Login from "../MainLogin/Login";
 import Signup from "../MainLogin/Signup";
 import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
+import Footer from "../../Components/Footer";
 function Home() {
   useEffect(() => {
     Aos.init();
@@ -75,11 +76,7 @@ function Home() {
           <div className="mock-dashbord">
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+            <Footer />
         </div>
       </div>
     </div>

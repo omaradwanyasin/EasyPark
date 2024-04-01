@@ -8,8 +8,8 @@ import Service from "./Pages/Service page/Service";
 import HomePageBtn from "./Components/HomePageBtn";
 import Navgation from "./Components/Navbar/Navgation";
 import { BrowserRouter , Routes , Route } from "react-router-dom";
-
-
+import MapMarker from "./Components/MapMarker";
+import Footer from "./Components/Footer";
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,8 @@ function App() {
         <Route path="/service" element ={<Service/>} />
       </Routes>
       </BrowserRouter>
+      
+    
     </div>
   );
 }
