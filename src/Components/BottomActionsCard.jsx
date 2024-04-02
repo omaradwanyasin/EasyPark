@@ -40,7 +40,11 @@ export default function BottomActionsCard(props) {
           <FavoriteBorder />
         </IconButton>
         {props.status === 0 ? (
-          <Button variant="outlined" color="neutral">
+          <Button
+            variant="outlined"
+            color="neutral"
+            onClick={() => props.onSelectCity()}
+          >
             View
           </Button>
         ) : (
