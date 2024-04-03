@@ -75,7 +75,7 @@ code {
 }
 .forget-password span {
   margin-top: 27px;
-  color: #000000;
+  color: blue;
   cursor: pointer;
   font-size: 18px;
 }
@@ -88,4 +88,9 @@ code {
   position: absolute;
   bottom: 11%;
   left: 33%;
+}
+.location{
+color: #000000;
+font-size: 22px;
+margin-right: 120px;
 }

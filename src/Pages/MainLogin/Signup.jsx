@@ -6,6 +6,9 @@ import "../MainLogin/Signup.css";
 import LoginBtn from "../../Components/LoginBtn";
 import Home from "../Home page/Home";
 import Navgation from "../../Components/Navbar/Navgation";
+import HomePageBtn from "../../Components/HomePageBtn";
+import GarageOwner from "./GarageOwner";
+import {Link} from "react-router-dom";
 function Signup() {
   return (
     <div className="container">
@@ -32,9 +35,9 @@ function Signup() {
       </div>
       <div className="submit_container">
         <div ><LoginBtn name="Sign up" /></div>
-        <div className="Login-As-GarageOwner">
+        <div className="Login-As-GarageOwner" >
           {" "}
-          <a href="#">Login as garage owner</a>
+          <Link to="/GarageOwner">Login as garage owner</Link>
         </div>
 
         {/* <div className="submit">Login</div> */}
