@@ -7,6 +7,7 @@ import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl-csp";
 import "../../Components/LoginBtn";
 import LoginBtn from "../../Components/LoginBtn";
+import { colors } from "@mui/material";
 function GarageOwner() {
   const [viewport,setViewport] = useState({
     width:"800px",
@@ -43,8 +44,13 @@ function GarageOwner() {
           <img src={password_icon} alt="" />
           <input type="password" placeholder="Password" />
         </div>
-        <br/>
-
+        <div className="input">
+          <img src={password_icon} alt="" />
+          <input type="text" placeholder="Phone number" />
+        </div>
+        
+        
+        <h1 className="location">Enter your location on the map</h1>
         <div className="input" id="map">
           <MapGL 
           {...viewport}
@@ -83,6 +89,7 @@ function GarageOwner() {
       <div style={{ marginTop: 30 }} className="forget-password">
         <span>Forget Password?</span>
       </div>
+      
       <div className="submit_container">
         <LoginBtn name="sign up"/>
       </div>
