@@ -17,6 +17,7 @@ export default function BottomActionsCard(props) {
       variant="outlined"
       sx={{
         width: 320,
+        height:150,
         // to make the card resizable
         overflow: "auto",
         resize: "horizontal",
