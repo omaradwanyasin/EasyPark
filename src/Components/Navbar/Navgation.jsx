@@ -14,7 +14,7 @@ function Navgation() {
         <li>
           <HomePageBtn name="Sign up" destination="/signup"/>
         </li>
-        <li> Home</li>
+        <li> <a href="home">Home</a></li>
         <li> Contact</li>
       </ul>
     </div>

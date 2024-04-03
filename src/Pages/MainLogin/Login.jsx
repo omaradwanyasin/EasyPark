@@ -7,6 +7,7 @@ import LoginBtn from "../../Components/LoginBtn";
 import Home from "../Home page/Home";
 import Navgation from "../../Components/Navbar/Navgation";
 import ReCAPTCHA from "react-google-recaptcha";
+import {Link} from "react-router-dom";
 function onChange(value) {
   console.log("Captcha value:", value);
 }
@@ -45,6 +46,10 @@ function Login() {
         <div className="submit_container">
           <div ><LoginBtn name="login" /></div>
         </div>
+        <div className="Login-As-GarageOwner" >
+          <Link to="/signup">Create a new account </Link>
+          </div>
+  
       </div>
     </div>
   );

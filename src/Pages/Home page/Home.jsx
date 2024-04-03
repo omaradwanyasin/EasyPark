@@ -14,7 +14,7 @@ import Signup from "../MainLogin/Signup";
 import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
-function Home() {
+function Home( id ="home") {
   useEffect(() => {
     Aos.init();
   }, []);
