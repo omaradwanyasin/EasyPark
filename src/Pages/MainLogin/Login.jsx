@@ -6,7 +6,10 @@ import "../MainLogin/Signup.css";
 import LoginBtn from "../../Components/LoginBtn";
 import Home from "../Home page/Home";
 import Navgation from "../../Components/Navbar/Navgation";
-
+import ReCAPTCHA from "react-google-recaptcha";
+function onChange(value) {
+  console.log("Captcha value:", value);
+}
 function Login() {
   return (
     <div>
@@ -25,11 +28,21 @@ function Login() {
             <input type="password" placeholder="Password" />
           </div>
         </div>
+        <br/>
         <div className="forget-password">
           <span>Forget Password?</span>
         </div>
+        <br/>
+        <div className="recap">
+     
+  <ReCAPTCHA
+    sitekey="6LdT1KwpAAAAAAQ1h-AbpJZvjrd6b83IpQ7sG2yQ
+    "
+    onChange={onChange}
+  />,
+ 
+; </div>
         <div className="submit_container">
-          {/* <div className="submit">Sign up</div> */}
           <div ><LoginBtn name="login" /></div>
         </div>
       </div>
