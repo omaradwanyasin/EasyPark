@@ -6,7 +6,7 @@ import linkedin from '../Images/linkedin.png';
 import insta from '../Images/instagram.png';
 
 
-function Footer() {
+function Footer( ) {
   return (
     <div className='footer'>
       <div  className='sb_footer__padding'>
@@ -14,13 +14,13 @@ function Footer() {
           <div className='sb__footer-links_div'>
             <h4>For Business</h4>
             <a href="##">
-              <p>employer1</p>
+              <p>Omar Yasin</p>
             </a>
             <a href="##">
-              <p>employer2</p>
+              <p>Samer Samara</p>
             </a>
             <a href="##">
-              <p>employer3</p>
+              <p>Omar Sanjaq</p>
             </a>
           </div>
           <div className='sb__footer-links_div'>
