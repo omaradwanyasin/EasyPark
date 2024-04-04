@@ -1,16 +1,17 @@
 .service-div {
   background-color: #00041a;
-  min-height: 230vh;
-  padding-top: 90px;
+  width: 100%;
+  padding-top: 0px;
   display: flex;
   gap: 3%;
+  margin: auto;
+  justify-content: space-between;
 }
 .parking-display {
+  width: 30%;
   display: flex;
   gap: 30px;
-  height: 90vh;
   overflow: hidden;
-  flex-wrap: wrap;
   height: fit-content;
   flex-direction: column;
 }

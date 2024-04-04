@@ -9,6 +9,8 @@
       },
       "properties": { "prop0": "value0", "parkid": 1 },
       "name": "abu baker parking",
+      "comments": ["this is first comment", "this another comment"],
+      "City": "Jenin",
       "status": 1,
       "info": "some info about the parking",
       "rating": 4
@@ -25,9 +27,13 @@
         "prop1": 0.0
       },
       "name": "al cenima parking",
+      "comments": ["this is first comment", "this another comment"],
+      "City": "Jenin",
       "status": 0,
       "info": "some info about the parking",
-      "rating": 2
+      "rating": 2,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     },
     {
       "type": "Feature",
@@ -43,7 +49,9 @@
       "name": "ibn sena parking",
       "status": 0,
       "info": "some info about the parking",
-      "rating": 3
+      "rating": 3,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     },
     {
       "type": "Feature",
@@ -55,7 +63,9 @@
       "name": "HIAFA parking",
       "status": 1,
       "info": "some info about the parking",
-      "rating": 3.5
+      "rating": 3.5,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     },
     {
       "type": "Feature",
@@ -67,7 +77,9 @@
       "name": "nablus street parking",
       "status": 0,
       "info": "some info about the parking",
-      "rating": 4
+      "rating": 4,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     },
     {
       "type": "Feature",
@@ -79,7 +91,9 @@
       "name": "al hesbeh parking",
       "status": 0,
       "info": "some info about the parking",
-      "rating": 3
+      "rating": 3,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     },
     {
       "type": "Feature",
@@ -91,7 +105,9 @@
       "name": "gaza parking",
       "status": 0,
       "info": "some info about the parking",
-      "rating": 5
+      "rating": 5,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
     }
   ]
 }

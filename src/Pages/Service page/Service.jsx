@@ -7,6 +7,7 @@ import park from "./park.json";
 import MapMarker from "../../Components/MapMarker";
 import BottomActionsCard from "../../Components/BottomActionsCard";
 import Navgation from "../../Components/Navbar/Navgation";
+import KeepMountedModal from "../../Components/KeepMountedModal";
 const ItemsPerPage = 3;
 function Service() {
   const mapRef = useRef(null);
@@ -40,20 +41,18 @@ function Service() {
   return (
     <div>
       <Navgation />
-      <div
-        className="service-div"
-        style={{ borderRadius: "30px", overflow: "hidden" }}
-      >
-        <div style={{ width: "60vw" }}>
+      <div className="service-div" style={{ overflow: "hidden" }}>
+        
+        <div style={{ width: "70vw" }}>
           <Map
             ref={mapRef}
             mapboxAccessToken="pk.eyJ1Ijoib21hcmFkd24iLCJhIjoiY2x1MWE0dHE4MGJtZTJqbW5mZ3p0M3BjdyJ9.TgSibF8OzyeO3mgVef1wNw"
             style={{
               overflow: "hidden",
               borderRadius: "30px",
-              width: "50vw",
-              height: "80vh",
-              margin: "auto",
+              width: "100%",
+              height: "90vh",
+              float: "right",
             }}
             initialViewState={{ latitude: 32.461, longitude: 35.3, zoom: 14 }}
             mapStyle={"mapbox://styles/omaradwn/clthk171g009n01qwa8r4en8v"}
@@ -82,7 +81,7 @@ function Service() {
                 closeButton={true}
                 closeOnClick={false}
               >
-                <p style={{ color: "black" }}>{selectedPark.name}</p>
+                <KeepMountedModal parking={selectedPark} />
               </Popup>
             )}
           </Map>
@@ -94,7 +93,6 @@ function Service() {
               title={parking.name}
               text={parking.info}
               status={parking.status}
-              rating={parking.rating}
               onSelectCity={() =>
                 handleMapTransition({
                   latitude: parking.geometry.coordinates[1],

@@ -10,17 +10,20 @@ import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import TextRating from "./TextRating";
+import parkingimg from "../../src/Images/Parkinglot.jpg";
 
 export default function BottomActionsCard(props) {
   return (
     <Card
       variant="outlined"
       sx={{
-        width: 320,
-        height:150,
+        width: "320px",
+        float: "left",
+        height: 140,
         // to make the card resizable
         overflow: "auto",
         resize: "horizontal",
+        backgroundColor: "#EEEEEE",
       }}
     >
       <Box
@@ -29,12 +32,11 @@ export default function BottomActionsCard(props) {
           justifyContent: "space-between",
           alignItems: "center",
         }}
-      >
-        <TextRating rating={props.rating} />
-      </Box>
+      ></Box>
       <CardContent>
         <Typography level="title-lg">{props.title}</Typography>
         <Typography level="body-sm">{props.info}</Typography>
+        <Typography level="body-sm">Capacity:50 Car</Typography>
       </CardContent>
       <CardActions buttonFlex="0 1 120px">
         <IconButton variant="outlined" color="neutral" sx={{ mr: "auto" }}>
