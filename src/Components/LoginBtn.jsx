@@ -1,9 +1,9 @@
 import React from 'react'
 import "./LoginBtn.css"
-function LoginBtn({name}) {
+function LoginBtn({name, type="submit"}) {
   return (
    <div >
-   <button className='button'>{name}</button>
+   <button className='button' type='submit'>{name}</button>
    </div>
   )
 }
