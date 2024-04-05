@@ -49,13 +49,12 @@ function Login() {
 
   return (
     <div>
-  <form onSubmit={formik.handleSubmit}>
-
-      <div className="container">
-        <div className="header">
-          <div className="text">Login</div>
-          <div className="underline"></div>
-        </div>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="container">
+          <div className="header">
+            <div className="text">Login</div>
+            <div className="underline"></div>
+          </div>
           <div className="inputs">
             <div className="input">
               <img src={email_icon} alt="" />
@@ -87,7 +86,9 @@ function Login() {
             </div>
           </div>
           <div className="forget-password">
-            <a href="#">Forget Password?</a>
+            <a href="#">
+              <span style={{ fontSize: "16px" }}>Forget Password?</span>
+            </a>
           </div>
           <div className="recap">
             <ReCAPTCHA
@@ -98,12 +99,11 @@ function Login() {
           <div className="submit_container">
             <LoginBtn name="login" onClick={formik.handleSubmit} />
           </div>
-        
-        <div className="Login-As-GarageOwner">
-          <Link to="/signup">Create a new account </Link>
+
+          <div className="Login-As-GarageOwner">
+            <Link to="/signup">Create a new account </Link>
+          </div>
         </div>
-       
-      </div>
       </form>
     </div>
   );

@@ -57,7 +57,7 @@ code {
   background: #eaeaea;
   border-radius: 6px;
 }
-#map{
+#map {
   width: 72%;
   height: 80%;
 }
@@ -73,14 +73,13 @@ code {
   color: #797979;
   font-size: 19px;
 }
-.forget-password{
+.forget-password {
   margin-top: 15px;
 }
 .forget-password a {
   color: blue;
   cursor: pointer;
   font-size: 18px;
-
 }
 .submit_container {
   display: flex;
@@ -92,20 +91,28 @@ code {
   bottom: 15%;
   left: 33%;
 }
-.Login-As-GarageOwner a{
+.Login-As-GarageOwner a {
   color: #000000;
 }
-.location{
-color: #000000;
-font-size: 22px;
-margin-right: 120px;
+.location {
+  color: #000000;
+  font-size: 22px;
+  margin-right: 120px;
 }
-.recap{
+.recap {
   margin-left: 150px;
   margin-top: 22px;
-
 }
-.error{
+.error {
   font-size: 12px;
   color: red;
+}
+.map-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.map-head h1 {
+  width: 50%;
+  margin: auto;
 }
