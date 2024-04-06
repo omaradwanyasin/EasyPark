@@ -65,7 +65,7 @@ export default function UserCard(props) {
         <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
           <img
             src={props.img}
-            srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
+            srcSet={props.img}
             loading="lazy"
             alt=""
           />

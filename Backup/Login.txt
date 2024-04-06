@@ -3,15 +3,18 @@ import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
 import "../MainLogin/Signup.css";
-import LoginBtn from "../../Components/LoginBtn";
-import {useFormik} from "formik"
-import {Link} from "react-router-dom";
-function Signup() {
+import LoginBtn from "../src/Components/LoginBtn";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+
+function onChange(value) {
+  console.log("Captcha value:", value);
+}
+
+function Login() {
   const validate = (values) => {
     const errors = {};
-    if (!values.name){
-      errors.name = "Name is required";
-    }
     if (!values.email) {
       errors.email = "Email is required";
     } else if (values.email.length < 4) {
@@ -29,7 +32,6 @@ function Signup() {
 
   const formik = useFormik({
     initialValues: {
-      name:"",
       email: "",
       password: "",
     },
@@ -45,32 +47,16 @@ function Signup() {
     },
   });
 
-
-
-
   return (
-    <div>
+    <div className="logincont">
       <form onSubmit={formik.handleSubmit}>
-    <div className="container">
-      <div className="header">
-        <div className="text">Sign up</div>
-        <div className="underline"></div>
-      </div>
-      <div className="inputs">
-        <div className="input">
-          <img src={user_icon} alt="" />
-          <input 
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          type="text" 
-          placeholder="Name"
-          id="name"
-          name="name" />
-          {formik.errors.name && (
-            <div className="error">{formik.errors.name}</div>
-          )}
-        </div>
-        <div className="input">
+        <div className="container">
+          <div className="header">
+            <div className="text">Login</div>
+            <div className="underline"></div>
+          </div>
+          <div className="inputs">
+            <div className="input">
               <img src={email_icon} alt="" />
               <input
                 onChange={formik.handleChange}
@@ -98,24 +84,29 @@ function Signup() {
                 <div className="error">{formik.errors.password}</div>
               )}
             </div>
-      </div>
-      <div style={{ marginTop: 30 }} className="forget-password">
-        <span>Forget Password?</span>
-      </div>
-      <div className="submit_container">
-        <div ><LoginBtn name="Sign up" onClick={formik.handleSubmit}  />
-        </div>
-        <div className="Login-As-GarageOwner"  >
-          {" "}
-          <Link to="/GarageOwner">Login as garage owner</Link>
-        </div>
+          </div>
+          <div className="forget-password">
+            <a href="#">
+              <span style={{ fontSize: "16px" }}>Forget Password?</span>
+            </a>
+          </div>
+          <div className="recap">
+            <ReCAPTCHA
+              sitekey="6LdT1KwpAAAAAAQ1h-AbpJZvjrd6b83IpQ7sG2yQ"
+              onChange={onChange}
+            />
+          </div>
+          <div className="submit_container">
+            <LoginBtn name="login" onClick={formik.handleSubmit} />
+          </div>
 
-        {/* <div className="submit">Login</div> */}
-      </div>
-    </div>
-    </form>
+          <div className="Login-As-GarageOwner">
+            <Link to="/signup">Create a new account </Link>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
 
-export default Signup;
+export default Login;

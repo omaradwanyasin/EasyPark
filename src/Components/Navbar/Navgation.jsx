@@ -3,6 +3,7 @@ import "../Navbar/navStyle.css";
 import "../HomePageBtn";
 import HomePageBtn from "../HomePageBtn";
 import Home from "../../Pages/Home page/Home";
+import {Link} from "react-router-dom"
 function Navgation() {
   return (
     <div className="navbar">
@@ -14,8 +15,8 @@ function Navgation() {
         <li>
           <HomePageBtn name="Sign up" destination="/signup"/>
         </li>
-        <li> <a href="home">Home</a></li>
-        <li> Contact</li>
+        <li> <Link to="/home">Home</Link></li>
+        <li><Link to="/contact">Contact us</Link></li>
       </ul>
     </div>
   );

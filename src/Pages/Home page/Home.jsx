@@ -2,19 +2,13 @@ import React, { useEffect } from "react";
 import Navgation from "../../Components/Navbar/Navgation";
 import firstmap from "../../Images/Map.png";
 import "../Home page/Home.css";
-import Button from "@mui/material/Button";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import BioCard from "../../Components/BioCard";
 import map2 from "../../Images/Group.png";
 import mock from "../../Images/deviceframes.png";
-import Service from "../Service page/Service";
-import Login from "../MainLogin/Login";
-import Signup from "../MainLogin/Signup";
-import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
-import DashboardPage from "../Dashboard/DashboardPage";
 function Home(id = "home") {
   useEffect(() => {
     Aos.init();
