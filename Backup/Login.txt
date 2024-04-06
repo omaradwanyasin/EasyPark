@@ -3,7 +3,7 @@ import user_icon from "./Assets/person.png";
 import email_icon from "./Assets/email.png";
 import password_icon from "./Assets/password.png";
 import "../MainLogin/Signup.css";
-import LoginBtn from "../../Components/LoginBtn";
+import LoginBtn from "../src/Components/LoginBtn";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";

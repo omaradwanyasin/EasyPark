@@ -2,19 +2,14 @@ import React, { useEffect } from "react";
 import Navgation from "../../Components/Navbar/Navgation";
 import firstmap from "../../Images/Map.png";
 import "../Home page/Home.css";
-import Button from "@mui/material/Button";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import BioCard from "../../Components/BioCard";
 import map2 from "../../Images/Group.png";
 import mock from "../../Images/deviceframes.png";
-import Service from "../Service page/Service";
-import Login from "../MainLogin/Login";
-import Signup from "../MainLogin/Signup";
-import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
-function Home( id ="home") {
+function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
@@ -31,7 +26,7 @@ function Home( id ="home") {
               a tap. Say goodbye to parking woes and hello to convenience!
             </p>
             <div>
-                <HomePageBtn name="Serivces" destination="/service"/>
+              <HomePageBtn name="Serivces" destination="/service" />
               {/* <Button>Explore Service</Button> */}
             </div>
           </div>
@@ -76,7 +71,7 @@ function Home( id ="home") {
           <div className="mock-dashbord">
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
-            <Footer />
+          <Footer />
         </div>
       </div>
     </div>
