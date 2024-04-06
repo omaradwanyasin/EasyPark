@@ -14,7 +14,8 @@ import Signup from "../MainLogin/Signup";
 import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
-function Home( id ="home") {
+import DashboardPage from "../Dashboard/DashboardPage";
+function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
@@ -31,7 +32,7 @@ function Home( id ="home") {
               a tap. Say goodbye to parking woes and hello to convenience!
             </p>
             <div>
-                <HomePageBtn name="Serivces" destination="/service"/>
+              <HomePageBtn name="Serivces" destination="/service" />
               {/* <Button>Explore Service</Button> */}
             </div>
           </div>
@@ -76,7 +77,7 @@ function Home( id ="home") {
           <div className="mock-dashbord">
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
-            <Footer />
+          <Footer />
         </div>
       </div>
     </div>
