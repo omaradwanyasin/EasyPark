@@ -100,11 +100,7 @@ export default function UserCard(props) {
             </div>
           </Sheet>
           <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
-            <Button
-              variant="outlined"
-              color="neutral"
-              onClick={props.deacreaseCounter}
-            >
+            <Button variant="outlined" color="neutral">
               Reject
             </Button>
             <Button

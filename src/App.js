@@ -8,10 +8,14 @@ import Contact from "./Pages/Contact/Contact";
 import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import Login from "./Pages/MainLogin/Login.tsx";
 
+import Payment from "./Pages/Payment/Payment";
+
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+
       <Routes>
         <Route index element ={<Home/>}/>
         <Route path="/home" element ={<Home/>} />
