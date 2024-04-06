@@ -11,6 +11,7 @@ import { BrowserRouter , Routes , Route } from "react-router-dom";
 import MapMarker from "./Components/MapMarker";
 import Footer from "./Components/Footer";
 import GarageOwner from "./Pages/MainLogin/GarageOwner";
+import Contact from "./Pages/Contact/Contact";
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
         <Route path="/signup" element ={<Signup/>} />
         <Route path="/service" element ={<Service/>} />
         <Route path="/Garageowner" element ={<GarageOwner/>} />
+        <Route path="/contact" element ={<Contact/>} />
 
       </Routes>
-      {/* <GarageOwner/> */}
       </BrowserRouter>
       
     
