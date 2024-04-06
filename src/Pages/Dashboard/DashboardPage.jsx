@@ -17,7 +17,7 @@ function DashboardPage() {
   };
   return (
     <div className="maindiv">
-      <div className="header">
+      <div className="headers">
         <h1>EasyPark</h1>
         <h3 style={{ paddingTop: "15px" }}>Welcome, Samer Omar!</h3>
       </div>
@@ -32,7 +32,6 @@ function DashboardPage() {
                 phone={user.phone_number}
                 img={user.image_url}
                 increaseCounter={increase}
-                deacreaseCounter={deacrease}
               />
             ))}
           </div>

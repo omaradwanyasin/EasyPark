@@ -12,6 +12,7 @@ import MapMarker from "./Components/MapMarker";
 import Footer from "./Components/Footer";
 import GarageOwner from "./Pages/MainLogin/GarageOwner";
 import DashboardPage from "./Pages/Dashboard/DashboardPage";
+import Payment from "./Pages/Payment/Payment";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/service" element={<Service />} />
           <Route path="/Garageowner" element={<GarageOwner />} />
           <Route path="/test" element={<DashboardPage />} />
+          <Route path="/pay" element={<Payment />} />
         </Routes>
         {/* <GarageOwner/> */}
       </BrowserRouter>

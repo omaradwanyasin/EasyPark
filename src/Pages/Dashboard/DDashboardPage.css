@@ -1,14 +1,11 @@
-body {
-  background-color: white;
-}
 .maindiv {
   margin: 0px;
   padding: 0px;
   background-color: white;
-  height: 100vh;
+  height: fit-content;
   color: black;
 }
-.header {
+.headers {
   display: flex;
   flex-direction: row;
   gap: 40px;
