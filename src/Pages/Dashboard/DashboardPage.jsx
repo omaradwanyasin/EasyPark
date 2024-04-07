@@ -9,6 +9,7 @@ import UserCard from "./UserCard";
 import resarvation from "./reservations.json";
 function DashboardPage() {
   const [counter, setcounter] = useState(0);
+
   const increase = () => {
     setcounter((prev) => prev + 1);
   };
