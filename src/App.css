@@ -1,8 +1,12 @@
+html{
+  background-color:#00041a ;
+}
 .App {
   text-align: center;
   background-color: #00041a;
   min-height: 100vh;
   color: white;
+  min-width: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
