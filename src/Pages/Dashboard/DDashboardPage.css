@@ -1,9 +1,8 @@
-
 .maindiv {
   margin: 0px;
   padding: 0px;
   background-color: white;
-  height: fit-content;
+  height: 100vh;
   color: black;
 }
 .headers {

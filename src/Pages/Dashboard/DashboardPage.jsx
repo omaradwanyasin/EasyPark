@@ -7,6 +7,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import UserCard from "./UserCard";
 import resarvation from "./reservations.json";
+import Typography from "@mui/joy/Typography";
+
 function DashboardPage() {
   const [counter, setcounter] = useState(0);
 
@@ -20,7 +22,9 @@ function DashboardPage() {
     <div className="maindiv">
       <div className="headers">
         <h1>EasyPark</h1>
-        <h3 style={{ paddingTop: "15px" }}>Welcome, Samer Omar!</h3>
+        <h3 style={{ paddingTop: "15px" }}>
+          <Typography component="h2">welcome Samer Omar!</Typography>
+        </h3>
       </div>
       <div className="conts">
         <div className="resv">
