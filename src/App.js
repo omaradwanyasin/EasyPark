@@ -9,6 +9,7 @@ import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import Login from "./Pages/MainLogin/Login.tsx";
 import SignMap from "./Pages/MainLogin/SignMap.jsx";
 import Payment from "./Pages/Payment/Payment";
+import Nservice from "../../EasyPark/src/Pages/Service page/Nservice";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/test" element={<DashboardPage />} />
           <Route path="/test2" element={<SignMap />} />
+          <Route path="/test3" element={<Nservice />} />
         </Routes>
       </BrowserRouter>
     </div>
