@@ -6,8 +6,8 @@ import { Marker, Popup } from "react-map-gl";
 import park from "./park.json";
 import MapMarker from "../../Components/MapMarker";
 import BottomActionsCard from "../../Components/BottomActionsCard";
-import Navgation from "../../Components/Navbar/Navgation";
 import KeepMountedModal from "../../Components/KeepMountedModal";
+import Navbar from "../../Components/Navbar/Navbar";
 const ItemsPerPage = 3;
 function Service() {
   const mapRef = useRef(null);
@@ -40,7 +40,7 @@ function Service() {
 
   return (
     <div>
-      <Navgation />
+      <Navbar />
       <div className="service-div" style={{ overflow: "hidden" }}>
         
         <div style={{ width: "70vw" }}>

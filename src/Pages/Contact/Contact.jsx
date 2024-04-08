@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import Navgation from '../../Components/Navbar/Navgation';
+import Navbar from '../../Components/Navbar/Navbar';
 
 const EmailForm = () => {
   const [name, setName] = useState('');
@@ -39,7 +39,7 @@ const EmailForm = () => {
 
   return (
     <div>
-      <Navgation />
+      <Navbar/>
       <h1>Contact us </h1>
       <form onSubmit={handleSubmit} style={s.container}>
         <input
