@@ -35,7 +35,7 @@ function DashboardPage() {
       <div className="conts">
         <div className="resv">
           <h3>Reservations</h3>
-          <div>
+          <div className="resvdisplay">
             {resarvation.users.map((user) => (
               <UserCard
                 id={user.reservation_id}
