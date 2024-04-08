@@ -6,7 +6,6 @@ import { Marker, Popup } from "react-map-gl";
 import park from "../park.json";
 import MapMarker from "../../../Components/MapMarker";
 import BottomActionsCard from "../../../Components/BottomActionsCard";
-import Navgation from "../../../Components/Navbar/Navgation";
 import KeepMountedModal from "../../../Components/KeepMountedModal";
 const ItemsPerPage = 3;
 function Mapdisplay(props) {
