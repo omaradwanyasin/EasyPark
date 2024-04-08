@@ -68,9 +68,11 @@ function Home(id = "home") {
               </p>
             </div>
           </div>
+
           <div className="mock-dashbord">
-            
-            <img width={1500} src={mock} data-aos="zoom-in"  className="img"/>
+          <h1 data-aos="fade-down"> inteactive interface with real- time state for garage owner's </h1>
+
+            <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
           <Footer />
         </div>

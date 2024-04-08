@@ -17,6 +17,7 @@ import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import SignMap from "./SignMap";
+import { useState } from "react";
 // import GoogleIcon from './GoogleIcon';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -54,6 +55,13 @@ function ColorSchemeToggle(props: IconButtonProps) {
 }
 
 export default function Garageowner() {
+  const [latitude,setLatitude]=useState("");
+  const [longitude,setLongitude]=useState("");
+  const handleLocationChange =(lat,lng)=>{
+    setLatitude(lat);
+    setLongitude(lng);
+  }
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -164,6 +172,10 @@ export default function Garageowner() {
                     email: formElements.email.value,
                     password: formElements.password.value,
                     persistent: formElements.persistent.checked,
+                    location:{
+                      latitude:latitude,
+                      longitude:longitude
+                    }
                   };
                   alert(JSON.stringify(data, null, 2));
                 }}
@@ -184,7 +196,7 @@ export default function Garageowner() {
                 <br />
                 <FormControl required>
                   <FormLabel>Location</FormLabel>
-                  <SignMap />
+                  <SignMap onLocationChange={handleLocationChange}/>
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box

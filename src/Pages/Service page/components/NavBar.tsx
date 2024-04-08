@@ -5,6 +5,7 @@ import Avatar from "@mui/joy/Avatar";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import { Link } from "react-router-dom";
 export default function HeaderSection() {
   return (
     <Box
@@ -32,8 +33,10 @@ export default function HeaderSection() {
           gap: 1.5,
         }}
       >
-        <IconButton size="sm" variant="soft">
+      <IconButton size="sm" variant="soft" > 
+      <Link to="/home"> 
           <LocalParkingIcon />
+          </Link>
         </IconButton>
         <Typography component="h1" fontWeight="xl">
           EasyPark

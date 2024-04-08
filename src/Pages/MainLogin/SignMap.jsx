@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl-csp";
 import user_icon from "./Assets/person.png";
 
 
-function SignMap() {
+function SignMap({ onLocationChange }) {
     const [viewport, setViewport] = useState({
         width: "800px",
         height: "600px",
@@ -18,6 +18,7 @@ function SignMap() {
         const { lng, lat } = event.lngLat;
         console.log("Latitude", lat, "Longitude", lng)
         setMarkerPosition({ longitude: lng, latitude: lat });
+        onLocationChange(lat,lng)
       };
       const handleViewportChange = (newViewport) => {
         setViewport(newViewport);
