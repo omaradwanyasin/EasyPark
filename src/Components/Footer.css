@@ -1,112 +1,104 @@
-.section_padding{
-    padding: 4rem 4rem;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+body {
+  line-height: 1.5;
+  font-family: "Poppins", sans-serif;
 }
-.footer{
-    background-color: #2d2d32;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.sb_footer{
-    display: flex;
-    flex-direction: column;
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col {
+  list-style:none;
+  list-style-type: none; /* Removes the bullet points */
+  padding: 0; /* Removes default padding */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding-right: 60px;
+}
+.footer {
+  background-color: #24262b;
+  padding: 70px 0;
+}
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column; /* Changed this line */
+}
+.footer-col h4 {
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+.footer-col h4::before {
+  content: "";
+  position:absolute;
+  left: 0;
+  bottom: -10px;
+  background-color:cornflowerblue;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+  padding-left: 200px;
+}
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+  
+}
+.footer-col ul li a:hover {
+  color: #ffffff;
+  font-size: 17px;
+  padding-bottom: 10px;
+}
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
 
+/*responsive*/
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
 }
-.sb_footer-links{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap:wrap;
+@media (max-width: 574px) {
+  .footer-col {
     width: 100%;
-    text-align: left;
-    margin-bottom: 2rem;
-
-}
-.sb__footer-links_div{
-    width:150px;
-    margin: 1rem;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    color: white;
-}
-
-a{
-    color: rgb(175,175,179);
-    text-decoration: none;
-}
-.socialmedia{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 120px;
-}
-.socialmedia img{
-    width: 80%;
-}
-
-.sb__footer-links_div h4{
-    font-size: 14px;
-    line-height: 17px;
-    margin-bottom: 0.9rem;
-}
-.sb__footer_links-div p{
-    font-size: 12px;
-    line-height: 15px;
-    margin: 0.5rem 0;
-    cursor: pointer;
-}
-.sb_footer-below{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 0.2rem;
-}
-.sb_footer-below-links{
-    display: flex;
-    flex-direction: row;
-}
-.sb_footer-below-links p{
-    font-size: 13px;
-    line-height: 15px;
-    margin-left: 2rem;
-    color: rgb(255,255,255);
-    font-weight: 600;
-}
-@media screen and (max-width:850px){
-    .sb__footer-heading h1{
-        font-size:44px;
-        line-height:50px;
-    }
-}
-@media screen and (max-width:550px){
-    .sb__footer-heading h1{
-        font-size:34px;
-        line-height:42px;
-    }
-
-
-    .sb__footer-links div{
-        margin: 1rem 0;
-    }
-    .sb__footer-btn p{
-        font-size: 14px;
-        line-height: 20px;
-    }
-    .sb__footer-below{
-        flex-direction: column;
-        justify-content: left;
-    }
-    .sb__footer-below-links{
-        flex-direction: column;
-    }
-    .sb__footer-below-links p{
-        margin-left: 0rem;
-        margin-top: 1rem;
-    }
-}
-
-@media screen and (max-width:400px) {
-    .sb__footer-heading h1{
-        font-size: 27px;
-        line-height: 38px;
-    }
+  }
 }

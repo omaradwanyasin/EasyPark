@@ -34,7 +34,7 @@ export default function RentalDashboard() {
       <Box
         component="main"
         sx={{
-          height: "100vh", // 55px is the height of the NavBar
+          height: "100vh",
           display: "grid",
           gridTemplateColumns: { xs: "auto", md: "50% 50%" },
           gridTemplateRows: "auto 1fr auto",
