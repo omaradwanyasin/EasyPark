@@ -11,13 +11,19 @@ import Typography from "@mui/joy/Typography";
 
 function DashboardPage() {
   const [counter, setcounter] = useState(0);
-
+  const[togglevalue,setTogleValue]= React.useState("web");
+  const capcity=50; // i will update it to be more dinamic later 
   const increase = () => {
-    setcounter((prev) => prev + 1);
+    if(counter <capcity){ // limt of the increment
+    setcounter((prev) => prev + 1);}
   };
   const deacrease = () => {
-    setcounter((prev) => prev - 1);
+    if(counter > 0){ // limt of the decrement
+    setcounter((prev) => prev - 1);}
   };
+  const handleToggleChange =(event , newValue) => {
+    setTogleValue(newValue)
+  }
   return (
     <div className="maindiv">
       <div className="headers">
@@ -43,15 +49,17 @@ function DashboardPage() {
         </div>
         <div className="cap">
           <h3>Capacity {counter}/50</h3>
-          <ColorToggleButton />
+          <ColorToggleButton   value={togglevalue} handleToggleChange={handleToggleChange}  />
           Counter : {counter}
           <div className="buttonaction">
+            {togglevalue !== "of"  && (
             <Fab color="success" aria-label="add" onClick={increase}>
               <AddIcon />
-            </Fab>
+            </Fab>)}
+            {togglevalue !== "of" && (
             <Fab color="error" aria-label="add" onClick={deacrease}>
               <RemoveIcon />
-            </Fab>
+            </Fab>)}
           </div>
         </div>
       </div>
