@@ -17,6 +17,7 @@ import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import SignMap from "./SignMap";
+import { useState } from "react";
 // import GoogleIcon from './GoogleIcon';
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -54,6 +55,13 @@ function ColorSchemeToggle(props: IconButtonProps) {
 }
 
 export default function Garageowner() {
+  const [latitude,setLatitude]=useState("");
+  const [longitude,setLongitude]=useState("");
+  const handleLocationChange =(lat,lng)=>{
+    setLatitude(lat);
+    setLongitude(lng);
+  }
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -75,7 +83,7 @@ export default function Garageowner() {
           display: "flex",
           justifyContent: "flex-end",
           backdropFilter: "blur(12px)",
-          backgroundColor: "rgba(255 255 255 / 0.2)",
+          backgroundColor: "#fff", //rgba(255 255 255 / 0.2)
           [theme.getColorSchemeSelector("dark")]: {
             backgroundColor: "rgba(19 19 24 / 0.4)",
           },
@@ -164,6 +172,10 @@ export default function Garageowner() {
                     email: formElements.email.value,
                     password: formElements.password.value,
                     persistent: formElements.persistent.checked,
+                    location:{
+                      latitude:latitude,
+                      longitude:longitude
+                    }
                   };
                   alert(JSON.stringify(data, null, 2));
                 }}
@@ -184,7 +196,7 @@ export default function Garageowner() {
                 <br />
                 <FormControl required>
                   <FormLabel>Location</FormLabel>
-                  <SignMap />
+                  <SignMap onLocationChange={handleLocationChange}/>
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
@@ -227,10 +239,10 @@ export default function Garageowner() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8?auto=format&w=1000&dpr=2)",
+          "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)",
+            "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
           },
         })}
       />
