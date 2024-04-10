@@ -1,13 +1,15 @@
 import * as React from "react";
 import { Box, IconButton } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import Avatar from "@mui/joy/Avatar";
+
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
-import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
+import Button from "@mui/joy/Button";
+import Avatar from "@mui/joy/Avatar";
+
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link } from "react-router-dom";
-
-export default function HeaderSection() {
+export default function NavBarDash() {
+  const [variant, setVariant] = React.useState("solid");
   return (
     <Box
       sx={{
@@ -20,7 +22,8 @@ export default function HeaderSection() {
         px: 1.5,
         py: 1,
         zIndex: 10000,
-        backgroundColor: "background.body",
+        backgroundColor: "white",
+
         borderBottom: "1px solid",
         borderColor: "divider",
         position: "sticky",
@@ -34,12 +37,12 @@ export default function HeaderSection() {
           gap: 1.5,
         }}
       >
-      <IconButton size="sm" variant="soft" > 
-      <Link to="/home"> 
-          <LocalParkingIcon />
+        <IconButton size="sm" variant="soft">
+          <Link to="/home">
+            <LocalParkingIcon />
           </Link>
         </IconButton>
-        <Typography component="h1" fontWeight="xl">
+        <Typography color="black" component="h1" fontWeight="xl">
           EasyPark
         </Typography>
       </Box>
@@ -62,7 +65,9 @@ export default function HeaderSection() {
             <Typography level="body-xs">EasyPark@test.com</Typography>
           </Box>
         </Box>
-        <ColorSchemeToggle sx={{ alignSelf: "center" }} />
+        <Button size="md" variant={variant} color="neutral">
+          Contact Us
+        </Button>
       </Box>
     </Box>
   );
