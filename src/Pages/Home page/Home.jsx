@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Navgation from "../../Components/Navbar/Navgation";
 import firstmap from "../../Images/Map.png";
 import "../Home page/Home.css";
 import Aos from "aos";
@@ -9,13 +8,14 @@ import map2 from "../../Images/Group.png";
 import mock from "../../Images/deviceframes.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
 function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
   return (
     <div>
-      <Navgation />
+      <Navbar/>
 {/* comment for push */}
       <div style={{ paddingTop: "80px" }}>
         <div className="Head-section">
@@ -68,7 +68,10 @@ function Home(id = "home") {
               </p>
             </div>
           </div>
+
           <div className="mock-dashbord">
+          <h1 data-aos="fade-down"> inteactive interface with real- time state for garage owner's </h1>
+
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
           <Footer />

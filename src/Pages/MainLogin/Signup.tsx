@@ -74,7 +74,7 @@ export default function Signup() {
           display: "flex",
           justifyContent: "flex-end",
           backdropFilter: "blur(12px)",
-          backgroundColor: "rgba(255 255 255 / 0.2)",
+          backgroundColor: "#fff",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundColor: "rgba(19 19 24 / 0.4)",
           },
@@ -221,10 +221,10 @@ export default function Signup() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8?auto=format&w=1000&dpr=2)",
+          "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)",
+            "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
           },
         })}
       />
