@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
+import logo from "./logo/EasyPark.png"; // The path should be relative to the current file
+
 
 function Navbar  (){
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,7 +11,8 @@ function Navbar  (){
   return (
     <nav>
       <Link to="/home" className="title">
-        Easy <span>Park</span>
+        {/* Easy <span>Park</span> */}
+        <img src={logo} alt="logo" className="logo" />
       </Link>
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
