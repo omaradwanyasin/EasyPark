@@ -15,6 +15,8 @@ body {
 .row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap :100px;
 }
 .col {
   list-style:none;
@@ -90,7 +92,6 @@ body {
   background-color: #ffffff;
 }
 
-/*responsive*/
 @media (max-width: 767px) {
   .footer-col {
     width: 50%;
