@@ -10,6 +10,8 @@ import SignMap from "./Pages/MainLogin/SignMap.jsx";
 import Payment from "./Pages/Payment/Payment";
 import Nservice from "../../EasyPark/src/Pages/Service page/Nservice";
 import  Navbar  from "./Components/Navbar/Navbar.jsx";
+import About from "./Pages/About/About.jsx";
+
 function App() {
   return (
     <div className="App">
@@ -25,6 +27,9 @@ function App() {
           <Route path="/test2" element={<SignMap />} />
           <Route path="/service" element={<Nservice />} />
           <Route path="/test4" element={<Navbar />} />
+          <Route path="/AboutUs" element={<About />} />
+
+
 
         </Routes>
       </BrowserRouter>
