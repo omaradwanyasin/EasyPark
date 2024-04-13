@@ -150,7 +150,7 @@ export default function RentalDashboard() {
                   closeOnClick={false}
                   onClick={() => handlePopupClick(selectedPark)}
                 >
-                  {/* Add Popup content here */}
+                  <h3 style={{ color: "black" }}>Im Here!</h3>
                 </Popup>
               )}
             </Map>
