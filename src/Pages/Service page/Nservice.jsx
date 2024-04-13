@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import Box from "@mui/joy/Box";
@@ -15,16 +15,24 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 
 export default function RentalDashboard() {
   const mapRef = useRef(null);
-
   const directionsRef = useRef(null);
   const [selectedPark, setSelectedPark] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+//for push test
+  useEffect(() => {
+    // Get user's current location using Geolocation API
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation([position.coords.longitude, position.coords.latitude]);
+      },
+      (error) => {
+        console.error("Error getting user location:", error);
+      }
+    );
+  }, []); // Empty dependency array to run only once when component mounts
 
   useEffect(() => {
-    console.log(selectedPark?.geometry.coordinates);
-  }, [selectedPark]);
-
-  useEffect(() => {
-    if (mapRef.current) {
+    if (mapRef.current && userLocation) {
       const map = mapRef.current.getMap();
       directionsRef.current = new MapboxDirections({
         accessToken:
@@ -34,13 +42,14 @@ export default function RentalDashboard() {
         controls: { instructions: true },
       });
       map.addControl(directionsRef.current, "top-left");
-      //this i will edit it later here should be the user location
-      directionsRef.current.setOrigin([35.29817997108734, 32.46248446267177]);
+      // Set user's location as the origin
+      directionsRef.current.setOrigin(userLocation);
     }
-  }, [mapRef.current]);
+  }, [mapRef.current, userLocation]); // Dependency array includes userLocation
+
   useEffect(() => {
     return () => {
-      if (directionsRef.current) {
+      if (directionsRef.current && mapRef.current) { // Added null check for mapRef.current
         const map = mapRef.current.getMap();
         map.removeControl(directionsRef.current);
         directionsRef.current = null;
@@ -48,21 +57,21 @@ export default function RentalDashboard() {
     };
   }, []);
 
-  const handlePopupClick = useCallback((parking) => {
+  const handlePopupClick = (parking) => {
     const coordinates = parking.geometry.coordinates;
     if (directionsRef.current) {
       // If origin (point A) is already set, set the destination (point B)
       directionsRef.current.setDestination([coordinates[0], coordinates[1]]);
     }
-  }, []);
+  };
 
-  const handleMapTransition = useCallback(({ longitude, latitude }) => {
+  const handleMapTransition = ({ longitude, latitude }) => {
     mapRef.current?.flyTo({
       center: [longitude, latitude],
       duration: 1000,
       zoom: 17,
     });
-  }, []);
+  };
 
   return (
     <CssVarsProvider disableTransitionOnChange>
@@ -160,3 +169,4 @@ export default function RentalDashboard() {
     </CssVarsProvider>
   );
 }
+
