@@ -63,12 +63,7 @@ export default function UserCard(props) {
         }}
       >
         <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
-          <img
-            src={props.img}
-            srcSet={props.img}
-            loading="lazy"
-            alt=""
-          />
+          <img src={props.img} srcSet={props.img} loading="lazy" alt="" />
         </AspectRatio>
         <CardContent>
           <Typography fontSize="xl" fontWeight="lg">

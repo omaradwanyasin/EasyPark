@@ -7,8 +7,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import UserCard from "./UserCard";
 import resarvation from "./reservations.json";
-import Typography from "@mui/joy/Typography";
-import NavBarEdit from "../../Components/NavBarEdit";
 import NavBarDash from "./NavDash";
 
 function DashboardPage() {

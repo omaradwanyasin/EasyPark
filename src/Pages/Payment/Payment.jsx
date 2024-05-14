@@ -16,9 +16,11 @@ function Payment() {
       <div className="paycont">
         <ButtonStepper GetdataValue={getdata} />
         {state == 1 ? (
-          <CreditCardForm />
+          <div style={{ paddingTop: 30 }}>
+            <CreditCardForm />
+          </div>
         ) : (
-          <div>
+          <div style={{ paddingTop: 30 }}>
             <AddressForm />
           </div>
         )}
