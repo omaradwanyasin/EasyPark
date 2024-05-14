@@ -11,10 +11,11 @@ import Payment from "./Pages/Payment/Payment";
 import Nservice from "../../EasyPark/src/Pages/Service page/Nservice";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import About from "./Pages/About/About.jsx";
-
+//adededed commit
 function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
