@@ -1,26 +1,23 @@
 import React, { useEffect } from "react";
-import Navgation from "../../Components/Navbar/Navgation";
 import firstmap from "../../Images/Map.png";
 import "../Home page/Home.css";
-import Button from "@mui/material/Button";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import BioCard from "../../Components/BioCard";
 import map2 from "../../Images/Group.png";
 import mock from "../../Images/deviceframes.png";
-import Service from "../Service page/Service";
-import Login from "../MainLogin/Login";
-import Signup from "../MainLogin/Signup";
-import LoginBtn from "../../Components/LoginBtn";
 import HomePageBtn from "../../Components/HomePageBtn";
-function Home() {
+import Footer from "../../Components/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
+import NavBarEdit from "../../Components/NavBarEdit";
+function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
   return (
     <div>
-      <Navgation />
-
+      <NavBarEdit />
+      {/* comment for push */}
       <div style={{ paddingTop: "80px" }}>
         <div className="Head-section">
           <div className="text-service-section" data-aos="fade-down">
@@ -72,14 +69,16 @@ function Home() {
               </p>
             </div>
           </div>
+
           <div className="mock-dashbord">
+            <h1 data-aos="fade-down">
+              {" "}
+              inteactive interface with real- time state for garage owner's{" "}
+            </h1>
+
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+          <Footer />
         </div>
       </div>
     </div>
