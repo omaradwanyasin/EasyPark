@@ -53,6 +53,8 @@ function DashboardPage() {
           <ColorToggleButton
             value={togglevalue}
             handleToggleChange={handleToggleChange}
+            //@Samer20003
+            garageId={"123"} //send the garageid so the backend can update send it as string
           />
           Counter : {counter}
           <div className="buttonaction">
