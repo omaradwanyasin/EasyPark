@@ -9,14 +9,13 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
-// import GoogleIcon from './GoogleIcon';
 
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -53,6 +52,36 @@ function ColorSchemeToggle(props: IconButtonProps) {
 }
 
 export default function Signup() {
+  const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
+    event.preventDefault();
+    const formElements = event.currentTarget.elements;
+    const data = {
+      name: formElements.name.value,
+      email: formElements.email.value,
+      password: formElements.password.value,
+      persistent: formElements.persistent.checked,
+    };
+
+    try {
+      const response = await fetch("https://localhost:7140/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      alert(`User created successfully: ${JSON.stringify(result, null, 2)}`);
+    } catch (error) {
+      console.error("There was a problem with the sign-up request:", error);
+    }
+  };
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -60,7 +89,7 @@ export default function Signup() {
         styles={{
           ":root": {
             "--Form-maxWidth": "800px",
-            "--Transition-duration": "0.4s", // set to `none` to disable transition
+            "--Transition-duration": "0.4s",
           },
         }}
       />
@@ -154,23 +183,10 @@ export default function Signup() {
               or
             </Divider>
             <Stack gap={4} sx={{ mt: 2 }}>
-              <form
-                onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                  event.preventDefault();
-                  const formElements = event.currentTarget.elements;
-                  const data = {
-                    name: formElements.name.value,
-                    email: formElements.email.value,
-                    password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
-                  };
-                  alert(JSON.stringify(data, null, 2));
-                }}
-              >
+              <form onSubmit={handleSubmit}>
                 <FormControl required>
                   <FormLabel>Name</FormLabel>
-                  <Input type="text" name="name" />{" "}
-                  {/* Change type to "text" */}
+                  <Input type="text" name="name" />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
@@ -221,10 +237,10 @@ export default function Signup() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-          "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
+            "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-            "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
+              "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
           },
         })}
       />
