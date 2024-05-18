@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Box, IconButton } from "@mui/joy";
+import Typography from "@mui/joy/Typography";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
 
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
@@ -10,10 +13,15 @@ function Navbar  (){
 
   return (
     <nav>
-      <Link to="/home" className="title">
-        {/* Easy <span>Park</span> */}
-        <img src={logo} alt="logo" className="logo" />
-      </Link>
+         <IconButton size="sm" variant="soft">
+          <Link to="/home">
+            <LocalParkingIcon />
+          </Link>
+        </IconButton>
+        <Typography className="logo" >
+              EasyPark
+        </Typography>
+  
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
         <span></span>

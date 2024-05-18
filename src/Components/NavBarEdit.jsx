@@ -54,18 +54,23 @@ export default function NavBarEdit() {
             display: { xs: "none", sm: "flex" },
           }}
         >
-          <Button size="md" variant={variant} color="primary">
+         <Link to='/login' > <Button size="md" variant={variant} color="primary">
             Login
           </Button>
+          </Link>
           <Box sx={{ minWidth: 0, flex: 1 }}>
+            <Link to='/signup'>
             <Button size="md" variant={variant} color="primary">
               Signup
             </Button>
+            </Link>
           </Box>
         </Box>
+        <Link to='/contact'>
         <Button size="md" variant={variant} color="neutral">
           Contact Us
         </Button>
+        </Link>
       </Box>
     </Box>
   );

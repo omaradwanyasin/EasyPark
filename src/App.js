@@ -29,7 +29,8 @@ function App() {
           <Route path="/service" element={<Nservice />} />
           <Route path="/test4" element={<Navbar />} />
           <Route path="/AboutUs" element={<About />} />
-          <Route path="/pay" element={<Payment />} />
+          <Route path="/pay" element={<Payment />} /> 
+          
         </Routes>
       </BrowserRouter>
     </div>

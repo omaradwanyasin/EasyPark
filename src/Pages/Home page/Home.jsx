@@ -9,14 +9,14 @@ import mock from "../../Images/deviceframes.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-import NavBarEdit from "../../Components/NavBarEdit";
+
 function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
   return (
     <div>
-      <NavBarEdit />
+      <Navbar />
       {/* comment for push */}
       <div style={{ paddingTop: "80px" }}>
         <div className="Head-section">
