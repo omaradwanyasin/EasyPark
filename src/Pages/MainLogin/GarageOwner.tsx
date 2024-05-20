@@ -24,6 +24,7 @@ interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   email: HTMLInputElement;
   password: HTMLInputElement;
+  phoneNumber: HTMLInputElement;
   persistent: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
@@ -55,12 +56,64 @@ function ColorSchemeToggle(props: IconButtonProps) {
 }
 
 export default function Garageowner() {
-  const [latitude,setLatitude]=useState("");
-  const [longitude,setLongitude]=useState("");
-  const handleLocationChange =(lat,lng)=>{
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    persistent: false,
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleLocationChange = (lat, lng) => {
     setLatitude(lat);
     setLongitude(lng);
-  }
+  };
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      Name: formData.name,
+      Email: formData.email,
+      Password: formData.password,
+      PhoneNumber: formData.phoneNumber,
+      Geometry: [latitude, longitude],
+    };
+
+    try {
+      const response = await fetch("https://localhost:7140/OwnerSignUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      setSuccessMessage("Account created successfully!");
+      setErrorMessage("");
+      // Handle success response here
+    } catch (error) {
+      setErrorMessage("Failed to create account.");
+      setSuccessMessage("");
+      // Handle error here
+    }
+  };
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -163,40 +216,47 @@ export default function Garageowner() {
               or
             </Divider>
             <Stack gap={4} sx={{ mt: 2 }}>
-              <form
-                onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                  event.preventDefault();
-                  const formElements = event.currentTarget.elements;
-                  const data = {
-                    name: formElements.name.value,
-                    email: formElements.email.value,
-                    password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
-                    location:{
-                      latitude:latitude,
-                      longitude:longitude
-                    }
-                  };
-                  alert(JSON.stringify(data, null, 2));
-                }}
-              >
+              <form onSubmit={handleSubmit}>
                 <FormControl required>
                   <FormLabel>Name</FormLabel>
-                  <Input type="text" name="name" />{" "}
-                  {/* Change type to "text" */}
+                  <Input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
-                  <Input type="email" name="email" />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Password</FormLabel>
-                  <Input type="password" name="password" />
+                  <Input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                <FormControl required>
+                  <FormLabel>Phone Number</FormLabel>
+                  <Input
+                    type="text"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                  />
                 </FormControl>
                 <br />
                 <FormControl required>
                   <FormLabel>Location</FormLabel>
-                  <SignMap onLocationChange={handleLocationChange}/>
+                  <SignMap onLocationChange={handleLocationChange} />
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
@@ -206,13 +266,29 @@ export default function Garageowner() {
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox size="sm" label="Remember me" name="persistent" />
+                    <Checkbox
+                      size="sm"
+                      label="Remember me"
+                      name="persistent"
+                      checked={formData.persistent}
+                      onChange={handleChange}
+                    />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>
-                    Sign in
+                    Sign up
                   </Button>
                 </Stack>
+                {errorMessage && (
+                  <Typography bgcolor="error" sx={{ mt: 2 }}>
+                    {errorMessage}
+                  </Typography>
+                )}
+                {successMessage && (
+                  <Typography color="success" sx={{ mt: 2 }}>
+                    {successMessage}
+                  </Typography>
+                )}
               </form>
             </Stack>
           </Box>
@@ -239,10 +315,10 @@ export default function Garageowner() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-          "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
+            "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-            "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
+              "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
           },
         })}
       />

@@ -191,7 +191,7 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox size="sm" label="Remember me" name="persistent" />
+                    <Checkbox size="sm" label="Login as Garage Owner" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>
@@ -227,7 +227,7 @@ export default function Login() {
             "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-              "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
+              "url(https://img.getimg.ai/generated/img-EH0b7Gbw1pfUwmXiTtWnN.jpeg)",
           },
         })}
       />
