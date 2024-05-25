@@ -8,8 +8,10 @@ nav {
     align-items: center;
     background-color: #00041a;
     color: white;
-    position: static;
+    position: sticky;
     top: 0;
+    width: 100%;
+    margin: auto;
 }
 
 nav .title {
@@ -59,10 +61,11 @@ nav .menu span {
     background-color: #fff;
     border-radius: 0.2rem;
 }
-
-.logo{
-    width: 190px;
+nav .logo{
+    color: white;
+    padding-right: 70px;
 }
+
 @media (max-width: 480px) {
     nav .menu {
         display: flex;
@@ -92,5 +95,8 @@ nav .menu span {
     nav ul li a {
         margin: 0.2rem 0.5rem;
     }
-   
+    nav .logo {
+        position: absolute;
+        left: 30px;
+    }
 }
