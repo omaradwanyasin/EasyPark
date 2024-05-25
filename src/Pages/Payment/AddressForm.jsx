@@ -82,7 +82,7 @@ export default function AddressForm({ onNextStep }) {
               id="city"
               name="city"
               type="city"
-              placeholder="Jenin"
+              placeholder="Jenin.."
               autoComplete="City"
               required
             />
