@@ -25,6 +25,7 @@ interface FormElements extends HTMLFormControlsCollection {
   password: HTMLInputElement;
   persistent: HTMLInputElement;
 }
+// test for the branch
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
