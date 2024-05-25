@@ -18,6 +18,8 @@ import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 // import GoogleIcon from './GoogleIcon';
 
+
+
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -50,7 +52,9 @@ function ColorSchemeToggle(props: IconButtonProps) {
     </IconButton>
   );
 }
+const validateUser = ()=>{
 
+}
 export default function Login() {
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -194,7 +198,7 @@ export default function Login() {
                     <Checkbox size="sm" label="Remember me" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
-                  <Button type="submit" fullWidth>
+                  <Button type="submit" onClick={validateUser} fullWidth>
                     Sign in
                   </Button>
                 </Stack>
