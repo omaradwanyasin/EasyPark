@@ -9,16 +9,13 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
-// import GoogleIcon from './GoogleIcon';
-
-
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -52,10 +49,44 @@ function ColorSchemeToggle(props: IconButtonProps) {
     </IconButton>
   );
 }
-const validateUser = ()=>{
 
-}
 export default function Login() {
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
+    event.preventDefault();
+    const formElements = event.currentTarget.elements;
+    const data = {
+      email: formElements.email.value,
+      password: formElements.password.value,
+      persistent: formElements.persistent.checked,
+    };
+
+    try {
+      const response = await fetch("https://localhost:7140/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Login successful:", result);
+        setErrorMessage("");
+        navigate("/service"); // Navigate to the service component upon successful login
+      } else {
+        console.error("Login failed:", response.statusText);
+        setErrorMessage("Invalid email or password. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessage("An error occurred. Please try again later.");
+    }
+  };
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -63,7 +94,7 @@ export default function Login() {
         styles={{
           ":root": {
             "--Form-maxWidth": "800px",
-            "--Transition-duration": "0.4s", // set to `none` to disable transition
+            "--Transition-duration": "0.4s",
           },
         }}
       />
@@ -105,7 +136,6 @@ export default function Login() {
                 <Link to="/home">
                   <LocalParkingIcon />
                 </Link>
-                {/* <BadgeRoundedIcon /> */}
               </IconButton>
               <Typography level="title-lg">Easy Park</Typography>
             </Box>
@@ -140,20 +170,10 @@ export default function Login() {
                   <Link to="/JoySignInSideTemplate">Sign in</Link>
                 </Typography>
                 <Typography level="body-sm">
-                  New to company?{" "}
-                  <Link to="/signup">
-                    {" "}
-                    {/* Use react-router-dom Link */}
-                    Sign up!
-                  </Link>
+                  New to company? <Link to="/signup">Sign up!</Link>
                 </Typography>
               </Stack>
-              <Button
-                variant="soft"
-                color="neutral"
-                fullWidth
-                // startDecorator={<GoogleIcon />}
-              >
+              <Button variant="soft" color="neutral" fullWidth>
                 Continue with Google
               </Button>
             </Stack>
@@ -167,18 +187,12 @@ export default function Login() {
               or
             </Divider>
             <Stack gap={4} sx={{ mt: 2 }}>
-              <form
-                onSubmit={(event: React.FormEvent<SignInFormElement>) => {
-                  event.preventDefault();
-                  const formElements = event.currentTarget.elements;
-                  const data = {
-                    email: formElements.email.value,
-                    password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
-                  };
-                  alert(JSON.stringify(data, null, 2));
-                }}
-              >
+              <form onSubmit={handleSubmit}>
+                {errorMessage && (
+                  <Typography color="danger" textAlign="center">
+                    {errorMessage}
+                  </Typography>
+                )}
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
                   <Input type="email" name="email" />
@@ -198,7 +212,7 @@ export default function Login() {
                     <Checkbox size="sm" label="Remember me" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
-                  <Button type="submit" onClick={validateUser} fullWidth>
+                  <Button type="submit" fullWidth>
                     Sign in
                   </Button>
                 </Stack>

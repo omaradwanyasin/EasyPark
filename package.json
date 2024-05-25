@@ -16,7 +16,7 @@
     "@microsoft/signalr": "^8.0.0",
     "@mui/icons-material": "^5.15.15",
     "@mui/joy": "^5.0.0-beta.32",
-    "@mui/material": "^5.15.15",
+    "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
