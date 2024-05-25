@@ -9,14 +9,15 @@ import mock from "../../Images/deviceframes.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
+import NavBarEdit from "../../Components/NavBarEdit";
 function Home(id = "home") {
   useEffect(() => {
     Aos.init();
   }, []);
   return (
     <div>
-      <Navbar/>
-{/* comment for push */}
+      <NavBarEdit />
+      {/* comment for push */}
       <div style={{ paddingTop: "80px" }}>
         <div className="Head-section">
           <div className="text-service-section" data-aos="fade-down">
@@ -70,7 +71,10 @@ function Home(id = "home") {
           </div>
 
           <div className="mock-dashbord">
-          <h1 data-aos="fade-down"> inteactive interface with real- time state for garage owner's </h1>
+            <h1 data-aos="fade-down">
+              {" "}
+              inteactive interface with real- time state for garage owner's{" "}
+            </h1>
 
             <img width={1500} src={mock} data-aos="zoom-in" />
           </div>

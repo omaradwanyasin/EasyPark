@@ -18,7 +18,20 @@ export default function RentalDashboard() {
   const directionsRef = useRef(null);
   const [selectedPark, setSelectedPark] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-//for push test
+  const [parkings, setParkings] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from your API
+    fetch("https://localhost:7140/parkings")
+      .then((response) => response.json())
+      .then((data) => {
+        setParkings(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching parking data:", error);
+      });
+  }, []);
+  //for push test
   useEffect(() => {
     // Get user's current location using Geolocation API
     navigator.geolocation.getCurrentPosition(
@@ -32,7 +45,7 @@ export default function RentalDashboard() {
   }, []); // Empty dependency array to run only once when component mounts
 
   useEffect(() => {
-    if (mapRef.current && userLocation) {
+    if (mapRef.current && userLocation && !directionsRef.current) {
       const map = mapRef.current.getMap();
       directionsRef.current = new MapboxDirections({
         accessToken:
@@ -49,7 +62,8 @@ export default function RentalDashboard() {
 
   useEffect(() => {
     return () => {
-      if (directionsRef.current && mapRef.current) { // Added null check for mapRef.current
+      if (directionsRef.current && mapRef.current) {
+        // Added null check for mapRef.current
         const map = mapRef.current.getMap();
         map.removeControl(directionsRef.current);
         directionsRef.current = null;
@@ -97,7 +111,7 @@ export default function RentalDashboard() {
           }}
         >
           <HeaderSection />
-          {park.features.map((parking) => (
+          {parkings.map((parking) => (
             <RentalCard
               key={parking.id}
               title={parking.name}
@@ -107,8 +121,8 @@ export default function RentalDashboard() {
               rating={parking.rating}
               onSelectCity={() =>
                 handleMapTransition({
-                  latitude: parking.geometry.coordinates[1],
-                  longitude: parking.geometry.coordinates[0],
+                  latitude: parking.geometry[1],
+                  longitude: parking.geometry[0],
                 })
               }
               onPopupClick={() => handlePopupClick(parking)}
@@ -159,7 +173,7 @@ export default function RentalDashboard() {
                   closeOnClick={false}
                   onClick={() => handlePopupClick(selectedPark)}
                 >
-                  {/* Add Popup content here */}
+                  <h3 style={{ color: "black" }}>Im Here!</h3>
                 </Popup>
               )}
             </Map>
@@ -169,4 +183,3 @@ export default function RentalDashboard() {
     </CssVarsProvider>
   );
 }
-
