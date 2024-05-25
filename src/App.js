@@ -11,6 +11,7 @@ import Payment from "./Pages/Payment/Payment";
 import Nservice from "../../EasyPark/src/Pages/Service page/Nservice";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import About from "./Pages/About/About.jsx";
+import Garage from "./Pages/MainLogin/Garage.tsx"
 //adededed commit
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/Garageowner" element={<GarageOwner />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/test" element={<DashboardPage />} />
+          <Route path="/Garage" element={<Garage />} />
           <Route path="/test2" element={<SignMap />} />
           <Route path="/service" element={<Nservice />} />
           <Route path="/test4" element={<Navbar />} />
