@@ -7,11 +7,11 @@ import Check from "@mui/icons-material/Check";
 
 const steps = ["Your Information", "Card Information", "Approved"];
 
-export default function ButtonStepper(props) {
-  const [activeStep, setActiveStep] = React.useState(1);
+export default function ButtonStepper({ GetdataValue, activeStep }) {
   React.useEffect(() => {
-    props.GetdataValue(activeStep);
-  });
+    GetdataValue(activeStep);
+  }, [activeStep, GetdataValue]);
+
   return (
     <Stepper sx={{ width: "100%" }}>
       {steps.map((step, index) => (
@@ -28,11 +28,11 @@ export default function ButtonStepper(props) {
           sx={{
             "&::after": {
               ...(activeStep > index &&
-                index !== 2 && { bgcolor: "primary.solidBg" }),
+                index !== steps.length - 1 && { bgcolor: "primary.solidBg" }),
             },
           }}
         >
-          <StepButton onClick={() => setActiveStep(index)}>
+          <StepButton disabled> {/* Make the StepButton disabled */}
             <p style={{ color: "white" }}>{step}</p>
           </StepButton>
         </Step>

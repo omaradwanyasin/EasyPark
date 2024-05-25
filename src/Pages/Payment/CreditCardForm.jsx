@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
@@ -12,7 +12,41 @@ import Button from "@mui/joy/Button";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
-export default function CreditCardForm() {
+export default function CreditCardForm({ onNextStep }) {
+  const [formData, setFormData] = useState({
+    cardNumber: "",
+    expiryDate: "",
+    cvc: "",
+    cardHolderName: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.cardNumber) newErrors.cardNumber = "Card number is required";
+    if (!formData.expiryDate) newErrors.expiryDate = "Expiry date is required";
+    if (!formData.cvc) newErrors.cvc = "CVC/CVV is required";
+    if (!formData.cardHolderName) newErrors.cardHolderName = "Card holder name is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleAddCard = () => {
+    if (validateForm()) {
+      onNextStep();
+    }
+  };
+
   return (
     <Card
       variant="outlined"
@@ -36,25 +70,48 @@ export default function CreditCardForm() {
           gap: 1.5,
         }}
       >
-        <FormControl sx={{ gridColumn: "1/-1" }}>
+        <FormControl sx={{ gridColumn: "1/-1" }} error={!!errors.cardNumber}>
           <FormLabel>Card number</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} />
+          <Input
+            name="cardNumber"
+            value={formData.cardNumber}
+            onChange={handleInputChange}
+            endDecorator={<CreditCardIcon />}
+          />
+          {errors.cardNumber && <Typography color="error">{errors.cardNumber}</Typography>}
         </FormControl>
-        <FormControl>
+        <FormControl error={!!errors.expiryDate}>
           <FormLabel>Expiry date</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} />
+          <Input
+            name="expiryDate"
+            value={formData.expiryDate}
+            onChange={handleInputChange}
+            endDecorator={<CreditCardIcon />}
+          />
+          {errors.expiryDate && <Typography color="error">{errors.expiryDate}</Typography>}
         </FormControl>
-        <FormControl>
+        <FormControl error={!!errors.cvc}>
           <FormLabel>CVC/CVV</FormLabel>
-          <Input endDecorator={<InfoOutlined />} />
+          <Input
+            name="cvc"
+            value={formData.cvc}
+            onChange={handleInputChange}
+            endDecorator={<InfoOutlined />}
+          />
+          {errors.cvc && <Typography color="error">{errors.cvc}</Typography>}
         </FormControl>
-        <FormControl sx={{ gridColumn: "1/-1" }}>
+        <FormControl sx={{ gridColumn: "1/-1" }} error={!!errors.cardHolderName}>
           <FormLabel>Card holder name</FormLabel>
-          <Input placeholder="Enter cardholder's full name" />
+          <Input
+            name="cardHolderName"
+            value={formData.cardHolderName}
+            onChange={handleInputChange}
+            placeholder="Enter cardholder's full name"
+          />
+          {errors.cardHolderName && <Typography color="error">{errors.cardHolderName}</Typography>}
         </FormControl>
-        <Checkbox label="Save card" sx={{ gridColumn: "1/-1", my: 1 }} />
         <CardActions sx={{ gridColumn: "1/-1" }}>
-          <Button variant="solid" color="primary">
+          <Button variant="solid" color="primary" onClick={handleAddCard}>
             Add card
           </Button>
         </CardActions>
