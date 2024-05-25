@@ -277,9 +277,11 @@ export default function Garageowner() {
                     />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
+                 
                   <Button type="submit" fullWidth>
-                    Sign up
+                    next
                   </Button>
+                 
                 </Stack>
                 {errorMessage && (
                   <Typography bgcolor="error" sx={{ mt: 2 }}>
