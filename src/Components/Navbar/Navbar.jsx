@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "./logo/EasyPark.png"; // The path should be relative to the current file
 
 
-function Navbar  (){
+function Navbar(){
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
