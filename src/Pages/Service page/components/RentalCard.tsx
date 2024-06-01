@@ -76,12 +76,10 @@ export default function RentalCard(props) {
             <strong>{props.price}</strong>{" "}
             <Typography level="body-md">price</Typography>
           </Typography>
-          
         </Stack>
-        
       </CardContent>
       <Rating rating={props.rating} />
-      {props.status === 0 ? (
+      {props.status === 1 ? (
         <Button
           variant="outlined"
           color="neutral"
@@ -103,7 +101,6 @@ export default function RentalCard(props) {
       <Button variant="solid" color="primary">
         Reserve
       </Button>
-      
     </Card>
   );
 }

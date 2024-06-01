@@ -12,7 +12,7 @@ import RentalCard from "./components/RentalCard.tsx";
 import HeaderSection from "./components/HeaderSection.tsx";
 import park from "./park.json";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions"; // Modified import
-
+import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 export default function RentalDashboard() {
   const mapRef = useRef(null);
   const directionsRef = useRef(null);
@@ -86,6 +86,42 @@ export default function RentalDashboard() {
       zoom: 17,
     });
   };
+
+  useEffect(() => {
+    // Establish connection to SignalR hub
+    const connection = new HubConnectionBuilder()
+      .withUrl("https://localhost:7140/garageHubs")
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    connection
+      .start()
+      .then(() => {
+        console.log("SignalR connection established");
+
+        // Listen for status updates from SignalR hub
+        connection.on("ReceiveStatusUpdate", (garageId, status) => {
+          console.log(
+            `Received status update: Garage ${garageId}, Status ${status}`
+          );
+
+          // Update parking status in parkings state
+          setParkings((prevParkings) =>
+            prevParkings.map((parking) =>
+              parking.id === garageId ? { ...parking, status } : parking
+            )
+          );
+        });
+      })
+      .catch((error) => {
+        console.error("Error establishing SignalR connection:", error);
+      });
+
+    return () => {
+      // Clean up SignalR connection
+      connection.stop().then(() => console.log("SignalR connection stopped"));
+    };
+  }, []);
 
   return (
     <CssVarsProvider disableTransitionOnChange>

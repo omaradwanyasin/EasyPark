@@ -54,7 +54,7 @@ function DashboardPage() {
             value={togglevalue}
             handleToggleChange={handleToggleChange}
             //@Samer20003
-            garageId={"123"} //send the garageid so the backend can update send it as string
+            garageId={"665b5cddf061400a41b5fd27"} //send the garageid so the backend can update send it as string
           />
           Counter : {counter}
           <div className="buttonaction">

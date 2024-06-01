@@ -46,12 +46,30 @@ export default function ColorToggleButton({
 
   const handleColorChange = async (event, newValue) => {
     handleToggleChange(event, newValue);
+
     if (conn && newValue !== null) {
       try {
-        console.log("Sending update to backend:", garageId, newValue);
-        await conn.invoke("UpdateStatus", garageId, newValue);
+        let status = 0; // Default status value
+
+        switch (newValue) {
+          case "on":
+            status = 1; // Available
+            break;
+          case "off":
+            status = 0; // Closed
+            break;
+          case "full":
+            status = 2; // Full
+            break;
+          default:
+            console.warn("Unknown status value:", newValue);
+            return; // Exit if the value is unknown
+        }
+
+        console.log("Sending update to backend:", garageId, status);
+        await conn.invoke("UpdateStatus", garageId, status);
         console.log(
-          `Sent update status to server: ${newValue} for garage ${garageId}`
+          `Sent update status to server: ${status} for garage ${garageId}`
         );
       } catch (e) {
         console.error("Error sending update to backend:", e);
