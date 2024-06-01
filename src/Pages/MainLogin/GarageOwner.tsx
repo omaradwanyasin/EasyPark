@@ -322,7 +322,7 @@ export default function Garageowner() {
             "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
-              "url(https://c0.wallpaperflare.com/preview/607/871/595/light-parking-garage-building-underground.jpg)",
+              "url(https://img.getimg.ai/generated/img-EH0b7Gbw1pfUwmXiTtWnN.jpeg)",
           },
         })}
       />
