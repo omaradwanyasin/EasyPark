@@ -11,12 +11,11 @@ import Payment from "./Pages/Payment/Payment";
 import Nservice from "../../EasyPark/src/Pages/Service page/Nservice";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import About from "./Pages/About/About.jsx";
-import Garage from "./Pages/MainLogin/Garage.tsx"
+import Garage from "./Pages/MainLogin/Garage.tsx";
 //adededed commit
 function App() {
   return (
     <div className="App">
-      
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
@@ -26,13 +25,12 @@ function App() {
           <Route path="/Garageowner" element={<GarageOwner />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/test" element={<DashboardPage />} />
-          <Route path="/Garage" element={<Garage />} />
+          <Route path="/Garageowner/Garage" element={<Garage />} />
           <Route path="/test2" element={<SignMap />} />
           <Route path="/service" element={<Nservice />} />
           <Route path="/test4" element={<Navbar />} />
           <Route path="/AboutUs" element={<About />} />
-          <Route path="/pay" element={<Payment />} /> 
-          
+          <Route path="/pay" element={<Payment />} />
         </Routes>
       </BrowserRouter>
     </div>
