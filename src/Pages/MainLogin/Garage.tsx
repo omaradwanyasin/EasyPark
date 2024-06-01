@@ -65,7 +65,7 @@ export default function Signup() {
       password: formElements.password.value,
       persistent: formElements.persistent.checked,
     };
-
+    
   
   };
 
