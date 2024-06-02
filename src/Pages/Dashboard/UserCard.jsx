@@ -6,7 +6,6 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-<<<<<<< HEAD
 import axios from "axios";
 
 export default function UserCard(props) {
@@ -52,14 +51,12 @@ export default function UserCard(props) {
         error.response ? error.response.data : error.message
       );
     }
-=======
 import "./DDashboardPage.css";
 
 export default function UserCard(props) {
   const [isVisable, setIsVisable] = React.useState(true);
   const handleReject = () => {
     setIsVisable(false);
->>>>>>> 2f0d51c672ce1bce67f8e015f8d8abd612afeae8
   };
 
   return (
@@ -70,7 +67,6 @@ export default function UserCard(props) {
         overflow: { xs: "auto", sm: "initial" },
       }}//testing 
     >
-<<<<<<< HEAD
       <Box
         sx={{
           position: "absolute",
@@ -159,7 +155,6 @@ export default function UserCard(props) {
               onClick={() => {
                 props.increaseCounter();
                 handleNotification("accepted");
-=======
       {isVisable && (
         <Card
           className="Information"
@@ -194,7 +189,6 @@ export default function UserCard(props) {
                 display: "flex",
                 gap: 2,
                 "& > div": { flex: 1 },
->>>>>>> 2f0d51c672ce1bce67f8e015f8d8abd612afeae8
               }}
             >
               <div>
