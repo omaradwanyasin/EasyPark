@@ -27,7 +27,7 @@ function Home(id = "home") {
               a tap. Say goodbye to parking woes and hello to convenience!
             </p>
             <div>
-              <HomePageBtn name="Serivces" destination="/service" />
+              <HomePageBtn name="Find Parking" destination="/service" />
               {/* <Button>Explore Service</Button> */}
             </div>
           </div>
