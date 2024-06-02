@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -6,8 +6,53 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
+import axios from "axios";
 
 export default function UserCard(props) {
+  const handleNotification = async (status) => {
+    try {
+      const message =
+        status === "accepted"
+          ? "Your reservation has been accepted."
+          : "Your reservation has been rejected.";
+
+      const notification2 = {
+        id: "",
+        userId: "string",
+        reservationId: "string",
+        message: "string",
+        status: "string",
+        createdAt: "2024-06-02T10:53:22.549Z",
+      };
+      const notification = {
+        userId: "123",
+        reservationId: "132",
+        message: message,
+        status: "unread",
+        createdAt: new Date(), // Ensure correct date format
+      };
+
+      console.log("Sending notification:", notification);
+
+      const response = await axios.post(
+        "https://localhost:7140/api/notifications",
+        notification2,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Notification sent:", response.data);
+    } catch (error) {
+      console.error(
+        "Error sending notification:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -27,7 +72,6 @@ export default function UserCard(props) {
           bottom: "-24px",
           "&::before": {
             top: "4px",
-
             display: "block",
             position: "absolute",
             right: "0.5rem",
@@ -37,7 +81,6 @@ export default function UserCard(props) {
           },
           "&::after": {
             top: "4px",
-
             display: "block",
             position: "absolute",
             left: "0.5rem",
@@ -57,7 +100,6 @@ export default function UserCard(props) {
             minWidth:
               "clamp(0px, (calc(var(--stack-point) - 2 * var(--Card-padding) - 2 * var(--variant-borderWidth, 0px)) + 1px - 100%) * 999, 100%)",
           },
-          // make the card resizable for demo
           overflow: "auto",
           resize: "horizontal",
         }}
@@ -69,7 +111,6 @@ export default function UserCard(props) {
           <Typography fontSize="xl" fontWeight="lg">
             {props.name}
           </Typography>
-
           <Sheet
             sx={{
               bgcolor: "background.level1",
@@ -95,13 +136,20 @@ export default function UserCard(props) {
             </div>
           </Sheet>
           <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
-            <Button variant="outlined" color="neutral">
+            <Button
+              variant="outlined"
+              color="neutral"
+              onClick={() => handleNotification("rejected")}
+            >
               Reject
             </Button>
             <Button
               variant="solid"
               color="primary"
-              onClick={props.increaseCounter}
+              onClick={() => {
+                props.increaseCounter();
+                handleNotification("accepted");
+              }}
             >
               Accept
             </Button>

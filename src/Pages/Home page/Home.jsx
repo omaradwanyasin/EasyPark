@@ -5,7 +5,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import BioCard from "../../Components/BioCard";
 import map2 from "../../Images/Group.png";
-import mock from "../../Images/deviceframes.png";
+import mock from "../../Images/lappad.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -76,7 +76,7 @@ function Home(id = "home") {
               inteactive interface with real- time state for garage owner's{" "}
             </h1>
 
-            <img width={1500} src={mock} data-aos="zoom-in" />
+            <img width={600} src={mock} data-aos="zoom-in" />
           </div>
           <Footer />
         </div>
