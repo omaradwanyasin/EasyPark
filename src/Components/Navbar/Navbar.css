@@ -12,6 +12,8 @@ nav {
     top: 0;
     width: 100%;
     margin: auto;
+    position: fixed;
+    z-index: 999;
 }
 
 nav .title {
@@ -74,13 +76,14 @@ nav .logo{
     nav {
         flex-direction: column;
         align-items: flex-start;
+        position: fixed;
+        z-index: 999;
     }
 
     nav ul {
         display: none;
         flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
+   
     }
 
     nav ul.open {
