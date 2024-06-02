@@ -173,9 +173,7 @@ export default function Login() {
                   New to company? <Link to="/signup">Sign up!</Link>
                 </Typography>
               </Stack>
-              <Button variant="soft" color="neutral" fullWidth>
-                Continue with Google
-              </Button>
+              
             </Stack>
             <Divider
               sx={(theme) => ({

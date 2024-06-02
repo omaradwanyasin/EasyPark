@@ -171,9 +171,7 @@ export default function Signup() {
                   <Link to="/Garageowner">Sign up!</Link>
                 </Typography>
               </Stack>
-              <Button variant="soft" color="neutral" fullWidth>
-                Continue with Google
-              </Button>
+              
             </Stack>
             <Divider
               sx={(theme) => ({

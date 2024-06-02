@@ -204,9 +204,7 @@ export default function Garageowner() {
                   <Link to="/Garageowner"></Link>
                 </Typography>
               </Stack>
-              <Button variant="soft" color="neutral" fullWidth>
-                Continue with Google
-              </Button>
+            
             </Stack>
             <Divider
               sx={(theme) => ({
