@@ -218,7 +218,7 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                    <Button type="submit" style={{background:'none'}}>
+                  <Button type="submit" style={{background:'none'}}>
                     Login as Garage Owner
                   </Button>
                     <Link to="#">Forgot your password?</Link>
