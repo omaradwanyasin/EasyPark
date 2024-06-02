@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Navbar from '../../Components/Navbar/Navbar';
+import "./Contact.css"
+import { alignProperty } from '@mui/material/styles/cssUtils';
 
 const EmailForm = () => {
   const [name, setName] = useState('');
@@ -10,12 +12,10 @@ const EmailForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Your EmailJS service ID, template ID, and Public Key
     const serviceId = 'EasyPark';
     const templateId = 'template_x1zethy';
     const publicKey = '4_eN7jLz9XIutd1o6';
 
-    // Create a new object that contains dynamic template params
     const templateParams = {
       from_name: name,
       from_email: email,
@@ -23,7 +23,6 @@ const EmailForm = () => {
       message: message,
     };
 
-    // Send the email using EmailJS
     emailjs
       .send(serviceId, templateId, templateParams, publicKey)
       .then((response) => {
@@ -40,31 +39,40 @@ const EmailForm = () => {
   return (
     <div>
       <Navbar/>
-      <h1>Contact us </h1>
+      <br />
+      <br />
+      <br />
+
       <form onSubmit={handleSubmit} style={s.container}>
+        <h2>Write us a Message .. 👇</h2>
+        <br />
+
+        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Email :</p>
         <input
           type="text"
-          placeholder="Your Name"
+          placeholder="..."
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={s.input}
         />
+        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Name :</p>
         <input
           type="email"
-          placeholder="Your Email"
+          placeholder="..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={s.input}
         />
+        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your message :</p>
         <textarea
           cols="30"
           rows="10"
-          placeholder="Your Message"
+          placeholder="Talk here ..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           style={s.textarea}
         />
-        <button type="submit" style={s.submitButton}>
+        <button type="submit" className='submitBtn'>
           Send Email
         </button>
       </form>
@@ -96,16 +104,8 @@ const s = {
     fontSize: '16px',
     resize: 'vertical',
   },
-  submitButton: {
-    width: '100%',
-    padding: '10px 20px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '16px',
-    cursor: 'pointer',
-  },
+
+
 };
 
 export default EmailForm;

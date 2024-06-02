@@ -76,7 +76,18 @@ export default function Login() {
         const result = await response.json();
         console.log("Login successful:", result);
         setErrorMessage("");
-        navigate("/service"); // Navigate to the service component upon successful login
+
+        localStorage.setItem("userEmail", data.email);
+        if (result.token) {
+          localStorage.setItem("authToken", result.token);
+        }
+        if (result.name) {
+          localStorage.setItem("userName", result.name);
+        }
+        if (result.id) {
+          localStorage.setItem("userId", result.id);
+        }
+        navigate("/service"); 
       } else {
         console.error("Login failed:", response.statusText);
         setErrorMessage("Invalid email or password. Please try again.");
@@ -173,9 +184,7 @@ export default function Login() {
                   New to company? <Link to="/signup">Sign up!</Link>
                 </Typography>
               </Stack>
-              <Button variant="soft" color="neutral" fullWidth>
-                Continue with Google
-              </Button>
+              
             </Stack>
             <Divider
               sx={(theme) => ({
@@ -209,7 +218,9 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox size="sm" label="Login as Garage Owner" name="persistent" />
+                  <Button type="submit" style={{background:'none'}}>
+                    Login as Garage Owner
+                  </Button>
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>
@@ -242,7 +253,7 @@ export default function Login() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-            "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
+            "url(https://img.getimg.ai/generated/img-bM8PhGWeAyNugZ4EJmWhu.jpeg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
               "url(https://img.getimg.ai/generated/img-EH0b7Gbw1pfUwmXiTtWnN.jpeg)",

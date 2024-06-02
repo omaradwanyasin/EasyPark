@@ -12,6 +12,8 @@ nav {
     top: 0;
     width: 100%;
     margin: auto;
+    position: fixed;
+    z-index: 999;
 }
 
 nav .title {
@@ -27,8 +29,8 @@ span{
 }
 
 nav ul li {
-    font-size: 22px;
-   list-style: none; 
+    font-size: 19px;
+    list-style: none; 
 }
 
 nav ul li a {
@@ -37,7 +39,8 @@ nav ul li a {
     color: white;
     padding: 0.5rem;
     margin: 0 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: 25px;
+    transition: .5s;
 }
 
 nav ul li a:not(.active):hover {
@@ -74,13 +77,14 @@ nav .logo{
     nav {
         flex-direction: column;
         align-items: flex-start;
+        position: fixed;
+        z-index: 999;
     }
 
     nav ul {
         display: none;
         flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
+   
     }
 
     nav ul.open {

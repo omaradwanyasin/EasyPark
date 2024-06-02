@@ -28,7 +28,6 @@ interface FormElements extends HTMLFormControlsCollection {
   wifi: HTMLInputElement;
   persistent: HTMLInputElement;
 }
-
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
@@ -75,26 +74,7 @@ export default function Signup() {
       persistent: formElements.persistent.checked,
     };
 
-    try {
-      const response = await fetch("https://localhost:7140/parkings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const result = await response.json();
-      console.log(result);
-
-      navigate("/login"); // Navigate to home on successful signup
-    } catch (error) {
-      console.error("There was a problem with your fetch operation:", error);
-    }
+  
   };
 
   return (
@@ -277,7 +257,7 @@ export default function Signup() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-            "url(https://img.freepik.com/premium-photo/car-parking-lot-with-cars-parking-space-illustration-ai-generated_843560-965.jpg)",
+            "url(https://img.getimg.ai/generated/img-bM8PhGWeAyNugZ4EJmWhu.jpeg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
               "url(https://img.getimg.ai/generated/img-EH0b7Gbw1pfUwmXiTtWnN.jpeg)",
