@@ -8,6 +8,7 @@ import UserCard from "./UserCard";
 import resarvation from "./reservations.json";
 import NavBarDash from "./NavDash";
 import NotificationsPopup from "./NotificationsPopup";
+import { SignalRProvider } from "../../signalRService";
 
 function DashboardPage() {
   const [counter, setCounter] = useState(0);
@@ -30,56 +31,58 @@ function DashboardPage() {
     setToggleValue(newValue);
   };
 
-  const userId = "123"; // should be from local storge
+  const userId = "0"; // should be from local storge
 
   return (
-    <div className="maindiv">
-      <div className="headers">
-        <NavBarDash />
-      </div>
-      <div className="conts">
-        <div className="resv">
-          <h3>Reservations</h3>
-          <div className="resvdisplay">
-            {resarvation.users.map((user) => (
-              <UserCard
-                key={user.reservation_id}
-                id={user.reservation_id}
-                name={user.name}
-                phone={user.phone_number}
-                img={user.image_url}
-                userId={userId}
-                increaseCounter={increase}
-              />
-            ))}
+    <SignalRProvider>
+      <div className="maindiv">
+        <div className="headers">
+          <NavBarDash />
+        </div>
+        <div className="conts">
+          <div className="resv">
+            <h3>Reservations</h3>
+            <div className="resvdisplay">
+              {resarvation.users.map((user) => (
+                <UserCard
+                  key={user.reservation_id}
+                  id={user.reservation_id}
+                  name={user.name}
+                  phone={user.phone_number}
+                  img={user.image_url}
+                  userId={userId}
+                  increaseCounter={increase}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="cap">
+            <h3>Capacity {counter}/50</h3>
+            <ColorToggleButton
+              value={toggleValue}
+              handleToggleChange={handleToggleChange}
+              garageId={"665b5cddf061400a41b5fd27"} // send the garage ID as a string
+            />
+            Counter : {counter}
+            <div className="buttonaction">
+              {toggleValue !== "off" && (
+                <Fab color="success" aria-label="add" onClick={increase}>
+                  <AddIcon />
+                </Fab>
+              )}
+              {toggleValue !== "off" && (
+                <Fab color="error" aria-label="add" onClick={decrease}>
+                  <RemoveIcon />
+                </Fab>
+              )}
+            </div>
+          </div>
+          <div className="notifications">
+            <NotificationsPopup userId={userId} />
           </div>
         </div>
-        <div className="cap">
-          <h3>Capacity {counter}/50</h3>
-          <ColorToggleButton
-            value={toggleValue}
-            handleToggleChange={handleToggleChange}
-            garageId={"665b5cddf061400a41b5fd27"} // send the garage ID as a string
-          />
-          Counter : {counter}
-          <div className="buttonaction">
-            {toggleValue !== "off" && (
-              <Fab color="success" aria-label="add" onClick={increase}>
-                <AddIcon />
-              </Fab>
-            )}
-            {toggleValue !== "off" && (
-              <Fab color="error" aria-label="add" onClick={decrease}>
-                <RemoveIcon />
-              </Fab>
-            )}
-          </div>
-        </div>
-        <div className="notifications">
-          <NotificationsPopup userId={userId} />
-        </div>
       </div>
-    </div>
+    </SignalRProvider>
   );
 }
 

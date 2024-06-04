@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import axios from "axios";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -6,57 +7,23 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import axios from "axios";
 import "./DDashboardPage.css";
+import { useContext } from "react";
+import { SignalRContext } from "../../signalRService";
 
 export default function UserCard(props) {
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [isVisable, setIsVisable] = React.useState(true);
+  const connection = useContext(SignalRContext); // Access connection from context
 
-  const handleNotification = async (status) => {
-    try {
-      const message =
-        status === "accepted"
-          ? "Your reservation has been accepted."
-          : "Your reservation has been rejected.";
-
-      const notification2 = {
-        id: "",
-        userId: "string",
-        reservationId: "string",
-        message: "string",
-        status: "string",
-        createdAt: "2024-06-02T10:53:22.549Z",
-      };
-
-      console.log("Sending notification:", notification2);
-
-      const response = await axios.post(
-        "https://localhost:7140/api/notifications",
-        notification2,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Notification sent:", response.data);
-    } catch (error) {
-      console.error(
-        "Error sending notification:",
-        error.response ? error.response.data : error.message
-      );
-    }
+  const handleReject = async () => {
+    setIsVisable(false);
+    const message = "Your reservation has been rejected.";
+    await connection.invoke("SendNotification", message, "error", "0");
   };
 
-  const handleReject = () => {
-    setIsVisible(false);
-    handleNotification("rejected");
-  };
-
-  const handleAccept = () => {
-    props.increaseCounter();
-    handleNotification("accepted");
+  const handleAccept = async () => {
+    const message = "Your reservation has been accepted.";
+    await connection.invoke("SendNotification", message, "success", "0");
   };
 
   return (
@@ -67,7 +34,7 @@ export default function UserCard(props) {
         overflow: { xs: "auto", sm: "initial" },
       }}
     >
-      {isVisible && (
+      {isVisable && (
         <Card
           className="Information"
           orientation="horizontal"
@@ -79,7 +46,6 @@ export default function UserCard(props) {
               minWidth:
                 "clamp(0px, (calc(var(--stack-point) - 2 * var(--Card-padding) - 2 * var(--variant-borderWidth, 0px)) + 1px - 100%) * 999, 100%)",
             },
-            // make the card resizable for demo
             overflow: "auto",
             resize: "horizontal",
           }}
