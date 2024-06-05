@@ -21,10 +21,12 @@ function Home(id = "home") {
       <div style={{ paddingTop: "80px" }}>
         <div className="Head-section">
           <div className="text-service-section" data-aos="fade-down">
-            <h1>EasyPark: Your Instant Parking Solution</h1>
+            <h1>
+              <span>EasyPark</span> Your Instant Parking Solution
+            </h1>
             <p>
-              Discover EasyPark: Instantly find parking spots near you with just
-              a tap. Say goodbye to parking woes and hello to convenience!
+              Instantly find parking spots near you with just a tap. Say goodbye
+              to parking woes and hello to convenience!
             </p>
             <div>
               <HomePageBtn name="Find Parking" destination="/service" />
