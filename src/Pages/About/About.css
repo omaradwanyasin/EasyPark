@@ -9,13 +9,11 @@
     gap: 150px;
 }
 .photo1{
-
     width: 400px;
-
-
+    height: 500px;
 }
 .Parag{
-    padding-top: 100px;
+    padding-top: 10px;
     gap: 50px;
 }
 .Parag h1{
@@ -25,6 +23,7 @@
     padding-top: 80px;
     font-size: 20px;
     letter-spacing: 5px;
+    width: 510px;
 }
 .link{
     color: chocolate;

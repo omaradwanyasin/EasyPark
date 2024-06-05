@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import img from './img/abou.jpg';
 import Navbar from '../../Components/Navbar/Navbar';
 import './About.css';
+import Footer from '../../Components/Footer';
 function About() {
 
   return (
@@ -34,10 +35,7 @@ function About() {
 
 
 
-
-        <section>
-
-        </section>
+<Footer/>
     </div>
   )
 }
