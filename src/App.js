@@ -16,6 +16,9 @@ import Garage from "./Pages/MainLogin/Garage.tsx";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { SignalRProvider } from "./signalRService";  // Import SignalRProvider
 import NotificationListener from "./NotificationListener.jsx";
+import Policy from './Pages/Policy Page/Policy.jsx';
+import ScrollToTop from './Components/ScrollToTop';
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,6 +51,7 @@ function App() {
       ) : (
         <SignalRProvider> {/* Wrap the app with SignalRProvider */}
           <BrowserRouter>
+          <ScrollToTop />
             <Routes>
               <Route index element={<Home />} />
               <Route path="/home" element={<Home />} />
@@ -61,6 +65,7 @@ function App() {
               <Route path="/service" element={<Nservice />} />
               <Route path="/test4" element={<Navbar />} />
               <Route path="/AboutUs" element={<About />} />
+              <Route path="/Policy" element={<Policy />} />
               <Route path="/pay" element={<Payment />} />
             </Routes>
             <NotificationListener /> {/* Add NotificationListener to listen for notifications */}
