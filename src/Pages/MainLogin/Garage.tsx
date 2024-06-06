@@ -62,19 +62,47 @@ export default function Signup() {
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
-    const chargingPoint = formElements["radio-chargingPoint-group"].value;
-    const heavyCars = formElements["radio-heavyCars-group"].value;
-    const wifi = formElements["radio-wifi-group"].value;
     const data = {
+      id: "", // You can generate a unique ID here if needed
+      type: "local", // Set this to the appropriate value
+      geometry: [0], // Adjust this as needed
+      properties: {
+        prop0: "string", // Set this to the appropriate value
+        parkId: 0 // Adjust this as needed
+      },
       name: formElements.name.value,
-      capacity: formElements.capacity.value,
-      chargingPoint: chargingPoint,
-      heavyCars: heavyCars,
-      wifi: wifi,
-      persistent: formElements.persistent.checked,
+      comments: ["string"], // Adjust this as needed
+      city: "string", // Set this to the appropriate value
+      status: 0, // Adjust this as needed
+      info: "string", // Set this to the appropriate value
+      rating: 0, // Adjust this as needed
+      capacity: parseInt(formElements.capacity.value, 10),
+      containsWifi: formElements.wifi.value === "yes",
+      supportsElectricalCharging: formElements.chargingPoint.value === "yes",
+      supportsHeavyTrucks: formElements.heavyCars.value === "yes",
+      garageId: "10" // Set this to the appropriate value or generate it if necessary
     };
 
-  
+    try {
+      const response = await fetch('https://localhost:7140/parkings'
+      , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Garage added successfully:', responseData);
+        navigate('/test'); // Navigate to a success page or perform another action
+      } else {
+        console.error('Failed to add garage:', response.statusText);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   return (
@@ -178,17 +206,16 @@ export default function Signup() {
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Garage Capacity</FormLabel>
-                  <Input type="number" name="number" />
+                  <Input type="number" name="capacity" />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Contain Charging Point ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup
-                      defaultValue="medium"
-                      name="radio-buttons-group"
+                      name="chargingPoint"
                     >
-                      <Radio value="danger" label="Yes" color="danger" />
-                      <Radio value="success" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="danger" />
+                      <Radio value="no" label="No" color="success" />
                     </RadioGroup>
                   </div>
                 </FormControl>
@@ -196,11 +223,10 @@ export default function Signup() {
                   <FormLabel>Suport Heavey Cars ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup
-                      defaultValue="medium"
-                      name="radio-buttons-group"
+                      name="heavyCars"
                     >
-                      <Radio value="danger" label="Yes" color="danger" />
-                      <Radio value="success" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="danger" />
+                      <Radio value="no" label="No" color="success" />
                     </RadioGroup>
                   </div>
                 </FormControl>
@@ -208,11 +234,10 @@ export default function Signup() {
                   <FormLabel>Wifi Available ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup
-                      defaultValue="medium"
-                      name="radio-buttons-group"
+                      name="wifi"
                     >
-                      <Radio value="danger" label="Yes" color="danger" />
-                      <Radio value="success" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="danger" />
+                      <Radio value="no" label="No" color="success" />
                     </RadioGroup>
                   </div>
                 </FormControl>

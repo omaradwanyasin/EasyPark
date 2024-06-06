@@ -7,7 +7,7 @@ import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link } from "react-router-dom";
 
-export default function HeaderSection() {
+export default function HeaderSection({ email, name }) {
   return (
     <Box
       sx={{
@@ -58,8 +58,8 @@ export default function HeaderSection() {
             src="https://media.istockphoto.com/id/1096419446/photo/modern-cheerful-business-man-in-deep-blue-shirt-standing-with-crossed-arms-isolated-on-gray.jpg?s=612x612&w=0&k=20&c=r4f-QedoEjL9KU-H96imU5UI5594wFUj2A9PgD8JXGY="
           />
           <Box sx={{ minWidth: 0, flex: 1 }}>
-            <Typography level="title-sm">Omar Yasin</Typography>
-            <Typography level="body-xs">EasyPark@test.com</Typography>
+            <Typography level="title-sm">{name}</Typography>
+            <Typography level="body-xs">{email}</Typography>
           </Box>
         </Box>
         <ColorSchemeToggle sx={{ alignSelf: "center" }} />

@@ -19,6 +19,17 @@ export default function RentalDashboard() {
   const [selectedPark, setSelectedPark] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [parkings, setParkings] = useState([]);
+  const [userInfo,setUserInfo] = useState({});
+
+  useEffect(()=>{
+    console.log("User name from localStorage:", localStorage.getItem('name'));
+    console.log("User id from localStorage:", localStorage.getItem('userId'));
+    console.log("User email from localStorage:", localStorage.getItem('userEmail'));
+    const userEmail = localStorage.getItem('userEmail');
+    const userName = localStorage.getItem('userName');
+    const userId= localStorage.getItem('userId');
+    setUserInfo({email:userEmail,name:userName,id:userId});
+  },[]);
 
   useEffect(() => {
     // Fetch data from your API
@@ -126,7 +137,7 @@ export default function RentalDashboard() {
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
-      <NavBar />
+      <NavBar email={userInfo.email} name={userInfo.name} />
       <Box
         component="main"
         sx={{

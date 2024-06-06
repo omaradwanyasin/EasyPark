@@ -1,4 +1,5 @@
 import * as React from "react";
+import {jwtDecode} from "jwt-decode";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -56,11 +57,11 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
-    const formElements = event.currentTarget.elements;
+    const formElements = event.currentTarget.elements as FormElements; // Cast event elements to FormElements interface
     const data = {
       email: formElements.email.value,
       password: formElements.password.value,
-      persistent: formElements.persistent.checked,
+      persistent: formElements.persistent?.checked || false,
     };
 
     try {
@@ -77,17 +78,24 @@ export default function Login() {
         console.log("Login successful:", result);
         setErrorMessage("");
 
-        localStorage.setItem("userEmail", data.email);
+        // Decode the token to extract user information
         if (result.token) {
+          // Decode the JWT token
+          const decodedToken: any = jwtDecode(result.token);
+        console.log(result.token, decodedToken);
+          // Extract user information from the decoded token
+          const userEmail = decodedToken.nameid;
+          const userName = decodedToken.unique_name;
+          const userId = decodedToken.UserId;
+        
+          // Store user information in localStorage
+          localStorage.setItem("userEmail", userEmail);
+          localStorage.setItem("userName", userName);
+          localStorage.setItem("userId", userId);
           localStorage.setItem("authToken", result.token);
         }
-        if (result.name) {
-          localStorage.setItem("userName", result.name);
-        }
-        if (result.id) {
-          localStorage.setItem("userId", result.id);
-        }
-        navigate("/service"); 
+
+        navigate("/service");
       } else {
         console.error("Login failed:", response.statusText);
         setErrorMessage("Invalid email or password. Please try again.");
@@ -184,7 +192,6 @@ export default function Login() {
                   New to company? <Link to="/signup">Sign up!</Link>
                 </Typography>
               </Stack>
-              
             </Stack>
             <Divider
               sx={(theme) => ({
@@ -218,9 +225,9 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                  <Button type="submit" style={{background:'none'}}>
-                    Login as Garage Owner
-                  </Button>
+                    <Button type="submit" style={{ background: "none" }}>
+                      Login as Garage Owner
+                    </Button>
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>
