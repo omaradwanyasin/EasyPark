@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../Dashboard/DDashboardPage.css";
 import ColorToggleButton from "./ColorToggleButton";
 import Fab from "@mui/material/Fab";
@@ -11,10 +11,19 @@ import NotificationsPopup from "./NotificationsPopup";
 import { SignalRProvider } from "../../signalRService";
 
 function DashboardPage() {
+  const[userInfo,setUserInfo]=useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
   const capacity = 50; // i will update it to be more dynamic later
-
+  useEffect(()=>{
+    console.log("User name from localStorage:", localStorage.getItem('name'));
+    console.log("User id from localStorage:", localStorage.getItem('userId'));
+    console.log("User email from localStorage:", localStorage.getItem('userEmail'));
+    const userEmail = localStorage.getItem('userEmail');
+    const userName = localStorage.getItem('userName');
+    const userId= localStorage.getItem('userId');
+    setUserInfo({email:userEmail,name:userName,id:userId});
+  },[]);
   const increase = () => {
     if (counter < capacity) {
       setCounter((prev) => prev + 1);
@@ -31,13 +40,13 @@ function DashboardPage() {
     setToggleValue(newValue);
   };
 
-  const userId = "0"; // should be from local storge
+  const userId = localStorage.getItem('userId'); // should be from local storge
 
   return (
     <SignalRProvider>
       <div className="maindiv">
         <div className="headers">
-          <NavBarDash />
+          <NavBarDash email={userInfo.email} name={userInfo.name} />
         </div>
         <div className="conts">
           <div className="resv">
@@ -61,7 +70,7 @@ function DashboardPage() {
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={"665b5cddf061400a41b5fd27"} // send the garage ID as a string
+              garageId={localStorage.getItem('userId')} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">

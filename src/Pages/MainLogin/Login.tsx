@@ -1,5 +1,5 @@
 import * as React from "react";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -65,7 +65,11 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch("https://localhost:7140/signin", {
+      const apiUrl = data.persistent
+        ? "https://localhost:7140/GarageOwnerSignin"
+        : "https://localhost:7140/signin";
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,12 +86,12 @@ export default function Login() {
         if (result.token) {
           // Decode the JWT token
           const decodedToken: any = jwtDecode(result.token);
-        console.log(result.token, decodedToken);
+          console.log(result.token, decodedToken);
           // Extract user information from the decoded token
           const userEmail = decodedToken.nameid;
           const userName = decodedToken.unique_name;
           const userId = decodedToken.UserId;
-        
+
           // Store user information in localStorage
           localStorage.setItem("userEmail", userEmail);
           localStorage.setItem("userName", userName);
@@ -95,7 +99,11 @@ export default function Login() {
           localStorage.setItem("authToken", result.token);
         }
 
-        navigate("/service");
+        if (data.persistent) {
+          navigate("/test");
+        } else {
+          navigate("/service");
+        }
       } else {
         console.error("Login failed:", response.statusText);
         setErrorMessage("Invalid email or password. Please try again.");
@@ -189,7 +197,7 @@ export default function Login() {
                   <Link to="/JoySignInSideTemplate">Sign in</Link>
                 </Typography>
                 <Typography level="body-sm">
-                  New to company? <Link to="/signup">Sign up!</Link>
+                  New on EasyPark? <Link to="/signup">Sign up!</Link>
                 </Typography>
               </Stack>
             </Stack>
@@ -225,9 +233,7 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                    <Button type="submit" style={{ background: "none" }}>
-                      Login as Garage Owner
-                    </Button>
+                    <Checkbox size="sm" label="Log in as Garage Owner" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>

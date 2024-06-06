@@ -30,7 +30,7 @@ export default function RentalDashboard() {
     const userId= localStorage.getItem('userId');
     setUserInfo({email:userEmail,name:userName,id:userId});
   },[]);
-
+  
   useEffect(() => {
     // Fetch data from your API
     fetch("https://localhost:7140/parkings")
@@ -133,7 +133,6 @@ export default function RentalDashboard() {
       connection.stop().then(() => console.log("SignalR connection stopped"));
     };
   }, []);
-
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />

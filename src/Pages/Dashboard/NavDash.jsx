@@ -8,7 +8,7 @@ import Avatar from "@mui/joy/Avatar";
 
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link } from "react-router-dom";
-export default function NavBarDash() {
+export default function NavBarDash({email,name}) {
   const [variant, setVariant] = React.useState("solid");
   return (
     <Box
@@ -57,8 +57,8 @@ export default function NavBarDash() {
         >
         
           <Box sx={{ minWidth: 0, flex: 1 }}>
-            <Typography level="title-sm">Omar Yasin</Typography>
-            <Typography level="body-xs">EasyPark@test.com</Typography>
+            <Typography level="title-sm">{name}</Typography>
+            <Typography level="body-xs">{email}</Typography>
           </Box>
         </Box> 
         <Link to ="/Contact">
