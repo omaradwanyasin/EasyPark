@@ -9,7 +9,7 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link ,useNavigate } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
@@ -69,11 +69,6 @@ export default function Garageowner() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleLocationChange = (lat, lng) => {
-    setLatitude(lat);
-    setLongitude(lng);
-  };
-
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     setFormData((prevData) => ({
@@ -89,8 +84,13 @@ export default function Garageowner() {
       Email: formData.email,
       Password: formData.password,
       PhoneNumber: formData.phoneNumber,
-      Geometry: [latitude, longitude],
     };
+    const userEmail = data.Email;
+    const userName = data.Name;
+
+    // Store user information in sessionStorage
+    sessionStorage.setItem("userEmail", userEmail);
+    sessionStorage.setItem("userName", userName);
 
     try {
       const response = await fetch("https://localhost:7140/OwnerSignUp", {
@@ -106,6 +106,10 @@ export default function Garageowner() {
       }
 
       const result = await response.json();
+      const GarageOwnerId = result.id;
+      sessionStorage.setItem("GarageOwnerId", GarageOwnerId);
+      console.log(result);
+      console.log(GarageOwnerId);
       setSuccessMessage("Account created successfully!");
       setErrorMessage("");
       navigate("Garage");
@@ -197,14 +201,13 @@ export default function Garageowner() {
             <Stack gap={4} sx={{ mb: 2 }}>
               <Stack gap={1}>
                 <Typography component="h1" level="h3">
-                  Sign up as Garageowner
+                  Sign up as Garage Owner
                 </Typography>
                 <Typography level="body-sm">
                   {" "}
                   <Link to="/Garageowner"></Link>
                 </Typography>
               </Stack>
-            
             </Stack>
             <Divider
               sx={(theme) => ({
@@ -254,10 +257,6 @@ export default function Garageowner() {
                   />
                 </FormControl>
                 <br />
-                <FormControl required>
-                  <FormLabel>Location</FormLabel>
-                  <SignMap onLocationChange={handleLocationChange} />
-                </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
                     sx={{
@@ -275,11 +274,10 @@ export default function Garageowner() {
                     />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
-                 
+
                   <Button type="submit" fullWidth>
                     next
                   </Button>
-                 
                 </Stack>
                 {errorMessage && (
                   <Typography bgcolor="error" sx={{ mt: 2 }}>
