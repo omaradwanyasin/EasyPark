@@ -14,9 +14,13 @@ function DashboardPage() {
   const [userInfo, setUserInfo] = useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
+  const garageId = sessionStorage.getItem("garageId"); // garage id should be stored
   const capacity = 50; // i will update it to be more dynamic later
   useEffect(() => {
-    console.log("User name from localStorage:", sessionStorage.getItem("userName"));
+    console.log(
+      "User name from localStorage:",
+      sessionStorage.getItem("userName")
+    );
     console.log("User id from localStorage:", sessionStorage.getItem("userId"));
     console.log(
       "User email from localStorage:",
@@ -25,6 +29,7 @@ function DashboardPage() {
     const userEmail = sessionStorage.getItem("userEmail");
     const userName = sessionStorage.getItem("userName");
     const userId = sessionStorage.getItem("userId");
+
     setUserInfo({ email: userEmail, name: userName, id: userId });
   }, []);
   const increase = () => {
@@ -69,11 +74,11 @@ function DashboardPage() {
             </div>
           </div>
           <div className="cap">
-            <h3>Capacity {counter}/50</h3>
+            <h3>Capacity {capacity}</h3>
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={"6666cf1ea87cfae3c2b82feb"} // send the garage ID as a string
+              garageId={garageId} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">

@@ -94,7 +94,7 @@ export default function Signup() {
       });
 
       if (response.ok) {
-        console.log(response);
+        console.log(response.body);
         // const responseData = await response.json();
         // sessionStorage.setItem("garageId", response.id);
         // console.log("Garage added successfully:", responseData);

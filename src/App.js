@@ -55,12 +55,28 @@ function App() {
             <ScrollToTop />
             <Routes>
               <Route index element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/home" element={
+              
+                  <Home />
+             
+              } />
+              <Route path="/login" element={
+               
+                  <Login /> 
+            
+              } />
+              <Route path="/signup" element={
+             
+                  <Signup /> 
+           
+              } />
               <Route path="/Garageowner" element={<GarageOwner />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/test" element={<DashboardPage />} />
+              <Route path="/test" element={
+
+                  <DashboardPage />
+               
+              } />
               <Route path="/Garageowner/Garage" element={<Garage />} />
               <Route path="/test2" element={<SignMap />} />
               <Route path="/service" element={<Nservice />} />

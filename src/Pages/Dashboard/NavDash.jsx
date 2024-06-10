@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Box, IconButton } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import Button from "@mui/joy/Button";
 import Avatar from "@mui/joy/Avatar";
@@ -10,6 +11,21 @@ import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link } from "react-router-dom";
 export default function NavBarDash({email,name}) {
   const [variant, setVariant] = React.useState("solid");
+  const navigate = useNavigate();
+ 
+
+  const handleLogout = () => {
+    // Clear sessionStorage
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("userEmail");
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userId");
+
+    // Navigate to the home page
+    navigate("/home");
+  };
+  
+  
   return (
     <Box
       sx={{
@@ -65,7 +81,11 @@ export default function NavBarDash({email,name}) {
         <Button size="md" variant={variant} color="neutral">
           Contact Us
         </Button>
+        
         </Link>
+        <Button size="md" variant={variant} color="neutral" onClick={handleLogout}>
+         Log out 
+        </Button>
       </Box>
     </Box>
   );
