@@ -41,10 +41,6 @@ function DashboardPage() {
   };
 
   useEffect(() => {
-    // Your existing useEffect logic
-    console.log("User name from localStorage:", localStorage.getItem("name"));
-    console.log("User id from localStorage:", localStorage.getItem("userId"));
-    console.log("User email from localStorage:", localStorage.getItem("userEmail"));
     const userEmail = sessionStorage.getItem("userEmail");
     const userName = sessionStorage.getItem("userName");
     const userId = sessionStorage.getItem("userId");
