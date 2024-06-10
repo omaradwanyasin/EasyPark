@@ -18,16 +18,19 @@ function DashboardPage() {
   const [capacity, setCapacity] = useState(null); // Track capacity
 
   const garageOwnerId = sessionStorage.getItem("userId"); // garage id should be stored
-
+  const garageid = sessionStorage.getItem("garageid");
   const fetchParkingData = async () => {
     try {
-      const response = await fetch(`https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`);
+      const response = await fetch(
+        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
       }
       const data = await response.json();
       console.log(data);
-      sessionStorage.setItem('capacity', data.capacity);
+      sessionStorage.setItem("garageid", data.id);
+      sessionStorage.setItem("capacity", data.capacity);
       setCapacity(data.capacity); // Update capacity from fetched data
     } catch (error) {
       console.error("Error fetching parking data:", error);
@@ -96,7 +99,7 @@ function DashboardPage() {
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageOwnerId={garageOwnerId} // send the garage ID as a string
+              garageId={garageid} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">
