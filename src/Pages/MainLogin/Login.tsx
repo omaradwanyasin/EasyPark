@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
@@ -85,6 +86,7 @@ export default function Login() {
         // Decode the token to extract user information
         if (result.token) {
           // Decode the JWT token
+     
           const decodedToken: any = jwtDecode(result.token);
           console.log(result.token, decodedToken);
           // Extract user information from the decoded token
@@ -93,10 +95,11 @@ export default function Login() {
           const userId = decodedToken.UserId;
 
           // Store user information in localStorage
-          localStorage.setItem("userEmail", userEmail);
-          localStorage.setItem("userName", userName);
-          localStorage.setItem("userId", userId);
-          localStorage.setItem("authToken", result.token);
+          sessionStorage.setItem("userEmail", userEmail);
+          sessionStorage.setItem("userName", userName);
+          sessionStorage.setItem("userId", userId);
+          sessionStorage.setItem("authToken", result.token);
+
         }
 
         if (data.persistent) {
@@ -113,6 +116,16 @@ export default function Login() {
       setErrorMessage("An error occurred. Please try again later.");
     }
   };
+  useEffect(() => {
+    return () => {
+      // Clear session storage when component unmounts
+      sessionStorage.removeItem("authToken");
+      sessionStorage.removeItem("userEmail");
+      sessionStorage.removeItem("userName");
+      sessionStorage.removeItem("userId");
+    };
+  }, []);
+
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>

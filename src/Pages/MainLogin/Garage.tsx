@@ -94,8 +94,8 @@ export default function Signup() {
       });
 
       if (response.ok) {
-        const responseData = await response.json();
-        console.log('Garage added successfully:', responseData);
+        // const responseData = await response.json();
+        // console.log('Garage added successfully:', responseData);
         navigate('/test'); // Navigate to a success page or perform another action
       } else {
         console.error('Failed to add garage:', response.statusText);

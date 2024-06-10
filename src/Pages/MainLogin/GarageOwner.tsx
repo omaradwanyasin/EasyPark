@@ -106,7 +106,10 @@ export default function Garageowner() {
       }
 
       const result = await response.json();
+      console.log(result);
       setSuccessMessage("Account created successfully!");
+     localStorage.setItem("GarageOwnerId",result.id);
+       const GarageOWnerId=localStorage.getItem("GarageOwnerId");
       setErrorMessage("");
       navigate("Garage");
       // Handle success response here

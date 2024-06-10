@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../Dashboard/DDashboardPage.css";
 import ColorToggleButton from "./ColorToggleButton";
 import Fab from "@mui/material/Fab";
@@ -11,19 +11,44 @@ import NotificationsPopup from "./NotificationsPopup";
 import { SignalRProvider } from "../../signalRService";
 
 function DashboardPage() {
-  const[userInfo,setUserInfo]=useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
-  const capacity = 50; // i will update it to be more dynamic later
-  useEffect(()=>{
-    console.log("User name from localStorage:", localStorage.getItem('name'));
-    console.log("User id from localStorage:", localStorage.getItem('userId'));
-    console.log("User email from localStorage:", localStorage.getItem('userEmail'));
-    const userEmail = localStorage.getItem('userEmail');
-    const userName = localStorage.getItem('userName');
-    const userId= localStorage.getItem('userId');
-    setUserInfo({email:userEmail,name:userName,id:userId});
-  },[]);
+  const [capacity, setCapacity] = useState(50); // Initial capacity
+  const [parkingData, setParkingData] = useState(null);
+
+  useEffect(() => {
+    fetchParkingData();
+  }, []); // Run only once on component mount
+
+  const fetchParkingData = async () => {
+    try {
+      const response = await fetch("https://localhost:7140/parkings/6662f2c3057a6c8907f6a51b");
+      if (!response.ok) {
+        throw new Error("Failed to fetch parking data");
+      }
+      const data = await response.json();
+      console.log("Fetched parking data:", data);
+      setCapacity(data.capacity); // Update capacity from fetched data
+      console.log("Capacity: " + data.capacity);
+      setParkingData(data); // Store the entire data if needed later
+    } catch (error) {
+      console.error("Error fetching parking data:", error);
+      // Handle error gracefully, maybe show a message to the user
+    }
+  };
+
+  useEffect(() => {
+    // Your existing useEffect logic
+    console.log("User name from localStorage:", localStorage.getItem("name"));
+    console.log("User id from localStorage:", localStorage.getItem("userId"));
+    console.log("User email from localStorage:", localStorage.getItem("userEmail"));
+    const userEmail = localStorage.getItem("userEmail");
+    const userName = localStorage.getItem("userName");
+    const userId = localStorage.getItem("userId");
+    setUserInfo({ email: userEmail, name: userName, id: userId });
+  }, []);
+
   const increase = () => {
     if (counter < capacity) {
       setCounter((prev) => prev + 1);
@@ -40,7 +65,7 @@ function DashboardPage() {
     setToggleValue(newValue);
   };
 
-  const userId = localStorage.getItem('userId'); // should be from local storge
+  const userId = localStorage.getItem("userId");
 
   return (
     <SignalRProvider>
@@ -66,11 +91,11 @@ function DashboardPage() {
             </div>
           </div>
           <div className="cap">
-            <h3>Capacity {counter}/50</h3>
+            <h3>Capacity {capacity}</h3>
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={localStorage.getItem('userId')} // send the garage ID as a string
+              garageId={localStorage.getItem("userId")} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">
