@@ -19,7 +19,7 @@ import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import "./Garage.css";
-
+import SignMap from "./SignMap";
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   capacity: HTMLInputElement;
@@ -58,17 +58,18 @@ function ColorSchemeToggle(props: IconButtonProps) {
 
 export default function Signup() {
   const navigate = useNavigate();
-
+  const garageId = sessionStorage.getItem("GarageOwnerId");
+  console.log(garageId);
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
     const data = {
       id: "", // You can generate a unique ID here if needed
       type: "local", // Set this to the appropriate value
-      geometry: [0], // Adjust this as needed
+      geometry: [parseFloat(latitude), parseFloat(longitude)], // Updated to include latitude and longitude
       properties: {
         prop0: "string", // Set this to the appropriate value
-        parkId: 0 // Adjust this as needed
+        parkId: 0, // Adjust this as needed
       },
       name: formElements.name.value,
       comments: ["string"], // Adjust this as needed
@@ -76,35 +77,42 @@ export default function Signup() {
       status: 0, // Adjust this as needed
       info: "string", // Set this to the appropriate value
       rating: 0, // Adjust this as needed
-      capacity: parseInt(formElements.capacity.value, 10),
+      capacity: 12,
       containsWifi: formElements.wifi.value === "yes",
       supportsElectricalCharging: formElements.chargingPoint.value === "yes",
       supportsHeavyTrucks: formElements.heavyCars.value === "yes",
-      garageId: "10" // Set this to the appropriate value or generate it if necessary
+      garageOwnerId: garageId, // Set this to the appropriate value or generate it if necessary
     };
-
+    console.log(data);
     try {
-      const response = await fetch('https://localhost:7140/parkings'
-      , {
-        method: 'POST',
+      const response = await fetch("https://localhost:7140/parkings", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
 
       if (response.ok) {
+        console.log(response.body);
         // const responseData = await response.json();
-        // console.log('Garage added successfully:', responseData);
-        navigate('/test'); // Navigate to a success page or perform another action
+        // sessionStorage.setItem("garageId", response.id);
+        // console.log("Garage added successfully:", responseData);
+        navigate("/test"); // Navigate to a success page or perform another action
       } else {
-        console.error('Failed to add garage:', response.statusText);
+        console.error("Failed to add garage:", response.statusText);
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     }
   };
 
+  const [latitude, setLatitude] = React.useState("");
+  const [longitude, setLongitude] = React.useState("");
+  const handleLocationChange = (lat, lng) => {
+    setLatitude(lat);
+    setLongitude(lng);
+  };
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -211,9 +219,7 @@ export default function Signup() {
                 <FormControl required>
                   <FormLabel>Contain Charging Point ? </FormLabel>
                   <div className="cheackBox">
-                    <RadioGroup
-                      name="chargingPoint"
-                    >
+                    <RadioGroup name="chargingPoint">
                       <Radio value="yes" label="Yes" color="danger" />
                       <Radio value="no" label="No" color="success" />
                     </RadioGroup>
@@ -222,9 +228,7 @@ export default function Signup() {
                 <FormControl required>
                   <FormLabel>Suport Heavey Cars ? </FormLabel>
                   <div className="cheackBox">
-                    <RadioGroup
-                      name="heavyCars"
-                    >
+                    <RadioGroup name="heavyCars">
                       <Radio value="yes" label="Yes" color="danger" />
                       <Radio value="no" label="No" color="success" />
                     </RadioGroup>
@@ -233,14 +237,18 @@ export default function Signup() {
                 <FormControl required>
                   <FormLabel>Wifi Available ? </FormLabel>
                   <div className="cheackBox">
-                    <RadioGroup
-                      name="wifi"
-                    >
+                    <RadioGroup name="wifi">
                       <Radio value="yes" label="Yes" color="danger" />
                       <Radio value="no" label="No" color="success" />
                     </RadioGroup>
                   </div>
                 </FormControl>
+                <div>
+                  <FormControl required>
+                    <FormLabel>Location</FormLabel>
+                    <SignMap onLocationChange={handleLocationChange} />
+                  </FormControl>
+                </div>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
                     sx={{
@@ -253,7 +261,7 @@ export default function Signup() {
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>
-                    Sign in
+                    Sign up
                   </Button>
                 </Stack>
               </form>

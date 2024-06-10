@@ -14,9 +14,8 @@ function DashboardPage() {
   const [userInfo, setUserInfo] = useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
-  const [capacity, setCapacity] = useState(50); // Initial capacity
-  const [parkingData, setParkingData] = useState(null);
-
+  const garageId = sessionStorage.getItem("garageId"); // garage id should be stored
+  const capacity = 50; // i will update it to be more dynamic later
   useEffect(() => {
     fetchParkingData();
   }, []); // Run only once on component mount
@@ -41,12 +40,16 @@ function DashboardPage() {
   };
 
   useEffect(() => {
+    // Your existing useEffect logic
+    console.log("User name from localStorage:", localStorage.getItem("name"));
+    console.log("User id from localStorage:", localStorage.getItem("userId"));
+    console.log("User email from localStorage:", localStorage.getItem("userEmail"));
     const userEmail = sessionStorage.getItem("userEmail");
     const userName = sessionStorage.getItem("userName");
     const userId = sessionStorage.getItem("userId");
+
     setUserInfo({ email: userEmail, name: userName, id: userId });
   }, []);
-
   const increase = () => {
     if (counter < capacity) {
       setCounter((prev) => prev + 1);
@@ -63,7 +66,7 @@ function DashboardPage() {
     setToggleValue(newValue);
   };
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId"); // should be from local storge
 
   return (
     <SignalRProvider>
@@ -93,7 +96,7 @@ function DashboardPage() {
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={localStorage.getItem("userId")} // send the garage ID as a string
+              garageId={garageId} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">

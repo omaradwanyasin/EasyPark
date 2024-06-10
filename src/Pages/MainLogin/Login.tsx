@@ -94,12 +94,11 @@ export default function Login() {
           const userName = decodedToken.unique_name;
           const userId = decodedToken.UserId;
 
-          // Store user information in localStorage
+          // Store user information in sessionStorage
           sessionStorage.setItem("userEmail", userEmail);
           sessionStorage.setItem("userName", userName);
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
-
         }
 
         if (data.persistent) {
