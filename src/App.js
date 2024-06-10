@@ -14,10 +14,12 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import About from "./Pages/About/About.jsx";
 import Garage from "./Pages/MainLogin/Garage.tsx";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-import { SignalRProvider } from "./signalRService"; // Import SignalRProvider
+import { SignalRProvider } from "./signalRService";  // Import SignalRProvider
 import NotificationListener from "./NotificationListener.jsx";
-import Policy from "./Pages/Policy Page/Policy.jsx";
-import ScrollToTop from "./Components/ScrollToTop";
+import Policy from './Pages/Policy Page/Policy.jsx';
+import ScrollToTop from './Components/ScrollToTop';
+import Protected from "./Routes/Protected.js";
+import Protectedauth from "./Routes/ProtectedDauth.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 3000);
   }, []);
 
   return (
@@ -48,11 +50,9 @@ function App() {
           />
         </div>
       ) : (
-        <SignalRProvider>
-          {" "}
-          {/* Wrap the app with SignalRProvider */}
+        <SignalRProvider> {/* Wrap the app with SignalRProvider */}
           <BrowserRouter>
-            <ScrollToTop />
+          <ScrollToTop />
             <Routes>
               <Route index element={<Home />} />
               <Route path="/home" element={
@@ -73,9 +73,9 @@ function App() {
               <Route path="/Garageowner" element={<GarageOwner />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/test" element={
-
+                <Protected>
                   <DashboardPage />
-               
+                </Protected>
               } />
               <Route path="/Garageowner/Garage" element={<Garage />} />
               <Route path="/test2" element={<SignMap />} />
@@ -85,8 +85,7 @@ function App() {
               <Route path="/Policy" element={<Policy />} />
               <Route path="/pay" element={<Payment />} />
             </Routes>
-            <NotificationListener />{" "}
-            {/* Add NotificationListener to listen for notifications */}
+            <NotificationListener /> {/* Add NotificationListener to listen for notifications */}
           </BrowserRouter>
         </SignalRProvider>
       )}

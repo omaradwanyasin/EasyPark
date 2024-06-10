@@ -77,7 +77,7 @@ export default function Signup() {
       status: 0, // Adjust this as needed
       info: "string", // Set this to the appropriate value
       rating: 0, // Adjust this as needed
-      capacity: 12,
+      capacity: formElements.capacity.value ,
       containsWifi: formElements.wifi.value === "yes",
       supportsElectricalCharging: formElements.chargingPoint.value === "yes",
       supportsHeavyTrucks: formElements.heavyCars.value === "yes",

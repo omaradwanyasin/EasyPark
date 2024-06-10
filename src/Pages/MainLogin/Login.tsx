@@ -99,6 +99,7 @@ export default function Login() {
           sessionStorage.setItem("userName", userName);
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
+          
         }
 
         if (data.persistent) {

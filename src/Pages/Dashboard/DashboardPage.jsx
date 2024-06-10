@@ -14,25 +14,21 @@ function DashboardPage() {
   const [userInfo, setUserInfo] = useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
-  const garageId = sessionStorage.getItem("garageId"); // garage id should be stored
-  const capacity = 50; // i will update it to be more dynamic later
-  useEffect(() => {
-    fetchParkingData();
-  }, []); // Run only once on component mount
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const [capacity, setCapacity] = useState(null); // Track capacity
+
+  const garageOwnerId = sessionStorage.getItem("userId"); // garage id should be stored
 
   const fetchParkingData = async () => {
     try {
-      const userId=sessionStorage.getItem("userId");
-      console.log("User id from localStorage:", userId);
-      const response = await fetch(`https://localhost:7140/parkings/${userId}`);
+      const response = await fetch(`https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`);
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
       }
       const data = await response.json();
-      console.log("Fetched parking data:", data);
+      console.log(data);
+      sessionStorage.setItem('capacity', data.capacity);
       setCapacity(data.capacity); // Update capacity from fetched data
-      console.log("Capacity: " + data.capacity);
-      setParkingData(data); // Store the entire data if needed later
     } catch (error) {
       console.error("Error fetching parking data:", error);
       // Handle error gracefully, maybe show a message to the user
@@ -40,16 +36,22 @@ function DashboardPage() {
   };
 
   useEffect(() => {
-    // Your existing useEffect logic
-    console.log("User name from localStorage:", localStorage.getItem("name"));
-    console.log("User id from localStorage:", localStorage.getItem("userId"));
-    console.log("User email from localStorage:", localStorage.getItem("userEmail"));
+    if (isLoggedIn) {
+      fetchParkingData();
+    }
+  }, [isLoggedIn]); // Run when isLoggedIn changes
+
+  useEffect(() => {
     const userEmail = sessionStorage.getItem("userEmail");
     const userName = sessionStorage.getItem("userName");
     const userId = sessionStorage.getItem("userId");
 
-    setUserInfo({ email: userEmail, name: userName, id: userId });
+    if (userEmail && userName && userId) {
+      setUserInfo({ email: userEmail, name: userName, id: userId });
+      setIsLoggedIn(true); // Set isLoggedIn to true when user info is available
+    }
   }, []);
+
   const increase = () => {
     if (counter < capacity) {
       setCounter((prev) => prev + 1);
@@ -65,8 +67,6 @@ function DashboardPage() {
   const handleToggleChange = (event, newValue) => {
     setToggleValue(newValue);
   };
-
-  const userId = localStorage.getItem("userId"); // should be from local storge
 
   return (
     <SignalRProvider>
@@ -85,7 +85,7 @@ function DashboardPage() {
                   name={user.name}
                   phone={user.phone_number}
                   img={user.image_url}
-                  userId={userId}
+                  userId={userInfo.id}
                   increaseCounter={increase}
                 />
               ))}
@@ -96,7 +96,7 @@ function DashboardPage() {
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={garageId} // send the garage ID as a string
+              garageOwnerId={garageOwnerId} // send the garage ID as a string
             />
             Counter : {counter}
             <div className="buttonaction">
@@ -113,7 +113,7 @@ function DashboardPage() {
             </div>
           </div>
           <div className="notifications">
-            <NotificationsPopup userId={userId} />
+            <NotificationsPopup userId={userInfo.id} />
           </div>
         </div>
       </div>
