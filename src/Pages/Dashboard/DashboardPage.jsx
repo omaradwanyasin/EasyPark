@@ -23,7 +23,9 @@ function DashboardPage() {
 
   const fetchParkingData = async () => {
     try {
-      const response = await fetch("https://localhost:7140/parkings/6662f2c3057a6c8907f6a51b");
+      const userId=sessionStorage.getItem("userId");
+      console.log("User id from localStorage:", userId);
+      const response = await fetch(`https://localhost:7140/parkings/${userId}`);
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
       }
@@ -43,9 +45,9 @@ function DashboardPage() {
     console.log("User name from localStorage:", localStorage.getItem("name"));
     console.log("User id from localStorage:", localStorage.getItem("userId"));
     console.log("User email from localStorage:", localStorage.getItem("userEmail"));
-    const userEmail = localStorage.getItem("userEmail");
-    const userName = localStorage.getItem("userName");
-    const userId = localStorage.getItem("userId");
+    const userEmail = sessionStorage.getItem("userEmail");
+    const userName = sessionStorage.getItem("userName");
+    const userId = sessionStorage.getItem("userId");
     setUserInfo({ email: userEmail, name: userName, id: userId });
   }, []);
 

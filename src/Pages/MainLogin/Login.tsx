@@ -116,15 +116,25 @@ export default function Login() {
       setErrorMessage("An error occurred. Please try again later.");
     }
   };
+
   useEffect(() => {
-    return () => {
-      // Clear session storage when component unmounts
-      sessionStorage.removeItem("authToken");
-      sessionStorage.removeItem("userEmail");
-      sessionStorage.removeItem("userName");
-      sessionStorage.removeItem("userId");
-    };
-  }, []);
+    // Redirect authenticated users to the dashboard upon mounting
+    const authToken = sessionStorage.getItem("authToken");
+    if (authToken) {
+      navigate("/test");
+    }
+  }, [navigate]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     // Clear sessionStorage when component unmounts
+  //     sessionStorage.removeItem("authToken");
+  //     sessionStorage.removeItem("userEmail");
+  //     sessionStorage.removeItem("userName");
+  //     sessionStorage.removeItem("userId");
+  //   };
+  // }, []);
+ 
 
 
   return (
