@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -9,16 +10,13 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
-import SignMap from "./SignMap";
-import { useState } from "react";
-// import GoogleIcon from './GoogleIcon';
 
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -55,42 +53,72 @@ function ColorSchemeToggle(props: IconButtonProps) {
   );
 }
 
-export default function Garageowner() {
+export default function GarageOwner() {
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
   const navigate = useNavigate();
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phoneNumber: "",
-    persistent: false,
-  });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+  const validatePassword = (password: string) => {
+    const minLength = 8;
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const numberRegex = /[0-9]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    const newErrors: string[] = [];
+
+    if (password.length < minLength) {
+      newErrors.push(`Password must be at least ${minLength} characters long.`);
+    } else {
+      newErrors.push(`Password is at least ${minLength} characters long.`);
+    }
+    if (!uppercaseRegex.test(password)) {
+      newErrors.push("Password must contain at least one uppercase letter.");
+    } else {
+      newErrors.push("Password contains an uppercase letter.");
+    }
+    if (!lowercaseRegex.test(password)) {
+      newErrors.push("Password must contain at least one lowercase letter.");
+    } else {
+      newErrors.push("Password contains a lowercase letter.");
+    }
+    if (!numberRegex.test(password)) {
+      newErrors.push("Password must contain at least one number.");
+    } else {
+      newErrors.push("Password contains a number.");
+    }
+    if (!specialCharRegex.test(password)) {
+      newErrors.push("Password must contain at least one special character.");
+    } else {
+      newErrors.push("Password contains a special character.");
+    }
+
+    return newErrors;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = {
-      Name: formData.name,
-      Email: formData.email,
-      Password: formData.password,
-      PhoneNumber: formData.phoneNumber,
-    };
-    const userEmail = data.Email;
-    const userName = data.Name;
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
 
-    // Store user information in sessionStorage
-    sessionStorage.setItem("userEmail", userEmail);
-    sessionStorage.setItem("userName", userName);
+    const validationErrors = validatePassword(newPassword);
+    setErrors(validationErrors);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
+    event.preventDefault();
+    const formElements = event.currentTarget.elements;
+    const data = {
+      name: formElements.name.value,
+      email: formElements.email.value,
+      password: formElements.password.value,
+      phoneNumber: formElements.phoneNumber.value,
+      persistent: formElements.persistent.checked,
+    };
+
+    if (errors.some((error) => error.includes("must"))) {
+      alert(errors.filter((error) => error.includes("must")).join("\n"));
+      return;
+    }
 
     try {
       const response = await fetch("https://localhost:7140/OwnerSignUp", {
@@ -106,20 +134,11 @@ export default function Garageowner() {
       }
 
       const result = await response.json();
-      const GarageOwnerId = result.id;
-      sessionStorage.setItem("GarageOwnerId", GarageOwnerId);
-      console.log(result);
-      console.log(GarageOwnerId);
-      setSuccessMessage("Account created successfully!");
-     localStorage.setItem("GarageOwnerId",result.id);
-       const GarageOWnerId=localStorage.getItem("GarageOwnerId");
-      setErrorMessage("");
+      sessionStorage.setItem("GarageOwnerId", result.id);
+      setErrors([]);
       navigate("Garage");
-      // Handle success response here
     } catch (error) {
-      setErrorMessage("Failed to create account.");
-      setSuccessMessage("");
-      // Handle error here
+      console.error("There was a problem with the sign-up request:", error);
     }
   };
 
@@ -130,7 +149,7 @@ export default function Garageowner() {
         styles={{
           ":root": {
             "--Form-maxWidth": "800px",
-            "--Transition-duration": "0.4s", // set to `none` to disable transition
+            "--Transition-duration": "0.4s",
           },
         }}
       />
@@ -144,7 +163,7 @@ export default function Garageowner() {
           display: "flex",
           justifyContent: "flex-end",
           backdropFilter: "blur(12px)",
-          backgroundColor: "#fff", //rgba(255 255 255 / 0.2)
+          backgroundColor: "#fff",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundColor: "rgba(19 19 24 / 0.4)",
           },
@@ -224,39 +243,35 @@ export default function Garageowner() {
               <form onSubmit={handleSubmit}>
                 <FormControl required>
                   <FormLabel>Name</FormLabel>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
+                  <Input type="text" name="name" />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
+                  <Input type="email" name="email" />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Password</FormLabel>
                   <Input
                     type="password"
                     name="password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    value={password}
+                    onChange={handlePasswordChange}
                   />
+                  <Stack sx={{ pl: 0, mt: 2, textAlign: "left" }}>
+                    {errors.map((error, index) => (
+                      <Typography
+                        key={index}
+                        level="body-sm"
+                        sx={{ color: error.includes("must") ? "#cc0000" : "green" }}
+                      >
+                        {error}
+                      </Typography>
+                    ))}
+                  </Stack>
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Phone Number</FormLabel>
-                  <Input
-                    type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                  />
+                  <Input type="text" name="phoneNumber" />
                 </FormControl>
                 <br />
                 <Stack gap={4} sx={{ mt: 2 }}>
@@ -271,26 +286,14 @@ export default function Garageowner() {
                       size="sm"
                       label="Remember me"
                       name="persistent"
-                      checked={formData.persistent}
-                      onChange={handleChange}
                     />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
 
-                  <Button type="submit" fullWidth>
+                  <Button type="submit" fullWidth disabled={errors.some((error) => error.includes("must"))}>
                     next
                   </Button>
                 </Stack>
-                {errorMessage && (
-                  <Typography bgcolor="error" sx={{ mt: 2 }}>
-                    {errorMessage}
-                  </Typography>
-                )}
-                {successMessage && (
-                  <Typography color="success" sx={{ mt: 2 }}>
-                    {successMessage}
-                  </Typography>
-                )}
               </form>
             </Stack>
           </Box>
