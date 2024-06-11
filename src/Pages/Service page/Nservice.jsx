@@ -83,7 +83,7 @@ export default function RentalDashboard() {
   }, []);
 
   const handlePopupClick = (parking) => {
-    const coordinates = parking.geometry.coordinates;
+    const coordinates = parking.geometry;
     if (directionsRef.current) {
       // If origin (point A) is already set, set the destination (point B)
       directionsRef.current.setDestination([coordinates[0], coordinates[1]]);
@@ -165,6 +165,10 @@ export default function RentalDashboard() {
               status={parking.status}
               price={parking.price}
               rating={parking.rating}
+              wifi={parking.containsWifi}
+              charging={parking.supportsElectricalCharging}
+              heavyCars={parking.supportsHeavyTrucks}
+
               onSelectCity={() =>
                 handleMapTransition({
                   latitude: parking.geometry[1],
@@ -194,11 +198,11 @@ export default function RentalDashboard() {
               initialViewState={{ latitude: 32.461, longitude: 35.3, zoom: 14 }}
               mapStyle={"mapbox://styles/omaradwn/clthk171g009n01qwa8r4en8v"}
             >
-              {park.features.map((item) => (
+              {parkings.map((item) => (
                 <Marker
                   key={item.id}
-                  latitude={item.geometry.coordinates[1]}
-                  longitude={item.geometry.coordinates[0]}
+                  latitude={item.geometry[0]}
+                  longitude={item.geometry[1]}
                 >
                   <button
                     style={{ all: "unset", cursor: "pointer" }}
@@ -213,8 +217,8 @@ export default function RentalDashboard() {
               ))}
               {selectedPark && (
                 <Popup
-                  latitude={selectedPark.geometry.coordinates[1]}
-                  longitude={selectedPark.geometry.coordinates[0]}
+                  latitude={selectedPark.geometry[0]}
+                  longitude={selectedPark.geometry[1]}
                   closeButton={true}
                   closeOnClick={false}
                   onClick={() => handlePopupClick(selectedPark)}

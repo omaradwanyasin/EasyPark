@@ -61,15 +61,56 @@ export default function RentalCard(props) {
           flexWrap="wrap"
           sx={{ my: 0.25 }}
         >
-          <Typography level="body-xs" startDecorator={<LocalShippingIcon />}>
+         {props.heavyCars? (
+          <Typography level="body-xs" 
+          startDecorator={<LocalShippingIcon />} 
+            style={{color:"green"}}>
             Bus parkings Exists
           </Typography>
-          <Typography level="body-xs" startDecorator={<BoltIcon />}>
+         ):(
+          <Typography
+          level="body-xs"
+          startDecorator={<LocalShippingIcon />}
+          style={{ color: "red" }} // Apply red color if charging is false
+        >
+          Bus parkings Doesn't Exist
+        </Typography>
+         )  
+        
+        }
+        { props.charging? (
+          <Typography level="body-xs" startDecorator={<BoltIcon />}
+          style={{ color: "green" }}>
             Charging Station
           </Typography>
-          <Typography level="body-xs" startDecorator={<WifiRoundedIcon />}>
-            Wi-Fi
+        ):(
+          <Typography
+          level="body-xs"
+          startDecorator={<BoltIcon  />}
+          style={{ color: "red" }} // Apply red color if charging is false
+        >
+          Charging Station Doesn't Exist
+        </Typography>
+        )  
+        
+        }
+         { props.charging? (
+          <Typography level="body-xs" startDecorator={<WifiRoundedIcon />}
+          style={{ color: "green" }}>
+            Wifi
           </Typography>
+        ):(
+          <Typography
+          level="body-xs"
+          startDecorator={<WifiRoundedIcon  />}
+          style={{ color: "red" }} // Apply red color if charging is false
+        >
+          Wifi Doesn't Exist
+        </Typography>
+        )  
+        
+        }
+        
         </Stack>
         <Stack direction="row" sx={{ mt: "auto" }}>
           <Typography level="title-lg" sx={{ flexGrow: 1, textAlign: "right" }}>
