@@ -11,6 +11,7 @@ import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 
 function Home(id = "home") {
+  sessionStorage.setItem("IsLogged", "false");
   useEffect(() => {
     Aos.init();
   }, []);
@@ -73,10 +74,7 @@ function Home(id = "home") {
           </div>
 
           <div className="mock-dashbord">
-            <h1 data-aos="fade-down">
-              {" "}
-              inteactive interface with real- time state for garage owner's{" "}
-            </h1>
+            <h1 data-aos="fade-down"> Car park management DashBoard </h1>
 
             <img width={600} src={mock} data-aos="zoom-in" />
           </div>

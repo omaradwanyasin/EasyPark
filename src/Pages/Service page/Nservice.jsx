@@ -19,18 +19,22 @@ export default function RentalDashboard() {
   const [selectedPark, setSelectedPark] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [parkings, setParkings] = useState([]);
-  const [userInfo,setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({});
+  const isLoggedIn = sessionStorage.getItem("IsLogged");
+  useEffect(() => {
+    console.log("User name from localStorage:", localStorage.getItem("name"));
+    console.log("User id from localStorage:", localStorage.getItem("userId"));
+    console.log(
+      "User email from localStorage:",
+      localStorage.getItem("userEmail")
+    );
+    const userEmail = sessionStorage.getItem("userEmail");
+    const userName = sessionStorage.getItem("userName");
+    const userId = sessionStorage.getItem("userId");
 
-  useEffect(()=>{
-    console.log("User name from localStorage:", localStorage.getItem('name'));
-    console.log("User id from localStorage:", localStorage.getItem('userId'));
-    console.log("User email from localStorage:", localStorage.getItem('userEmail'));
-    const userEmail = localStorage.getItem('userEmail');
-    const userName = localStorage.getItem('userName');
-    const userId= localStorage.getItem('userId');
-    setUserInfo({email:userEmail,name:userName,id:userId});
-  },[]);
-  
+    setUserInfo({ email: userEmail, name: userName, id: userId });
+  }, []);
+
   useEffect(() => {
     // Fetch data from your API
     fetch("https://localhost:7140/parkings")
@@ -83,7 +87,7 @@ export default function RentalDashboard() {
   }, []);
 
   const handlePopupClick = (parking) => {
-    const coordinates = parking.geometry.coordinates;
+    const coordinates = parking.geometry;
     if (directionsRef.current) {
       // If origin (point A) is already set, set the destination (point B)
       directionsRef.current.setDestination([coordinates[0], coordinates[1]]);
@@ -167,10 +171,11 @@ export default function RentalDashboard() {
               rating={parking.rating}
               onSelectCity={() =>
                 handleMapTransition({
-                  latitude: parking.geometry[1],
-                  longitude: parking.geometry[0],
+                  latitude: parking.geometry[0],
+                  longitude: parking.geometry[1],
                 })
               }
+              isLoggedIn={isLoggedIn}
               onPopupClick={() => handlePopupClick(parking)}
             />
           ))}
@@ -194,11 +199,11 @@ export default function RentalDashboard() {
               initialViewState={{ latitude: 32.461, longitude: 35.3, zoom: 14 }}
               mapStyle={"mapbox://styles/omaradwn/clthk171g009n01qwa8r4en8v"}
             >
-              {park.features.map((item) => (
+              {parkings.map((item) => (
                 <Marker
                   key={item.id}
-                  latitude={item.geometry.coordinates[1]}
-                  longitude={item.geometry.coordinates[0]}
+                  latitude={item.geometry[0]}
+                  longitude={item.geometry[1]}
                 >
                   <button
                     style={{ all: "unset", cursor: "pointer" }}
@@ -213,8 +218,8 @@ export default function RentalDashboard() {
               ))}
               {selectedPark && (
                 <Popup
-                  latitude={selectedPark.geometry.coordinates[1]}
-                  longitude={selectedPark.geometry.coordinates[0]}
+                  latitude={selectedPark.geometry[0]}
+                  longitude={selectedPark.geometry[1]}
                   closeButton={true}
                   closeOnClick={false}
                   onClick={() => handlePopupClick(selectedPark)}
