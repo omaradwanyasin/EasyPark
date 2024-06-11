@@ -62,6 +62,7 @@ export default function Signup() {
     number: false,
     specialChar: false,
   });
+  const [isPasswordTouched, setIsPasswordTouched] = React.useState(false);
 
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
@@ -103,6 +104,7 @@ export default function Signup() {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
+    setIsPasswordTouched(true);
     const validationErrors = validatePassword(newPassword);
     setErrors(validationErrors.errors);
     setCriteriaStatus(validationErrors.criteriaStatus);
@@ -252,24 +254,46 @@ export default function Signup() {
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Password</FormLabel>
-                  <Input type="password" name="password" value={password} onChange={handlePasswordChange} />
-                  <Stack sx={{ pl: 0, mt: 2, textAlign: "left" }}>
-                    <Typography level="body-sm" sx={{ color: criteriaStatus.minLength ? "#00cc00" : "#cc0000" }}>
-                      Password must be at least 8 characters long.
-                    </Typography>
-                    <Typography level="body-sm" sx={{ color: criteriaStatus.uppercase ? "#00cc00" : "#cc0000" }}>
-                      Password must contain at least one uppercase letter.
-                    </Typography>
-                    <Typography level="body-sm" sx={{ color: criteriaStatus.lowercase ? "#00cc00" : "#cc0000" }}>
-                      Password must contain at least one lowercase letter.
-                    </Typography>
-                    <Typography level="body-sm" sx={{ color: criteriaStatus.number ? "#00cc00" : "#cc0000" }}>
-                      Password must contain at least one number.
-                    </Typography>
-                    <Typography level="body-sm" sx={{ color: criteriaStatus.specialChar ? "#00cc00" : "#cc0000" }}>
-                      Password must contain at least one special character.
-                    </Typography>
-                  </Stack>
+                  <Input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                  {isPasswordTouched && (
+                    <Stack sx={{ pl: 0, mt: 2, textAlign: "left" }}>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.minLength ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must be at least 8 characters long.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.uppercase ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one uppercase letter.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.lowercase ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one lowercase letter.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.number ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one number.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.specialChar ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one special character.
+                      </Typography>
+                    </Stack>
+                  )}
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
