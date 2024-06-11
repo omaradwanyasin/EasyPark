@@ -169,6 +169,10 @@ export default function RentalDashboard() {
               status={parking.status}
               price={parking.price}
               rating={parking.rating}
+              wifi={parking.containsWifi}
+              charging={parking.supportsElectricalCharging}
+              heavyCars={parking.supportsHeavyTrucks}
+
               onSelectCity={() =>
                 handleMapTransition({
                   latitude: parking.geometry[0],
