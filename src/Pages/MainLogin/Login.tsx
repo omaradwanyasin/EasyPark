@@ -86,7 +86,7 @@ export default function Login() {
         // Decode the token to extract user information
         if (result.token) {
           // Decode the JWT token
-     
+
           const decodedToken: any = jwtDecode(result.token);
           console.log(result.token, decodedToken);
           // Extract user information from the decoded token
@@ -99,7 +99,7 @@ export default function Login() {
           sessionStorage.setItem("userName", userName);
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
-          
+          sessionStorage.setItem("IsLogged", "true");
         }
 
         if (data.persistent) {
@@ -134,8 +134,6 @@ export default function Login() {
   //     sessionStorage.removeItem("userId");
   //   };
   // }, []);
- 
-
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -256,7 +254,11 @@ export default function Login() {
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox size="sm" label="Log in as Garage Owner" name="persistent" />
+                    <Checkbox
+                      size="sm"
+                      label="Log in as Garage Owner"
+                      name="persistent"
+                    />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
                   <Button type="submit" fullWidth>

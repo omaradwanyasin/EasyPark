@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Updated for React Router v6
 
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -17,8 +18,24 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Rating from "./Rating.tsx";
 
 export default function RentalCard(props) {
-  const { category, title, rareFind = false, liked = false, image } = props;
+  const {
+    category,
+    title,
+    rareFind = false,
+    liked = false,
+    image,
+    isLoggedIn,
+  } = props;
   const [isLiked, setIsLiked] = React.useState(liked);
+  const navigate = useNavigate(); // Updated for React Router v6
+
+  const handleReserveClick = () => {
+    if (isLoggedIn === "true") {
+      navigate("/pay");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <Card>
@@ -139,7 +156,7 @@ export default function RentalCard(props) {
           Full
         </Button>
       )}
-      <Button variant="solid" color="primary">
+      <Button variant="solid" color="primary" onClick={handleReserveClick}>
         Reserve
       </Button>
     </Card>

@@ -19,18 +19,22 @@ export default function RentalDashboard() {
   const [selectedPark, setSelectedPark] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [parkings, setParkings] = useState([]);
-  const [userInfo,setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({});
+  const isLoggedIn = sessionStorage.getItem("IsLogged");
+  useEffect(() => {
+    console.log("User name from localStorage:", localStorage.getItem("name"));
+    console.log("User id from localStorage:", localStorage.getItem("userId"));
+    console.log(
+      "User email from localStorage:",
+      localStorage.getItem("userEmail")
+    );
+    const userEmail = sessionStorage.getItem("userEmail");
+    const userName = sessionStorage.getItem("userName");
+    const userId = sessionStorage.getItem("userId");
 
-  useEffect(()=>{
-    console.log("User name from localStorage:", localStorage.getItem('name'));
-    console.log("User id from localStorage:", localStorage.getItem('userId'));
-    console.log("User email from localStorage:", localStorage.getItem('userEmail'));
-    const userEmail = localStorage.getItem('userEmail');
-    const userName = localStorage.getItem('userName');
-    const userId= localStorage.getItem('userId');
-    setUserInfo({email:userEmail,name:userName,id:userId});
-  },[]);
-  
+    setUserInfo({ email: userEmail, name: userName, id: userId });
+  }, []);
+
   useEffect(() => {
     // Fetch data from your API
     fetch("https://localhost:7140/parkings")
@@ -171,10 +175,11 @@ export default function RentalDashboard() {
 
               onSelectCity={() =>
                 handleMapTransition({
-                  latitude: parking.geometry[1],
-                  longitude: parking.geometry[0],
+                  latitude: parking.geometry[0],
+                  longitude: parking.geometry[1],
                 })
               }
+              isLoggedIn={isLoggedIn}
               onPopupClick={() => handlePopupClick(parking)}
             />
           ))}
