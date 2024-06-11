@@ -90,8 +90,10 @@ export default function RentalCard(props) {
         </Stack>
         <Stack direction="row" sx={{ mt: "auto" }}>
           <Typography level="title-lg" sx={{ flexGrow: 1, textAlign: "right" }}>
-            <strong>{props.price}</strong>{" "}
-            <Typography level="body-md">price: 3$</Typography>
+            {" "}
+            <Typography level="body-md">
+              price: <strong>{props.price}</strong>$
+            </Typography>
           </Typography>
         </Stack>
       </CardContent>
