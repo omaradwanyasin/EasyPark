@@ -98,7 +98,7 @@ export default function Signup() {
         // const responseData = await response.json();
         // sessionStorage.setItem("garageId", response.id);
         // console.log("Garage added successfully:", responseData);
-        navigate("/test"); // Navigate to a success page or perform another action
+        navigate("/GarageDashBoard"); // Navigate to a success page or perform another action
       } else {
         console.error("Failed to add garage:", response.statusText);
       }

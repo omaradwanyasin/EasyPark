@@ -1,10 +1,11 @@
-import { Church } from "@mui/icons-material";
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-function Protected({ children }) {
+function Protected({ children, requiredRole }) {
   const token = sessionStorage.getItem("authToken");
-  if (token) {
+  const userRole = sessionStorage.getItem("userRole");
+
+  if (token && (!requiredRole || userRole === requiredRole)) {
     return children;
   } 
   return <Navigate to="/login" />;

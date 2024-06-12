@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode"; // Adjust the import for jwtDecode
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -86,13 +86,13 @@ export default function Login() {
         // Decode the token to extract user information
         if (result.token) {
           // Decode the JWT token
-
           const decodedToken: any = jwtDecode(result.token);
           console.log(result.token, decodedToken);
           // Extract user information from the decoded token
           const userEmail = decodedToken.nameid;
           const userName = decodedToken.unique_name;
           const userId = decodedToken.UserId;
+          const userRole = data.persistent ? "garageOwner" : "normalUser"; // Determine the user role
 
           // Store user information in sessionStorage
           sessionStorage.setItem("userEmail", userEmail);
@@ -100,9 +100,9 @@ export default function Login() {
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
           sessionStorage.setItem("IsLogged", "true");
-          
-
+          sessionStorage.setItem("userRole", userRole); // Store the user role
         }
+
         if (data.persistent) {
           navigate("/GarageDashBoard");
         } else {
@@ -125,16 +125,6 @@ export default function Login() {
       navigate("/GarageDashBoard");
     }
   }, [navigate]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     // Clear sessionStorage when component unmounts
-  //     sessionStorage.removeItem("authToken");
-  //     sessionStorage.removeItem("userEmail");
-  //     sessionStorage.removeItem("userName");
-  //     sessionStorage.removeItem("userId");
-  //   };
-  // }, []);
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>

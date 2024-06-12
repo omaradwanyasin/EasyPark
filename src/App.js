@@ -64,13 +64,13 @@ function App() {
               <Route path="/Garageowner" element={<GarageOwner />} />
               <Route path="/contact" element={<Contact />} />
               <Route
-                path="/GarageDashBoard"
-                element={
-                  <Protected>
-                    <DashboardPage />
-                  </Protected>
-                }
-              />
+          path="/GarageDashBoard"
+          element={
+            <Protected requiredRole="garageOwner">
+              <DashboardPage />
+            </Protected>
+          }
+        />
               <Route path="/Garageowner/Garage" element={<Garage />} />
               <Route path="/test2" element={<SignMap />} />
               <Route path="/service" element={<Nservice />} />
