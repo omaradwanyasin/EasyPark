@@ -46,7 +46,6 @@ export default function RentalDashboard() {
         console.error("Error fetching parking data:", error);
       });
   }, []);
-  //for push test
   useEffect(() => {
     // Get user's current location using Geolocation API
     navigator.geolocation.getCurrentPosition(

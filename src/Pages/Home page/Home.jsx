@@ -9,13 +9,13 @@ import mock from "../../Images/lappad.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-
 function Home(id = "home") {
   sessionStorage.setItem("IsLogged", "false");
   useEffect(() => {
     Aos.init();
   }, []);
   return (
+
     <div>
       <Navbar />
       {/* comment for push */}
@@ -82,6 +82,7 @@ function Home(id = "home") {
         </div>
       </div>
     </div>
+
   );
 }
 

@@ -100,12 +100,13 @@ export default function Login() {
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
           sessionStorage.setItem("IsLogged", "true");
-        }
+          
 
+        }
         if (data.persistent) {
-          navigate("/test");
+          navigate("/GarageDashBoard");
         } else {
-          navigate("/service");
+          navigate("/home");
         }
       } else {
         console.error("Login failed:", response.statusText);
@@ -121,7 +122,7 @@ export default function Login() {
     // Redirect authenticated users to the dashboard upon mounting
     const authToken = sessionStorage.getItem("authToken");
     if (authToken) {
-      navigate("/test");
+      navigate("/GarageDashBoard");
     }
   }, [navigate]);
 
