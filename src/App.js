@@ -19,6 +19,7 @@ import NotificationListener from "./NotificationListener.jsx";
 import Policy from "./Pages/Policy Page/Policy.jsx";
 import ScrollToTop from "./Components/ScrollToTop";
 import Protected from "./Routes/Protected.js";
+import HomePageIntro from "./Components/HomePageIntro/HomePageIntro.jsx";
 import Protectedauth from "./Routes/ProtectedDauth.js";
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
               <Route path="/AboutUs" element={<About />} />
               <Route path="/Policy" element={<Policy />} />
               <Route path="/pay" element={<Payment />} />
+              <Route path="/homePageIntro" element={<HomePageIntro />} />
             </Routes>
             <NotificationListener />{" "}
             {/* Add NotificationListener to listen for notifications */}

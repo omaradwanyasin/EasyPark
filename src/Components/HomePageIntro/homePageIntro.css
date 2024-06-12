@@ -1,0 +1,98 @@
+/* Container for the entire section */
+.homePageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #f5f9f6;
+    padding: 40px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Left side with the illustration */
+.img {
+    flex: 1;
+    text-align: center;
+    background-color: #f5f9f6; /* Matching background color */
+    padding: 20px; /* Padding to give some space around the image */
+    margin-bottom: 20px; /* Space between image and text on smaller screens */
+}
+
+/* Right side with the text */
+.text-section {
+    flex: 2;
+    padding-left: 20px;
+}
+
+/* Main heading */
+.title h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+/* Highlighted text */
+.title h1 span {
+    background-color: #ffd700;
+    padding: 0 5px;
+}
+
+/* Paragraph text */
+.parag p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Image inside the illustration */
+.img img {
+    background-color: #f5f9f6;
+    max-width: 100%;
+    height: auto;
+    width: 80%; /* Increase the width of the image */
+}
+
+/* Ensuring the text section and image are properly aligned */
+.text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .text-section {
+        padding-left: 0;
+    }
+
+    .title h1 {
+        font-size: 1.8em;
+    }
+
+    .parag p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .title h1 {
+        font-size: 1.5em;
+    }
+
+    .parag p {
+        font-size: 0.9em;
+    }
+
+    .img img {
+        width: 100%; /* Make image full width on small screens */
+    }
+}

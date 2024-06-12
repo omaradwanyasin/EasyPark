@@ -7,7 +7,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Button } from "@mui/material";
 function Section2() {
   return (
-    <div className="main">
+    <div className="main" data-aos="zoom-in">
       <div>
         <h2>The simplest way to book a parking space.</h2>
         <div className="featuers">
