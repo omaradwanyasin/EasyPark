@@ -1,0 +1,124 @@
+/* Section2.css */
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Optional: ensures items are vertically centered within the .main div */
+  padding: 2rem;
+  margin: 0 auto;
+  font-family: "Arial", sans-serif;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Allows for relative positioning adjustments */
+  /* Adjust this value to move the .main div to the right */
+}
+
+.main div:first-child {
+}
+
+.main img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.featuers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 80%;
+}
+
+.cont {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cont:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cont div:first-child {
+  font-size: 2rem;
+  color: #0d6efd;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main img {
+    max-width: 80%;
+    margin: 1rem 0;
+  }
+
+  .main div:first-child {
+    max-width: 100%;
+  }
+
+  .featuers {
+    align-items: center;
+  }
+
+  .cont {
+    flex-direction: column;
+    text-align: left;
+  }
+}
+
+button {
+  margin-top: 20px;
+  background-color: #0d6efd; /* Same color as the icon in .cont divs */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3; /* Slightly darker shade for hover effect */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

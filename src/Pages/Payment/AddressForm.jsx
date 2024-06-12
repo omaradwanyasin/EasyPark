@@ -20,12 +20,17 @@ export default function AddressForm({ onNextStep }) {
 
   return (
     <div
-      style={{color:"black", backgroundColor: "white", padding: "30px", borderRadius: 15 }}
+      style={{
+        color: "black",
+        backgroundColor: "white",
+        padding: "30px",
+        borderRadius: 15,
+      }}
     >
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={3} >
+        <Grid container spacing={3}>
           <FormGrid item xs={12} md={6}>
-            <FormLabel htmlFor="first-name"  style={{color:"black"}} required>
+            <FormLabel htmlFor="first-name" style={{ color: "black" }} required>
               First name
             </FormLabel>
             <OutlinedInput
@@ -38,7 +43,7 @@ export default function AddressForm({ onNextStep }) {
             />
           </FormGrid>
           <FormGrid item xs={12} md={6}>
-            <FormLabel htmlFor="last-name" style={{color:"black"}} required>
+            <FormLabel htmlFor="last-name" style={{ color: "black" }} required>
               Last name
             </FormLabel>
             <OutlinedInput
@@ -51,7 +56,7 @@ export default function AddressForm({ onNextStep }) {
             />
           </FormGrid>
           <FormGrid item xs={12}>
-            <FormLabel htmlFor="address1" style={{color:"black"}} required>
+            <FormLabel htmlFor="address1" style={{ color: "black" }} required>
               Address line 1
             </FormLabel>
             <OutlinedInput
@@ -64,18 +69,19 @@ export default function AddressForm({ onNextStep }) {
             />
           </FormGrid>
           <FormGrid item xs={12}>
-            <FormLabel htmlFor="address2" style={{color:"black"}} >Address line 2</FormLabel>
+            <FormLabel htmlFor="address2" style={{ color: "black" }}>
+              Address line 2
+            </FormLabel>
             <OutlinedInput
               id="address2"
               name="address2"
               type="address2"
               placeholder="Apartment, suite, unit, etc. (optional)"
               autoComplete="shipping address-line2"
-              
             />
           </FormGrid>
           <FormGrid item xs={6}>
-            <FormLabel htmlFor="city" style={{color:"black"}}  required>
+            <FormLabel htmlFor="city" style={{ color: "black" }} required>
               City
             </FormLabel>
             <OutlinedInput
@@ -89,7 +95,7 @@ export default function AddressForm({ onNextStep }) {
           </FormGrid>
 
           <FormGrid item xs={6}>
-            <FormLabel htmlFor="country" style={{color:"black"}}  required>
+            <FormLabel htmlFor="country" style={{ color: "black" }} required>
               Country
             </FormLabel>
             <OutlinedInput
@@ -107,7 +113,7 @@ export default function AddressForm({ onNextStep }) {
               variant="contained"
               color="primary"
               type="submit"
-              style={{ marginTop: "20px", width:"100%" }}
+              style={{ marginTop: "20px", width: "100%" }}
             >
               Next
             </Button>
@@ -116,5 +122,4 @@ export default function AddressForm({ onNextStep }) {
       </form>
     </div>
   );
-
 }

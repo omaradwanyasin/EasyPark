@@ -17,7 +17,7 @@ function DashboardPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
   const [capacity, setCapacity] = useState(null); // Track capacity
 
-  const garageOwnerId = sessionStorage.getItem("userId"); // garage id should be stored
+  const garageOwnerId = sessionStorage.getItem("userId"); 
   const garageid = sessionStorage.getItem("garageid");
   const fetchParkingData = async () => {
     try {
@@ -28,9 +28,9 @@ function DashboardPage() {
         throw new Error("Failed to fetch parking data");
       }
       const data = await response.json();
+      console.log(data);
       sessionStorage.setItem("garageid", data.id);
       sessionStorage.setItem("capacity", data.capacity);
-      sessionStorage.setItem("geometry",data.geometry); // store geometry in the session storage to pass it on the map
       setCapacity(data.capacity); // Update capacity from fetched data
     } catch (error) {
       console.error("Error fetching parking data:", error);
@@ -70,7 +70,7 @@ function DashboardPage() {
   const handleToggleChange = (event, newValue) => {
     setToggleValue(newValue);
   };
-  
+
   return (
     <SignalRProvider>
       <div className="maindiv">

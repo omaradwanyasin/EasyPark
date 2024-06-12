@@ -9,7 +9,7 @@ import mock from "../../Images/lappad.png";
 import HomePageBtn from "../../Components/HomePageBtn";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-
+import Section2 from "../../Components/HomePageSection2/Section2";
 function Home(id = "home") {
   sessionStorage.setItem("IsLogged", "false");
   useEffect(() => {
@@ -23,7 +23,7 @@ function Home(id = "home") {
         <div className="Head-section">
           <div className="text-service-section" data-aos="fade-down">
             <h1>
-              <span>EasyPark</span> Your Instant Parking Solution
+              <span>EasyPark</span> The smarter way to find parking
             </h1>
             <p>
               Instantly find parking spots near you with just a tap. Say goodbye
@@ -35,9 +35,10 @@ function Home(id = "home") {
             </div>
           </div>
           <div data-aos="zoom-in">
-            <img style={{ width: "130%" }} src={firstmap} />
+            <img style={{ width: "100%" }} src={firstmap} />
           </div>
         </div>
+        <Section2 />
         <div className="seconde-head">
           <h3 data-aos="zoom-in">Revolutionizing Parking in Palestine</h3>
           <p data-aos="zoom-in" style={{ width: "40%", margin: "auto" }}>
