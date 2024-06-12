@@ -16,14 +16,12 @@ import p1 from "./imgs/p1.jpg";
 import p2 from "./imgs/p2.jpg";
 import p3 from "./imgs/p3.jpg";
 
-
 function Home(id = "home") {
-  sessionStorage.setItem("IsLogged", "false");
+
   useEffect(() => {
     Aos.init();
   }, []);
   return (
-
     <div>
       <Navbar />
       {/* comment for push */}
@@ -55,8 +53,13 @@ function Home(id = "home") {
         </Box>
 
         <div className="seconde-head">
-          <h3 data-aos="zoom-in" style={{color:"white"}}>Revolutionizing Parking in Palestine</h3>
-          <p data-aos="zoom-in" style={{ width: "40%", margin: "auto" , color:"white"}}>
+          <h3 data-aos="zoom-in" style={{ color: "white" }}>
+            Revolutionizing Parking in Palestine
+          </h3>
+          <p
+            data-aos="zoom-in"
+            style={{ width: "40%", margin: "auto", color: "white" }}
+          >
             Say goodbye to the frustration of searching for parking spots in
             Palestine. EasyPark is proud to introduce the first-ever parking
             spot finder dedicated to Palestinian cities.
@@ -72,16 +75,7 @@ function Home(id = "home") {
             />
             <BioCard text={"User Friendly Interface"} />
           </div>
-          
 
-
-
-
-
-
-
-
-          
           <div className="last-section">
             <div>
               <img src={map2} data-aos="zoom-in"></img>
@@ -91,7 +85,7 @@ function Home(id = "home") {
                 Our platform is designed to make parking a hassle-free
                 experience for users like you.
               </h1>
-              <p data-aos="fade-down" style={{color:"salmon"}}>
+              <p data-aos="fade-down" style={{ color: "white" }}>
                 Whether you're searching for parking spaces, managing your own
                 garage, or both, our platform offers a seamless solution
                 tailored to your needs.
@@ -99,32 +93,82 @@ function Home(id = "home") {
             </div>
           </div>
 
-          <h3 data-aos="zoom-in" style={{paddingTop:"50px",color:"white"}}>Why book parking?</h3>
-          
+          <h3 data-aos="zoom-in" style={{ paddingTop: "50px", color: "white" }}>
+            Why book parking?
+          </h3>
+
           <div className="cards" data-aos="zoom-in">
-            <div style={{backgroundColor:"white",width:"320px",borderRadius:"8px",padding:"20px"}}>
+            <div
+              style={{
+                backgroundColor: "white",
+                width: "320px",
+                borderRadius: "8px",
+                padding: "20px",
+              }}
+            >
               <h3>Get closer</h3>
-              <img src={p3} style={{width:"150px",borderRadius:"10px",boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",marginBottom:"20px"}}/>
-              <p>You’ll always be a stone’s throw away from where you need to be.</p>
-            
+              <img
+                src={p3}
+                style={{
+                  width: "150px",
+                  borderRadius: "10px",
+                  boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",
+                  marginBottom: "20px",
+                }}
+              />
+              <p>
+                You’ll always be a stone’s throw away from where you need to be.
+              </p>
             </div>
-            <div style={{backgroundColor:"white",width:"320px",borderRadius:"8px",padding:"20px"}}>
+            <div
+              style={{
+                backgroundColor: "white",
+                width: "320px",
+                borderRadius: "8px",
+                padding: "20px",
+              }}
+            >
               <h3>Park smarter</h3>
-              <img src={p1} style={{width:"150px",borderRadius:"10px",boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",marginBottom:"20px"}}/>
-              <p>Save time, money & hassle by booking your space before you set out.</p>
-            
+              <img
+                src={p1}
+                style={{
+                  width: "150px",
+                  borderRadius: "10px",
+                  boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",
+                  marginBottom: "20px",
+                }}
+              />
+              <p>
+                Save time, money & hassle by booking your space before you set
+                out.
+              </p>
             </div>
-            <div style={{backgroundColor:"white",width:"320px", borderRadius:"8px",padding:"20px"}}>
+            <div
+              style={{
+                backgroundColor: "white",
+                width: "320px",
+                borderRadius: "8px",
+                padding: "20px",
+              }}
+            >
               <h3>Peace of mind</h3>
-              <img src={p2} style={{width:"150px",borderRadius:"10px",boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",marginBottom:"20px"}}/>
-              <p>Find the best spot, see exactly what you’re paying & even extend your stay - all through our award-winning app.</p>
+              <img
+                src={p2}
+                style={{
+                  width: "150px",
+                  borderRadius: "10px",
+                  boxShadow: "10px 14px 14px rgba(0.1, 0.1, 0.2, 0.5)",
+                  marginBottom: "20px",
+                }}
+              />
+              <p>
+                Find the best spot, see exactly what you’re paying & even extend
+                your stay - all through our award-winning app.
+              </p>
             </div>
           </div>
-          
 
-
-
-          <div className="mock-dashbord" style={{marginTop:"100px"}}>
+          <div className="mock-dashbord" style={{ marginTop: "100px" }}>
             <h1 data-aos="fade-down"> Car park management DashBoard </h1>
 
             <img width={600} src={mock} data-aos="zoom-in" />
@@ -134,7 +178,6 @@ function Home(id = "home") {
         </div>
       </div>
     </div>
-
   );
 }
 

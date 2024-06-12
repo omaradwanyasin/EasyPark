@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import {jwtDecode} from "jwt-decode"; // Adjust the import for jwtDecode
+import { jwtDecode } from "jwt-decode"; // Adjust the import for jwtDecode
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -100,7 +100,9 @@ export default function Login() {
           sessionStorage.setItem("userId", userId);
           sessionStorage.setItem("authToken", result.token);
           sessionStorage.setItem("IsLogged", "true");
-          sessionStorage.setItem("userRole", userRole); // Store the user role
+          sessionStorage.setItem("userRole", userRole);
+          const test = sessionStorage.getItem("IsLogged");
+          console.log(test); // Store the user role
         }
 
         if (data.persistent) {
