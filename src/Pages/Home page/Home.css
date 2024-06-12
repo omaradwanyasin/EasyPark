@@ -1,8 +1,8 @@
 .Head-section {
-  padding-top: 150px;
+  padding-top: 100px;
   display: flex;
   justify-content: space-around;
-  width: 70%;
+  width: 80%;
   margin: auto;
   gap: 100px;
 }
@@ -18,6 +18,7 @@
   justify-content: center;
   padding-top: 30px;
 }
+
 .seconde-head {
   padding-top: 250px;
 }
@@ -37,3 +38,12 @@
 img{
   background-color: #00041a;
 }
+.homePageIntro{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+

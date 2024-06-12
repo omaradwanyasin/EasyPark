@@ -163,6 +163,7 @@ export default function RentalDashboard() {
           {parkings.map((parking) => (
             <RentalCard
               key={parking.id}
+              id={parking.id}
               title={parking.name}
               text={parking.info}
               status={parking.status}
@@ -171,7 +172,6 @@ export default function RentalDashboard() {
               wifi={parking.containsWifi}
               charging={parking.supportsElectricalCharging}
               heavyCars={parking.supportsHeavyTrucks}
-
               onSelectCity={() =>
                 handleMapTransition({
                   latitude: parking.geometry[0],

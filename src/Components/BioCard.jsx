@@ -27,6 +27,9 @@ export default function BioCard(props) {
         <Typography level="body-sm" sx={{ maxWidth: "24ch" }}>
           {props.text}
         </Typography>
+
+
+
       </CardContent>
       <CardOverflow sx={{ bgcolor: "background.level1" }}>
         <CardActions buttonFlex="1">

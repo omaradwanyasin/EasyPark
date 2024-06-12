@@ -19,18 +19,29 @@ import Rating from "./Rating.tsx";
 
 export default function RentalCard(props) {
   const {
+    id, // Assuming id is the garage ID
     category,
     title,
     rareFind = false,
     liked = false,
     image,
     isLoggedIn,
+    heavyCars,
+    charging,
+    wifi,
+    price,
+    rating,
+    status,
+    onSelectCity,
+    onPopupClick,
   } = props;
   const [isLiked, setIsLiked] = React.useState(liked);
-  const navigate = useNavigate(); // Updated for React Router v6
+  const navigate = useNavigate();
 
   const handleReserveClick = () => {
     if (isLoggedIn === "true") {
+      sessionStorage.setItem('reservedGarageId', id);
+      console.log(`Garage ID ${id} has been reserved`);
       navigate("/pay");
     } else {
       navigate("/login");
@@ -78,72 +89,72 @@ export default function RentalCard(props) {
           flexWrap="wrap"
           sx={{ my: 0.25 }}
         >
-         {props.heavyCars? (
-          <Typography level="body-xs" 
-          startDecorator={<LocalShippingIcon />} 
-            style={{color:"green"}}>
-            Bus parkings Exists
-          </Typography>
-         ):(
-          <Typography
-          level="body-xs"
-          startDecorator={<LocalShippingIcon />}
-          style={{ color: "red" }} // Apply red color if charging is false
-        >
-          Bus parkings Doesn't Exist
-        </Typography>
-         )  
-        
-        }
-        { props.charging? (
-          <Typography level="body-xs" startDecorator={<BoltIcon />}
-          style={{ color: "green" }}>
-            Charging Station
-          </Typography>
-        ):(
-          <Typography
-          level="body-xs"
-          startDecorator={<BoltIcon  />}
-          style={{ color: "red" }} // Apply red color if charging is false
-        >
-          Charging Station Doesn't Exist
-        </Typography>
-        )  
-        
-        }
-         { props.charging? (
-          <Typography level="body-xs" startDecorator={<WifiRoundedIcon />}
-          style={{ color: "green" }}>
-            Wifi
-          </Typography>
-        ):(
-          <Typography
-          level="body-xs"
-          startDecorator={<WifiRoundedIcon  />}
-          style={{ color: "red" }} // Apply red color if charging is false
-        >
-          Wifi Doesn't Exist
-        </Typography>
-        )  
-        
-        }
-        
+          {heavyCars ? (
+            <Typography
+              level="body-xs"
+              startDecorator={<LocalShippingIcon />}
+              style={{ color: "green" }}
+            >
+              Bus parkings Exists
+            </Typography>
+          ) : (
+            <Typography
+              level="body-xs"
+              startDecorator={<LocalShippingIcon />}
+              style={{ color: "red" }}
+            >
+              Bus parkings Doesn't Exist
+            </Typography>
+          )}
+          {charging ? (
+            <Typography
+              level="body-xs"
+              startDecorator={<BoltIcon />}
+              style={{ color: "green" }}
+            >
+              Charging Station
+            </Typography>
+          ) : (
+            <Typography
+              level="body-xs"
+              startDecorator={<BoltIcon />}
+              style={{ color: "red" }}
+            >
+              Charging Station Doesn't Exist
+            </Typography>
+          )}
+          {wifi ? (
+            <Typography
+              level="body-xs"
+              startDecorator={<WifiRoundedIcon />}
+              style={{ color: "green" }}
+            >
+              Wifi
+            </Typography>
+          ) : (
+            <Typography
+              level="body-xs"
+              startDecorator={<WifiRoundedIcon />}
+              style={{ color: "red" }}
+            >
+              Wifi Doesn't Exist
+            </Typography>
+          )}
         </Stack>
         <Stack direction="row" sx={{ mt: "auto" }}>
           <Typography level="title-lg" sx={{ flexGrow: 1, textAlign: "right" }}>
-            {" "}
             <Typography level="body-md">
-              price: <strong>{props.price}</strong>$
+              price: <strong>{price}</strong>$
             </Typography>
           </Typography>
         </Stack>
       </CardContent>
-      <Rating rating={props.rating} />
-      {props.status === 1 ? (
+      <Rating rating={rating} />
+      {status === 1 ? (
         <Button
           variant="outlined"
           color="neutral"
-          onClick={() => props.onSelectCity()}
+          onClick={onSelectCity}
         >
           View
         </Button>
@@ -151,9 +162,7 @@ export default function RentalCard(props) {
         <Button
           variant="outlined"
           color="danger"
-          onClick={() => {
-            console.log("test");
-          }}
+          onClick={() => console.log("test")}
         >
           Full
         </Button>
@@ -164,3 +173,4 @@ export default function RentalCard(props) {
     </Card>
   );
 }
+

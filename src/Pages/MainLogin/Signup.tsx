@@ -9,13 +9,14 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link ,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
+
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   email: HTMLInputElement;
@@ -52,6 +53,17 @@ function ColorSchemeToggle(props: IconButtonProps) {
 
 export default function Signup() {
   const navigate = useNavigate();
+  const [errors, setErrors] = React.useState<string[]>([]);
+  const [password, setPassword] = React.useState("");
+  const [criteriaStatus, setCriteriaStatus] = React.useState({
+    minLength: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    specialChar: false,
+  });
+  const [isPasswordTouched, setIsPasswordTouched] = React.useState(false);
+
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
@@ -61,6 +73,11 @@ export default function Signup() {
       password: formElements.password.value,
       persistent: formElements.persistent.checked,
     };
+
+    if (errors.length > 0) {
+      alert("Please fix the password errors before submitting.");
+      return;
+    }
 
     try {
       const response = await fetch("https://localhost:7140/signup", {
@@ -82,6 +99,50 @@ export default function Signup() {
     } catch (error) {
       console.error("There was a problem with the sign-up request:", error);
     }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setIsPasswordTouched(true);
+    const validationErrors = validatePassword(newPassword);
+    setErrors(validationErrors.errors);
+    setCriteriaStatus(validationErrors.criteriaStatus);
+  };
+
+  const validatePassword = (password: string) => {
+    const errors: string[] = [];
+    const minLength = 8;
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const numberRegex = /[0-9]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    const criteriaStatus = {
+      minLength: password.length >= minLength,
+      uppercase: uppercaseRegex.test(password),
+      lowercase: lowercaseRegex.test(password),
+      number: numberRegex.test(password),
+      specialChar: specialCharRegex.test(password),
+    };
+
+    if (!criteriaStatus.minLength) {
+      errors.push(`Password must be at least ${minLength} characters long.`);
+    }
+    if (!criteriaStatus.uppercase) {
+      errors.push("Password must contain at least one uppercase letter.");
+    }
+    if (!criteriaStatus.lowercase) {
+      errors.push("Password must contain at least one lowercase letter.");
+    }
+    if (!criteriaStatus.number) {
+      errors.push("Password must contain at least one number.");
+    }
+    if (!criteriaStatus.specialChar) {
+      errors.push("Password must contain at least one special character.");
+    }
+
+    return { errors, criteriaStatus };
   };
 
   return (
@@ -171,7 +232,6 @@ export default function Signup() {
                   <Link to="/Garageowner">Sign up!</Link>
                 </Typography>
               </Stack>
-              
             </Stack>
             <Divider
               sx={(theme) => ({
@@ -194,7 +254,46 @@ export default function Signup() {
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Password</FormLabel>
-                  <Input type="password" name="password" />
+                  <Input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                  {isPasswordTouched && (
+                    <Stack sx={{ pl: 0, mt: 2, textAlign: "left" }}>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.minLength ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must be at least 8 characters long.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.uppercase ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one uppercase letter.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.lowercase ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one lowercase letter.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.number ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one number.
+                      </Typography>
+                      <Typography
+                        level="body-sm"
+                        sx={{ color: criteriaStatus.specialChar ? "#00cc00" : "#cc0000" }}
+                      >
+                        Password must contain at least one special character.
+                      </Typography>
+                    </Stack>
+                  )}
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
                   <Box
@@ -207,7 +306,7 @@ export default function Signup() {
                     <Checkbox size="sm" label="Remember me" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
-                  <Button type="submit" fullWidth >
+                  <Button type="submit" fullWidth disabled={errors.length > 0}>
                     Sign in
                   </Button>
                 </Stack>
