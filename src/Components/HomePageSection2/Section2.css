@@ -10,9 +10,9 @@
   max-width: 1200px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative; 
+  position: relative;
   /* Allows for relative positioning adjustments */
-  /* Adjust this value to move the .main div to the right */
+  left: 50px; /* Adjust this value to move the .main div to the right */
 }
 
 .main div:first-child {

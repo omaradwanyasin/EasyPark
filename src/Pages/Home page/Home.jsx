@@ -11,6 +11,7 @@ import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 import Section2 from "../../Components/HomePageSection2/Section2";
 import HomePageIntro from "../../Components/HomePageIntro/HomePageIntro";
+import { Box } from "@mui/material";
 function Home(id = "home") {
   sessionStorage.setItem("IsLogged", "false");
   useEffect(() => {
@@ -40,13 +41,13 @@ function Home(id = "home") {
           </div>
         </div>
         <div className="homePageIntro">
- 
-       <HomePageIntro/>
-  
-       </div>
-      
-       <Section2 />
-      
+          <HomePageIntro />
+        </div>
+
+        <Box>
+          <Section2 />
+        </Box>
+
         <div className="seconde-head">
           <h3 data-aos="zoom-in">Revolutionizing Parking in Palestine</h3>
           <p data-aos="zoom-in" style={{ width: "40%", margin: "auto" }}>
@@ -87,9 +88,8 @@ function Home(id = "home") {
 
             <img width={600} src={mock} data-aos="zoom-in" />
           </div>
-          
+
           <Footer />
-       
         </div>
       </div>
     </div>
