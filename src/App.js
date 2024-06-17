@@ -66,7 +66,7 @@ function App() {
               <Route
           path="/GarageDashBoard"
           element={
-            <Protected requiredRole="garageOwner">
+            <Protected requiredRole="garageOwner"> 
               <DashboardPage />
             </Protected>
           }
@@ -77,7 +77,14 @@ function App() {
               <Route path="/test4" element={<Navbar />} />
               <Route path="/AboutUs" element={<About />} />
               <Route path="/Policy" element={<Policy />} />
-              <Route path="/pay" element={<Payment />} />
+              <Route path="/pay" element={
+              <Protected requiredRole="normalUser">
+              <Payment />
+              </Protected>
+              
+            }
+              
+              />
               <Route path="/homePageIntro" element={<HomePageIntro />} />
             </Routes>
             <NotificationListener />{" "}

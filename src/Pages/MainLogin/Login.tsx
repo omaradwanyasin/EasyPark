@@ -98,11 +98,14 @@ export default function Login() {
           sessionStorage.setItem("userEmail", userEmail);
           sessionStorage.setItem("userName", userName);
           sessionStorage.setItem("userId", userId);
+          sessionStorage.setItem("email", userEmail);
           sessionStorage.setItem("authToken", result.token);
           sessionStorage.setItem("IsLogged", "true");
           sessionStorage.setItem("userRole", userRole);
+          console.log("role is "+ sessionStorage.getItem("userRole"));
           const test = sessionStorage.getItem("IsLogged");
           console.log(test); // Store the user role
+          console.log("Garage id is "+ userId);
         }
 
         if (data.persistent) {
