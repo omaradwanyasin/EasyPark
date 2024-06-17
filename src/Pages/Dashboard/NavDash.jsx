@@ -20,7 +20,7 @@ export default function NavBarDash({email,name}) {
     sessionStorage.removeItem("userEmail");
     sessionStorage.removeItem("userName");
     sessionStorage.removeItem("userId");
-
+    sessionStorage.clear();
     // Navigate to the home page
     navigate("/home");
   };

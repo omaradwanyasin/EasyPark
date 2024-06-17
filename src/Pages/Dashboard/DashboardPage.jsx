@@ -5,7 +5,6 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import UserCard from "./UserCard";
-import resarvation from "./reservations.json";
 import NavBarDash from "./NavDash";
 import NotificationsPopup from "./NotificationsPopup";
 import { SignalRProvider } from "../../signalRService";
@@ -16,13 +15,15 @@ function DashboardPage() {
   const [toggleValue, setToggleValue] = useState("web");
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
   const [capacity, setCapacity] = useState(null); // Track capacity
+  const [reservations, setReservations] = useState([]); // Track reservations
 
   const garageOwnerId = sessionStorage.getItem("userId"); 
   const garageid = sessionStorage.getItem("garageid");
+
   const fetchParkingData = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
+        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`,
       );
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
@@ -31,6 +32,7 @@ function DashboardPage() {
       console.log(data);
       sessionStorage.setItem("garageid", data.id);
       sessionStorage.setItem("capacity", data.capacity);
+  
       setCapacity(data.capacity); // Update capacity from fetched data
     } catch (error) {
       console.error("Error fetching parking data:", error);
@@ -38,9 +40,37 @@ function DashboardPage() {
     }
   };
 
+  const fetchReservations = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7140/api/Reservation/reservation?garageId=${garageid}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch reservation data");
+      }
+      const data = await response.json();
+      console.log(data);
+      
+      // Extract necessary information from data
+      const formattedReservations = data.map((reservation) => {
+        sessionStorage.setItem(`phone_${reservation.reservation_id}`, reservation.phone);
+        return {
+          reservation_id: reservation.reservation_id,
+          name: reservation.name,
+          phone_number: reservation.phone,
+        };
+      });
+      setReservations(formattedReservations); // Update reservations from formatted data
+    } catch (error) {
+      console.error("Error fetching reservation data:", error);
+      // Handle error gracefully, maybe show a message to the user
+    }
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
       fetchParkingData();
+      fetchReservations(); // Fetch reservations when user is logged in
     }
   }, [isLoggedIn]); // Run when isLoggedIn changes
 
@@ -81,15 +111,16 @@ function DashboardPage() {
           <div className="resv">
             <h3>Reservations</h3>
             <div className="resvdisplay">
-              {resarvation.users.map((user) => (
+              {reservations.map((reservation) => (
                 <UserCard
-                  key={user.reservation_id}
-                  id={user.reservation_id}
-                  name={user.name}
-                  phone={user.phone_number}
-                  img={user.image_url}
+                  key={reservation.reservation_id}
+                  id={reservation.reservation_id}
+                  name={reservation.name}
+                  phone={reservation.phone_number}
+                  img={reservation.image_url}
                   userId={userInfo.id}
                   increaseCounter={increase}
+                  decreaseCounter={decrease}
                 />
               ))}
             </div>

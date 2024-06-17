@@ -13,17 +13,24 @@ import { SignalRContext } from "../../signalRService";
 
 export default function UserCard(props) {
   const [isVisable, setIsVisable] = React.useState(true);
+  const [isAccepted, setIsAccepted] = React.useState(false);
   const connection = useContext(SignalRContext); // Access connection from context
 
   const handleReject = async () => {
     setIsVisable(false);
+    props.decreaseCounter(); // Decrease counter on reject
     const message = "Your reservation has been rejected.";
     await connection.invoke("SendNotification", message, "error", "0");
+
   };
 
   const handleAccept = async () => {
+    if(!isAccepted){
+    props.increaseCounter(); // Increase counter on accept
     const message = "Your reservation has been accepted.";
     await connection.invoke("SendNotification", message, "success", "0");
+    setIsAccepted(true);
+  }
   };
 
   return (
@@ -50,12 +57,10 @@ export default function UserCard(props) {
             resize: "horizontal",
           }}
         >
-          <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
-            <img src={props.img} srcSet={props.img} loading="lazy" alt="" />
-          </AspectRatio>
+       
           <CardContent>
             <Typography fontSize="xl" fontWeight="lg">
-              {props.name}
+             Name: {props.name}
             </Typography>
 
             <Sheet
@@ -76,10 +81,7 @@ export default function UserCard(props) {
                 <Typography fontWeight="lg">{props.phone}</Typography>
               </div>
               <div>
-                <Typography level="body-xs" fontWeight="lg">
-                  Reservation ID
-                </Typography>
-                <Typography fontWeight="lg">#{props.id}</Typography>
+            
               </div>
             </Sheet>
             <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
