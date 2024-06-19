@@ -21,6 +21,7 @@ import ScrollToTop from "./Components/ScrollToTop";
 import Protected from "./Routes/Protected.js";
 import HomePageIntro from "./Components/HomePageIntro/HomePageIntro.jsx";
 import Protectedauth from "./Routes/ProtectedDauth.js";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -52,44 +53,45 @@ function App() {
         </div>
       ) : (
         <SignalRProvider>
-          {" "}
           {/* Wrap the app with SignalRProvider */}
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/Garageowner" element={<GarageOwner />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route
-          path="/GarageDashBoard"
-          element={
-            <Protected requiredRole="garageOwner"> 
-              <DashboardPage />
-            </Protected>
-          }
-        />
-              <Route path="/Garageowner/Garage" element={<Garage />} />
-              <Route path="/test2" element={<SignMap />} />
-              <Route path="/service" element={<Nservice />} />
-              <Route path="/test4" element={<Navbar />} />
-              <Route path="/AboutUs" element={<About />} />
-              <Route path="/Policy" element={<Policy />} />
-              <Route path="/pay" element={
-              <Protected requiredRole="normalUser">
-              <Payment />
+          <AuthProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/Garageowner" element={<GarageOwner />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route
+            path="/GarageDashBoard"
+            element={
+              <Protected requiredRole="garageOwner"> 
+                <DashboardPage />
               </Protected>
-              
             }
-              
-              />
-              <Route path="/homePageIntro" element={<HomePageIntro />} />
-            </Routes>
-            <NotificationListener />{" "}
-            {/* Add NotificationListener to listen for notifications */}
-          </BrowserRouter>
+          />
+                <Route path="/Garageowner/Garage" element={<Garage />} />
+                <Route path="/test2" element={<SignMap />} />
+                <Route path="/service" element={<Nservice />} />
+                <Route path="/test4" element={<Navbar />} />
+                <Route path="/AboutUs" element={<About />} />
+                <Route path="/Policy" element={<Policy />} />
+                <Route path="/pay" element={
+                <Protected requiredRole="normalUser">
+                <Payment />
+                </Protected>
+                
+              }
+                
+                />
+                <Route path="/homePageIntro" element={<HomePageIntro />} />
+              </Routes>
+              <NotificationListener />{" "}
+              {/* Add NotificationListener to listen for notifications */}
+            </BrowserRouter>
+          </AuthProvider>
         </SignalRProvider>
       )}
     </div>

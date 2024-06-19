@@ -17,22 +17,22 @@ function DashboardPage() {
   const [capacity, setCapacity] = useState(null); // Track capacity
   const [reservations, setReservations] = useState([]); // Track reservations
 
-  const garageOwnerId = sessionStorage.getItem("userId"); 
-  const garageid = sessionStorage.getItem("garageid");
+  const garageOwnerId = localStorage.getItem("userId");
+  const garageid = localStorage.getItem("garageid");
 
   const fetchParkingData = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`,
+        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
       }
       const data = await response.json();
       console.log(data);
-      sessionStorage.setItem("garageid", data.id);
-      sessionStorage.setItem("capacity", data.capacity);
-  
+      localStorage.setItem("garageid", data.id);
+      localStorage.setItem("capacity", data.capacity);
+
       setCapacity(data.capacity); // Update capacity from fetched data
     } catch (error) {
       console.error("Error fetching parking data:", error);
@@ -50,10 +50,13 @@ function DashboardPage() {
       }
       const data = await response.json();
       console.log(data);
-      
+
       // Extract necessary information from data
       const formattedReservations = data.map((reservation) => {
-        sessionStorage.setItem(`phone_${reservation.reservation_id}`, reservation.phone);
+        localStorage.setItem(
+          `phone_${reservation.reservation_id}`,
+          reservation.phone
+        );
         return {
           reservation_id: reservation.reservation_id,
           name: reservation.name,
@@ -75,9 +78,9 @@ function DashboardPage() {
   }, [isLoggedIn]); // Run when isLoggedIn changes
 
   useEffect(() => {
-    const userEmail = sessionStorage.getItem("userEmail");
-    const userName = sessionStorage.getItem("userName");
-    const userId = sessionStorage.getItem("userId");
+    const userEmail = localStorage.getItem("userEmail");
+    const userName = localStorage.getItem("userName");
+    const userId = localStorage.getItem("userId");
 
     if (userEmail && userName && userId) {
       setUserInfo({ email: userEmail, name: userName, id: userId });
@@ -101,6 +104,14 @@ function DashboardPage() {
     setToggleValue(newValue);
   };
 
+  const handleReject = (reservationId) => {
+    setReservations((prevReservations) =>
+      prevReservations.filter(
+        (reservation) => reservation.reservation_id !== reservationId
+      )
+    );
+  };
+
   return (
     <SignalRProvider>
       <div className="maindiv">
@@ -121,6 +132,7 @@ function DashboardPage() {
                   userId={userInfo.id}
                   increaseCounter={increase}
                   decreaseCounter={decrease}
+                  onReject={handleReject}
                 />
               ))}
             </div>

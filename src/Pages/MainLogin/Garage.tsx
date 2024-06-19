@@ -58,7 +58,7 @@ function ColorSchemeToggle(props: IconButtonProps) {
 
 export default function Signup() {
   const navigate = useNavigate();
-  const garageId = sessionStorage.getItem("GarageOwnerId");
+  const garageId = localStorage.getItem("GarageOwnerId");
   console.log(garageId);
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
@@ -96,7 +96,7 @@ export default function Signup() {
       if (response.ok) {
         console.log(response.body);
         // const responseData = await response.json();
-        // sessionStorage.setItem("garageId", response.id);
+        // localStorage.setItem("garageId", response.id);
         // console.log("Garage added successfully:", responseData);
         navigate("/GarageDashBoard"); // Navigate to a success page or perform another action
       } else {

@@ -46,9 +46,9 @@ export default function CreditCardForm({ onNextStep }) {
   const handleAddCard = async () => {
     if (validateForm()) {
       try {
-        const userId = sessionStorage.getItem("userId");
-        const garageId = sessionStorage.getItem("reservedGarageId");
-        const email = sessionStorage.getItem("email");
+        const userId = localStorage.getItem("userId");
+        const garageId = localStorage.getItem("reservedGarageId");
+        const email = localStorage.getItem("email");
         const reservationData = {
           id: "",  // Assuming this will be generated on the server side
           name: formData.name,

@@ -18,6 +18,7 @@ import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -55,7 +56,7 @@ function ColorSchemeToggle(props: IconButtonProps) {
 export default function Login() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
-
+  const {login} = useAuth();
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements as FormElements; // Cast event elements to FormElements interface
@@ -94,18 +95,16 @@ export default function Login() {
           const userId = decodedToken.UserId;
           const userRole = data.persistent ? "garageOwner" : "normalUser"; // Determine the user role
 
-          // Store user information in sessionStorage
-          sessionStorage.setItem("userEmail", userEmail);
-          sessionStorage.setItem("userName", userName);
-          sessionStorage.setItem("userId", userId);
-          sessionStorage.setItem("email", userEmail);
-          sessionStorage.setItem("authToken", result.token);
-          sessionStorage.setItem("IsLogged", "true");
-          sessionStorage.setItem("userRole", userRole);
-          console.log("role is "+ sessionStorage.getItem("userRole"));
-          const test = sessionStorage.getItem("IsLogged");
-          console.log(test); // Store the user role
-          console.log("Garage id is "+ userId);
+          // Store user information in localStorage
+          login({
+            userEmail: userEmail,
+            userName: userName,
+            userId: userId,
+            email: userEmail,
+            authToken: result.token,
+            IsLogged: "true",
+            userRole: userRole,
+          })
         }
 
         if (data.persistent) {
@@ -125,7 +124,7 @@ export default function Login() {
 
   useEffect(() => {
     // Redirect authenticated users to the dashboard upon mounting
-    const authToken = sessionStorage.getItem("authToken");
+    const authToken = localStorage.getItem("authToken");
     if (authToken) {
       navigate("/GarageDashBoard");
     }

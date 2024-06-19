@@ -15,12 +15,12 @@ export default function NavBarDash({email,name}) {
  
 
   const handleLogout = () => {
-    // Clear sessionStorage
-    sessionStorage.removeItem("authToken");
-    sessionStorage.removeItem("userEmail");
-    sessionStorage.removeItem("userName");
-    sessionStorage.removeItem("userId");
-    sessionStorage.clear();
+    // Clear localStorage
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
+    localStorage.clear();
     // Navigate to the home page
     navigate("/home");
   };
