@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 body {
   line-height: 1.5;
   font-family: "Poppins", sans-serif;
@@ -8,15 +8,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  max-width: 1170px;
-  margin: auto;
 
-}
 .row {
   display: flex;
   flex-direction: row;
@@ -37,7 +29,7 @@ body {
 }
 .footer {
   background-color: #24262b;
-  height: 200px;
+  height: 220px;
 }
 .footer-col {
   width: 25%;
@@ -45,6 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 150px;
+  
 }
 .footer-col h4 {
   font-size: 18px;
@@ -173,4 +166,84 @@ body {
   .footer-col {
     width: 100%;
   }
+} */
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+footer{
+  background-color: #24262b;
+}
+.footerContainer{
+  width: 100%;
+  padding: 70px 30px 20px;
+}
+
+.social{
+  display: flex;
+  justify-content: center;
+}
+.social a{
+  text-decoration: none;
+  padding: 10px;
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 50%;
+}
+.social a i{
+  font-size: 2em;
+  color:black;
+  opacity: 0.9;
+} 
+.social a:hover{
+  background-color: #111;
+  transition: 0.5s;
+}
+.social a:hover i{
+  color: white;
+  transition: .5s;
+}
+.footerNav ul{
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.line{
+  box-shadow: none;
+  width: 100px;
+  height: 3px;
+  border: 3px solid rgb(0, 115, 255);
+  border-radius: 20px;
+  
+  margin: 20px auto; 
+}
+.footerNav ul li a{
+  color: white;
+  margin: 15px;
+  text-decoration: none;
+  opacity: .7;
+  font-size: 1em;
+  transition: .5s;
+}
+.footerNav ul li a:hover{
+  opacity: 1;
+}
+.footerButtom{
+  padding: 20px;
+  text-align: center;
+}
+.footerButtom p{
+  color: white;
+}
+
+.team{
+  color: white;
+  opacity: .5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0px 5px;
 }

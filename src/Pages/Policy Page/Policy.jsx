@@ -24,10 +24,10 @@ function Policy() {
           </div>
           
         </section>
-        <hr style={{}}/>
+        <hr className='line2' />
         <br />
         <section>
-        <div className='main' >
+        <div className='main1'>
           <h1>Privacy Policy :</h1>
           <p><span style={{fontWeight:'800' ,color:'white'}}><br/>Introduction :</span><br/><br/>Welcome to EasyPark . We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website , use our services. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the website or use our services.<br/></p>
           <p > <span style={{fontWeight:'800',color:'white'}}><br/>Personal Information :</span><br/><br/>
