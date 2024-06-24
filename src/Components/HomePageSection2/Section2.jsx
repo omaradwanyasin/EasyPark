@@ -19,7 +19,7 @@ function Section2() {
               <h3>Tell us where you’re going</h3>
               <p>
                 Our super smart app will quickly find the best space for you.
-                And with 100k spaces to choose from, including private
+                And with a lot of spaces to choose from, including private
                 driveways, no one gets you closer.
               </p>
             </div>

@@ -1,49 +1,97 @@
 .Head-section {
   padding-top: 100px;
   display: flex;
-  justify-content: space-around;
-  width: 80%;
+  flex-direction: column; /* Stack vertically by default */
+  align-items: center;
+  width: 90%; /* Use percentages for fluid width */
   margin: auto;
-  gap: 100px;
+  gap: 50px; /* Adjust gap for better spacing */
+}
+
+@media (min-width: 768px) {
+  .Head-section {
+    flex-direction: row; /* Switch to row layout for larger screens */
+    gap: 100px;
+  }
 }
 
 .text-service-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center; /* Center text for better alignment */
 }
+
 .cards {
   display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to next line */
   gap: 30px;
   justify-content: center;
   padding-top: 30px;
 }
 
+.cards > div {
+  flex: 1 1 300px; /* Allow cards to grow and shrink */
+  max-width: 320px; /* Set a max width */
+}
+
 .seconde-head {
-  padding-top: 250px;
+  padding-top: 150px; /* Reduce padding for smaller screens */
+  text-align: center;
 }
+
+@media (min-width: 768px) {
+  .seconde-head {
+    padding-top: 250px; /* Increase padding for larger screens */
+  }
+}
+
 .last-section {
-  padding-top: 250px;
+  padding-top: 150px; /* Reduce padding for smaller screens */
   display: flex;
-  width: 73%;
-  justify-content: center;
+  flex-direction: column; /* Stack vertically by default */
+  align-items: center;
+  width: 90%;
   margin: auto;
-  gap: 50px;
+  gap: 30px;
 }
+
+@media (min-width: 768px) {
+  .last-section {
+    flex-direction: row; /* Switch to row layout for larger screens */
+    padding-top: 250px;
+    gap: 50px;
+  }
+  img {
+    width: 1000px;
+  }
+}
+
 .subtext {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
-img{
+
+img {
   background-color: #00041a;
+  max-width: 100%; /* Ensure images are responsive */
+  height: auto;
 }
-.homePageIntro{
+
+.homePageIntro {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 150px;
-  padding-bottom: 100px;
+  padding-top: 100px; /* Reduce padding for smaller screens */
+  padding-bottom: 50px;
 }
 
+@media (min-width: 768px) {
+  .homePageIntro {
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+}
