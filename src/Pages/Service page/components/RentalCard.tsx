@@ -167,9 +167,20 @@ export default function RentalCard(props) {
           Full
         </Button>
       )}
+      {status === 0 || status===2 ? (
+        <Button
+        variant="outlined"
+        color="neutral"
+        onClick={onSelectCity}
+      >
+        View
+      </Button>
+      ):
+
       <Button variant="solid" color="primary" onClick={handleReserveClick}>
         Reserve
       </Button>
+}
     </Card>
   );
 }
