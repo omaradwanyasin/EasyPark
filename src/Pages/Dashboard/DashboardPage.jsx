@@ -16,10 +16,8 @@ function DashboardPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
   const [capacity, setCapacity] = useState(null); // Track capacity
   const [reservations, setReservations] = useState([]); // Track reservations
-
   const garageOwnerId = localStorage.getItem("userId");
   const garageid = localStorage.getItem("garageid");
-
   const fetchParkingData = async () => {
     try {
       const response = await fetch(
@@ -29,7 +27,7 @@ function DashboardPage() {
         throw new Error("Failed to fetch parking data");
       }
       const data = await response.json();
-      console.log(data);
+
       localStorage.setItem("garageid", data.id);
       localStorage.setItem("capacity", data.capacity);
 
@@ -54,13 +52,18 @@ function DashboardPage() {
       // Extract necessary information from data
       const formattedReservations = data.map((reservation) => {
         localStorage.setItem(
-          `phone_${reservation.reservation_id}`,
-          reservation.phone
+          `resID${reservation.id}`,
+          `phone${reservation.phone}`,
+        
+
+
         );
+        console.log(reservation.id);
         return {
-          reservation_id: reservation.reservation_id,
+          reservation_id: reservation.id,
           name: reservation.name,
           phone_number: reservation.phone,
+         
         };
       });
       setReservations(formattedReservations); // Update reservations from formatted data
@@ -107,7 +110,7 @@ function DashboardPage() {
   const handleReject = (reservationId) => {
     setReservations((prevReservations) =>
       prevReservations.filter(
-        (reservation) => reservation.reservation_id !== reservationId
+        (reservation) => reservation.id !== reservationId
       )
     );
   };
@@ -124,11 +127,9 @@ function DashboardPage() {
             <div className="resvdisplay">
               {reservations.map((reservation) => (
                 <UserCard
-                  key={reservation.reservation_id}
                   id={reservation.reservation_id}
                   name={reservation.name}
                   phone={reservation.phone_number}
-                  img={reservation.image_url}
                   userId={userInfo.id}
                   increaseCounter={increase}
                   decreaseCounter={decrease}
