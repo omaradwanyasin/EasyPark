@@ -3,25 +3,15 @@ import { Box, IconButton, Typography } from "@mui/material";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const isLogged = sessionStorage.getItem("IsLogged");
-
-    if (isLogged) {
-      setIsAuthenticated(isLogged === "true");
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
-
+  const {isLoggedin, logout}=useAuth()
+  
   const handleSignOut = () => {
-    setIsAuthenticated(false);
-    sessionStorage.clear();
+    logout();
     navigate("/home");
   };
 
@@ -73,7 +63,7 @@ function Navbar() {
           <span></span>
         </div>
         <ul className={menuOpen ? "open" : ""}>
-          {isAuthenticated ? (
+          {isLoggedin ? (
             <li>
               <NavLink to="/home" onClick={handleSignOut}>
                 Sign Out

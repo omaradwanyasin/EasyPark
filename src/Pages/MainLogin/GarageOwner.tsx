@@ -134,7 +134,7 @@ export default function GarageOwner() {
       }
 
       const result = await response.json();
-      sessionStorage.setItem("GarageOwnerId", result.id);
+      localStorage.setItem("GarageOwnerId", result.id);
       setErrors([]);
       navigate("Garage");
     } catch (error) {

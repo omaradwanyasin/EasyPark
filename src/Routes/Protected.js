@@ -2,8 +2,8 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 function Protected({ children, requiredRole }) {
-  const token = sessionStorage.getItem("authToken");
-  const userRole = sessionStorage.getItem("userRole");
+  const token = localStorage.getItem("authToken");
+  const userRole = localStorage.getItem("userRole");
 
   if (token && (!requiredRole || userRole === requiredRole)) {
     return children;

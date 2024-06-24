@@ -20,7 +20,7 @@ export default function RentalDashboard() {
   const [userLocation, setUserLocation] = useState(null);
   const [parkings, setParkings] = useState([]);
   const [userInfo, setUserInfo] = useState({});
-  const isLoggedIn = sessionStorage.getItem("IsLogged");
+  const isLoggedIn = localStorage.getItem("IsLogged");
   useEffect(() => {
     console.log("User name from localStorage:", localStorage.getItem("name"));
     console.log("User id from localStorage:", localStorage.getItem("userId"));
@@ -28,9 +28,9 @@ export default function RentalDashboard() {
       "User email from localStorage:",
       localStorage.getItem("userEmail")
     );
-    const userEmail = sessionStorage.getItem("userEmail");
-    const userName = sessionStorage.getItem("userName");
-    const userId = sessionStorage.getItem("userId");
+    const userEmail = localStorage.getItem("userEmail");
+    const userName = localStorage.getItem("userName");
+    const userId = localStorage.getItem("userId");
 
     setUserInfo({ email: userEmail, name: userName, id: userId });
   }, []);

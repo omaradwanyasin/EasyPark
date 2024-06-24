@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
-import Checkbox from "@mui/joy/Checkbox";
-import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
@@ -18,6 +16,8 @@ export default function CreditCardForm({ onNextStep }) {
     expiryDate: "",
     cvc: "",
     cardHolderName: "",
+    name: "",
+    phoneNumber: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -36,17 +36,55 @@ export default function CreditCardForm({ onNextStep }) {
     if (!formData.expiryDate) newErrors.expiryDate = "Expiry date is required";
     if (!formData.cvc) newErrors.cvc = "CVC/CVV is required";
     if (!formData.cardHolderName) newErrors.cardHolderName = "Card holder name is required";
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleAddCard = () => {
+  const handleAddCard = async () => {
     if (validateForm()) {
-      onNextStep();
+      try {
+        const userId = localStorage.getItem("userId");
+        const garageId = localStorage.getItem("reservedGarageId");
+        const email = localStorage.getItem("email");
+        const reservationData = {
+          id: "",  // Assuming this will be generated on the server side
+          name: formData.name,
+          userId,
+          garageId,
+          reservationDate: new Date().toISOString(),
+          isConfirmed: true,
+          email,
+          phone: formData.phoneNumber,
+          cardNumber: formData.cardNumber,
+          expiryDate: formData.expiryDate,
+          cvc: formData.cvc,
+          cardHolderName: formData.cardHolderName
+        };
+  
+        const response = await fetch("https://localhost:7140/api/Reservation/AddReservation", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reservationData),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Reservation added successfully:", data);
+          onNextStep();
+        } else {
+          const errorData = await response.json();
+          console.error("Failed to add reservation:", response.status, errorData);
+        }
+      } catch (error) {
+        console.error("Error adding reservation:", error);
+      }
     }
   };
-
   return (
     <Card
       variant="outlined"
@@ -54,7 +92,6 @@ export default function CreditCardForm({ onNextStep }) {
         maxHeight: "max-content",
         maxWidth: "100%",
         mx: "auto",
-        // to make the demo resizable
         overflow: "auto",
         resize: "horizontal",
       }}
@@ -62,7 +99,7 @@ export default function CreditCardForm({ onNextStep }) {
       <Typography level="title-lg" startDecorator={<InfoOutlined />}>
         Add new card
       </Typography>
-      <Divider inset="none" />
+      {/* <Divider inset="none" /> */}
       <CardContent
         sx={{
           display: "grid",
@@ -109,6 +146,26 @@ export default function CreditCardForm({ onNextStep }) {
             placeholder="Enter cardholder's full name"
           />
           {errors.cardHolderName && <Typography color="error">{errors.cardHolderName}</Typography>}
+        </FormControl>
+        <FormControl sx={{ gridColumn: "1/-1" }} error={!!errors.name}>
+          <FormLabel>Name</FormLabel>
+          <Input
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Enter your name"
+          />
+          {errors.name && <Typography color="error">{errors.name}</Typography>}
+        </FormControl>
+        <FormControl sx={{ gridColumn: "1/-1" }} error={!!errors.phoneNumber}>
+          <FormLabel>Phone number</FormLabel>
+          <Input
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            placeholder="Enter your phone number"
+          />
+          {errors.phoneNumber && <Typography color="error">{errors.phoneNumber}</Typography>}
         </FormControl>
         <CardActions sx={{ gridColumn: "1/-1" }}>
           <Button variant="solid" color="primary" onClick={handleAddCard}>

@@ -40,7 +40,7 @@ export default function RentalCard(props) {
 
   const handleReserveClick = () => {
     if (isLoggedIn === "true") {
-      sessionStorage.setItem('reservedGarageId', id);
+      localStorage.setItem('reservedGarageId', id);
       console.log(`Garage ID ${id} has been reserved`);
       navigate("/pay");
     } else {

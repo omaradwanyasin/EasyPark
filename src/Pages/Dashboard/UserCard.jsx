@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
@@ -12,18 +11,36 @@ import { useContext } from "react";
 import { SignalRContext } from "../../signalRService";
 
 export default function UserCard(props) {
-  const [isVisable, setIsVisable] = React.useState(true);
+  const [isVisible, setIsVisible] = React.useState(true);
+  const [isAccepted, setIsAccepted] = React.useState(false);
   const connection = useContext(SignalRContext); // Access connection from context
 
   const handleReject = async () => {
-    setIsVisable(false);
-    const message = "Your reservation has been rejected.";
-    await connection.invoke("SendNotification", message, "error", "0");
+    try {
+      const response = await axios.delete(
+        `https://localhost:7140/api/Reservation/deleteReservation?reservationid=${props.id}`
+      );
+      if (response.status !== 200) {
+        throw new Error("Failed to delete reservation");
+      }
+      setIsVisible(false);
+      props.decreaseCounter(); // Decrease counter on reject
+      props.onReject(props.id); // Notify parent component about the rejection
+      const message = "Your reservation has been rejected.";
+      await connection.invoke("SendNotification", message, "error", "0");
+    } catch (error) {
+      console.error("Error deleting reservation:", error);
+      // Handle error gracefully, maybe show a message to the user
+    }
   };
 
   const handleAccept = async () => {
-    const message = "Your reservation has been accepted.";
-    await connection.invoke("SendNotification", message, "success", "0");
+    if (!isAccepted) {
+      props.increaseCounter(); // Increase counter on accept
+      const message = "Your reservation has been accepted.";
+      await connection.invoke("SendNotification", message, "success", "0");
+      setIsAccepted(true);
+    }
   };
 
   return (
@@ -34,7 +51,7 @@ export default function UserCard(props) {
         overflow: { xs: "auto", sm: "initial" },
       }}
     >
-      {isVisable && (
+      {isVisible && (
         <Card
           className="Information"
           orientation="horizontal"
@@ -50,12 +67,9 @@ export default function UserCard(props) {
             resize: "horizontal",
           }}
         >
-          <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
-            <img src={props.img} srcSet={props.img} loading="lazy" alt="" />
-          </AspectRatio>
           <CardContent>
             <Typography fontSize="xl" fontWeight="lg">
-              {props.name}
+              Name: {props.name}
             </Typography>
 
             <Sheet
@@ -75,14 +89,11 @@ export default function UserCard(props) {
                 </Typography>
                 <Typography fontWeight="lg">{props.phone}</Typography>
               </div>
-              <div>
-                <Typography level="body-xs" fontWeight="lg">
-                  Reservation ID
-                </Typography>
-                <Typography fontWeight="lg">#{props.id}</Typography>
-              </div>
+              <div></div>
             </Sheet>
-            <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
+            <Box
+              sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}
+            >
               <Button variant="outlined" color="neutral" onClick={handleReject}>
                 Reject
               </Button>
