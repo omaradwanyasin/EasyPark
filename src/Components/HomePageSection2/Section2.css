@@ -7,16 +7,13 @@
   padding: 2rem;
   margin: 0 auto;
   font-family: "Arial", sans-serif;
-  
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  /* Allows for relative positioning adjustments */
-  left: 50px; /* Adjust this value to move the .main div to the right */
+  width: 80%;
 }
 
-.main div:first-child {
-}
+
 
 .main img {
   max-width: 100%;
