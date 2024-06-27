@@ -65,15 +65,24 @@ function Home(id = "home") {
             spot finder dedicated to Palestinian cities.
           </p>
           <div className="cards" data-aos="zoom-in">
+            <div className="card">
             <BioCard
               text={"Instantly locate available parking spots near you"}
             />
+            </div>
+            
+            <div className="card">
             <BioCard
               text={
                 "Real-time updates on parking availability to save you time"
               }
             />
-            <BioCard text={"User Friendly Interface"} />
+            </div>
+            
+            <div className="card">
+              <BioCard text={"User Friendly Interface Accessible, Intuitive, Simple"} />
+            </div>
+            
           </div>
 
           <div className="last-section">
@@ -105,6 +114,7 @@ function Home(id = "home") {
                 borderRadius: "8px",
                 padding: "20px",
               }}
+              className="card"
             >
               <h3>Get closer</h3>
               <img
@@ -127,6 +137,7 @@ function Home(id = "home") {
                 borderRadius: "8px",
                 padding: "20px",
               }}
+              className="card"
             >
               <h3>Park smarter</h3>
               <img
@@ -150,6 +161,7 @@ function Home(id = "home") {
                 borderRadius: "8px",
                 padding: "20px",
               }}
+              className="card"
             >
               <h3>Peace of mind</h3>
               <img

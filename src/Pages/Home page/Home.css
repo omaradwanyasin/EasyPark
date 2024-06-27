@@ -29,7 +29,12 @@
   justify-content: center;
   padding-top: 30px;
 }
-
+.card{
+  transition: .5s;
+}
+.card:hover{
+  transform: scale(1.1);
+}
 .cards > div {
   flex: 1 1 300px; /* Allow cards to grow and shrink */
   max-width: 320px; /* Set a max width */
