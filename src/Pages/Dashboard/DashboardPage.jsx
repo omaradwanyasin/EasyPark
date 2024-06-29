@@ -18,10 +18,11 @@ function DashboardPage() {
   const [reservations, setReservations] = useState([]); // Track reservations
   const garageOwnerId = localStorage.getItem("userId");
   const garageid = localStorage.getItem("garageid");
+
   const fetchParkingData = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7140/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
+        `https://easyparkfinal.azurewebsites.net/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
@@ -41,7 +42,7 @@ function DashboardPage() {
   const fetchReservations = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7140/api/Reservation/reservation?garageId=${garageid}`
+        `https://easyparkfinal.azurewebsites.net/api/Reservation/reservation?garageId=${garageid}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch reservation data");
@@ -53,17 +54,13 @@ function DashboardPage() {
       const formattedReservations = data.map((reservation) => {
         localStorage.setItem(
           `resID${reservation.id}`,
-          `phone${reservation.phone}`,
-        
-
-
+          `phone${reservation.phone}`
         );
         console.log(reservation.id);
         return {
           reservation_id: reservation.id,
           name: reservation.name,
           phone_number: reservation.phone,
-         
         };
       });
       setReservations(formattedReservations); // Update reservations from formatted data
@@ -77,6 +74,12 @@ function DashboardPage() {
     if (isLoggedIn) {
       fetchParkingData();
       fetchReservations(); // Fetch reservations when user is logged in
+
+      // Set interval to fetch reservations every 3 seconds
+      const intervalId = setInterval(fetchReservations, 3000);
+
+      // Cleanup interval on component unmount
+      return () => clearInterval(intervalId);
     }
   }, [isLoggedIn]); // Run when isLoggedIn changes
 
@@ -109,9 +112,7 @@ function DashboardPage() {
 
   const handleReject = (reservationId) => {
     setReservations((prevReservations) =>
-      prevReservations.filter(
-        (reservation) => reservation.id !== reservationId
-      )
+      prevReservations.filter((reservation) => reservation.id !== reservationId)
     );
   };
 
@@ -127,6 +128,7 @@ function DashboardPage() {
             <div className="resvdisplay">
               {reservations.map((reservation) => (
                 <UserCard
+                  key={reservation.reservation_id}
                   id={reservation.reservation_id}
                   name={reservation.name}
                   phone={reservation.phone_number}

@@ -65,26 +65,26 @@ function App() {
                 <Route path="/Garageowner" element={<GarageOwner />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route
-            path="/GarageDashBoard"
-            element={
-              <Protected requiredRole="garageOwner"> 
-                <DashboardPage />
-              </Protected>
-            }
-          />
+                  path="/GarageDashBoard"
+                  element={
+                    
+                      <DashboardPage />
+                    
+                  }
+                />
                 <Route path="/Garageowner/Garage" element={<Garage />} />
                 <Route path="/test2" element={<SignMap />} />
                 <Route path="/service" element={<Nservice />} />
                 <Route path="/test4" element={<Navbar />} />
                 <Route path="/AboutUs" element={<About />} />
                 <Route path="/Policy" element={<Policy />} />
-                <Route path="/pay" element={
-                <Protected requiredRole="normalUser">
-                <Payment />
-                </Protected>
-                
-              }
-                
+                <Route
+                  path="/pay"
+                  element={
+                    <Protected requiredRole="normalUser">
+                      <Payment />
+                    </Protected>
+                  }
                 />
                 <Route path="/homePageIntro" element={<HomePageIntro />} />
               </Routes>

@@ -56,7 +56,7 @@ function ColorSchemeToggle(props: IconButtonProps) {
 export default function Login() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
-  const {login} = useAuth();
+  const { login } = useAuth();
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements as FormElements; // Cast event elements to FormElements interface
@@ -68,8 +68,8 @@ export default function Login() {
 
     try {
       const apiUrl = data.persistent
-        ? "https://localhost:7140/GarageOwnerSignin"
-        : "https://localhost:7140/signin";
+        ? "https://easyparkfinal.azurewebsites.net/GarageOwnerSignin"
+        : "https://easyparkfinal.azurewebsites.net/signin";
 
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -104,7 +104,7 @@ export default function Login() {
             authToken: result.token,
             IsLogged: "true",
             userRole: userRole,
-          })
+          });
         }
 
         if (data.persistent) {

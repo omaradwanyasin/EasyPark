@@ -14,15 +14,16 @@ export default function UserCard(props) {
   const [isVisible, setIsVisible] = React.useState(true);
   const [isAccepted, setIsAccepted] = React.useState(false);
   const connection = useContext(SignalRContext); // Access connection from context
-  
 
   const handleReject = async () => {
     try {
       const response = await axios.delete(
-        `https://localhost:7140/api/Reservation/deleteReservation?reservationid=${props.id}`
+        `https://easyparkfinal.azurewebsites.net/api/Reservation/deleteReservation?reservationid=${props.id}`
       );
       if (response.status !== 200) {
-        throw new Error(`Failed to delete reservation. Status code: ${response.status}`);
+        throw new Error(
+          `Failed to delete reservation. Status code: ${response.status}`
+        );
       }
       setIsVisible(false);
       props.decreaseCounter(); // Decrease counter on reject
@@ -30,11 +31,13 @@ export default function UserCard(props) {
       const message = "Your reservation has been rejected.";
       await connection.invoke("SendNotification", message, "error", "0");
     } catch (error) {
-      console.error("Error deleting reservation:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error deleting reservation:",
+        error.response ? error.response.data : error.message
+      );
       // Handle error gracefully, maybe show a message to the user
     }
   };
-  
 
   const handleAccept = async () => {
     if (!isAccepted) {
@@ -93,9 +96,7 @@ export default function UserCard(props) {
               </div>
               <div></div>
             </Sheet>
-            <Box
-              sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}
-            >
+            <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
               <Button variant="outlined" color="neutral" onClick={handleReject}>
                 Reject
               </Button>

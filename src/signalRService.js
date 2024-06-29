@@ -7,9 +7,16 @@ const SignalRProvider = ({ children }) => {
   const [connection, setConnection] = useState(null);
 
   useEffect(() => {
-    const userId = "0"; // Replace with actual user ID once available
+    const userId = "668031355831b901ecff7d31"; // Use the actual user ID from localStorage or another auth source
+    if (!userId) {
+      console.error("User ID not found in localStorage");
+      return;
+    }
+
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://localhost:7140/notificationHub?userId=${userId}`)
+      .withUrl(
+        `https://easyparkfinal.azurewebsites.net/notificationHub?userId=${userId}`
+      )
       .withAutomaticReconnect()
       .build();
 

@@ -121,13 +121,16 @@ export default function GarageOwner() {
     }
 
     try {
-      const response = await fetch("https://localhost:7140/OwnerSignUp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://easyparkfinal.azurewebsites.net/OwnerSignUp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -262,7 +265,9 @@ export default function GarageOwner() {
                       <Typography
                         key={index}
                         level="body-sm"
-                        sx={{ color: error.includes("must") ? "#cc0000" : "green" }}
+                        sx={{
+                          color: error.includes("must") ? "#cc0000" : "green",
+                        }}
                       >
                         {error}
                       </Typography>
@@ -282,15 +287,15 @@ export default function GarageOwner() {
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox
-                      size="sm"
-                      label="Remember me"
-                      name="persistent"
-                    />
+                    <Checkbox size="sm" label="Remember me" name="persistent" />
                     <Link to="#">Forgot your password?</Link>
                   </Box>
 
-                  <Button type="submit" fullWidth disabled={errors.some((error) => error.includes("must"))}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    disabled={errors.some((error) => error.includes("must"))}
+                  >
                     next
                   </Button>
                 </Stack>

@@ -20,6 +20,7 @@ import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import "./Garage.css";
 import SignMap from "./SignMap";
+
 interface FormElements extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   capacity: HTMLInputElement;
@@ -77,7 +78,7 @@ export default function Signup() {
       status: 0, // Adjust this as needed
       info: "string", // Set this to the appropriate value
       rating: 0, // Adjust this as needed
-      capacity: formElements.capacity.value ,
+      capacity: formElements.capacity.value,
       containsWifi: formElements.wifi.value === "yes",
       supportsElectricalCharging: formElements.chargingPoint.value === "yes",
       supportsHeavyTrucks: formElements.heavyCars.value === "yes",
@@ -85,13 +86,16 @@ export default function Signup() {
     };
     console.log(data);
     try {
-      const response = await fetch("https://localhost:7140/parkings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://easyparkfinal.azurewebsites.net/parkings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (response.ok) {
         console.log(response.body);

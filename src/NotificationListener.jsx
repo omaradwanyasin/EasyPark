@@ -6,9 +6,9 @@ import Snackbar from "@mui/material/Snackbar";
 const NotificationListener = () => {
   const connection = useContext(SignalRContext);
   const [alertMessage, setAlertMessage] = useState("");
-  const [severity, setSeverity] = useState("success"); // default severity
+  const [severity, setSeverity] = useState("success");
   const [open, setOpen] = useState(false);
-
+  const id = "668029c65831b901ecff7b1f";
   useEffect(() => {
     if (connection) {
       connection.on("ReceiveNotification", (message, severity) => {

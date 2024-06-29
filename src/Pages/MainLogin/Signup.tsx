@@ -80,13 +80,16 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("https://localhost:7140/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://easyparkfinal.azurewebsites.net/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -95,7 +98,6 @@ export default function Signup() {
       const result = await response.json();
       alert(`User created successfully: ${JSON.stringify(result, null, 2)}`);
       navigate("/Login");
-       
     } catch (error) {
       console.error("There was a problem with the sign-up request:", error);
     }
@@ -264,31 +266,49 @@ export default function Signup() {
                     <Stack sx={{ pl: 0, mt: 2, textAlign: "left" }}>
                       <Typography
                         level="body-sm"
-                        sx={{ color: criteriaStatus.minLength ? "#00cc00" : "#cc0000" }}
+                        sx={{
+                          color: criteriaStatus.minLength
+                            ? "#00cc00"
+                            : "#cc0000",
+                        }}
                       >
                         Password must be at least 8 characters long.
                       </Typography>
                       <Typography
                         level="body-sm"
-                        sx={{ color: criteriaStatus.uppercase ? "#00cc00" : "#cc0000" }}
+                        sx={{
+                          color: criteriaStatus.uppercase
+                            ? "#00cc00"
+                            : "#cc0000",
+                        }}
                       >
                         Password must contain at least one uppercase letter.
                       </Typography>
                       <Typography
                         level="body-sm"
-                        sx={{ color: criteriaStatus.lowercase ? "#00cc00" : "#cc0000" }}
+                        sx={{
+                          color: criteriaStatus.lowercase
+                            ? "#00cc00"
+                            : "#cc0000",
+                        }}
                       >
                         Password must contain at least one lowercase letter.
                       </Typography>
                       <Typography
                         level="body-sm"
-                        sx={{ color: criteriaStatus.number ? "#00cc00" : "#cc0000" }}
+                        sx={{
+                          color: criteriaStatus.number ? "#00cc00" : "#cc0000",
+                        }}
                       >
                         Password must contain at least one number.
                       </Typography>
                       <Typography
                         level="body-sm"
-                        sx={{ color: criteriaStatus.specialChar ? "#00cc00" : "#cc0000" }}
+                        sx={{
+                          color: criteriaStatus.specialChar
+                            ? "#00cc00"
+                            : "#cc0000",
+                        }}
                       >
                         Password must contain at least one special character.
                       </Typography>
@@ -336,7 +356,7 @@ export default function Signup() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundImage:
-          "url(https://img.getimg.ai/generated/img-bM8PhGWeAyNugZ4EJmWhu.jpeg)",
+            "url(https://img.getimg.ai/generated/img-bM8PhGWeAyNugZ4EJmWhu.jpeg)",
           [theme.getColorSchemeSelector("dark")]: {
             backgroundImage:
               "url(https://img.getimg.ai/generated/img-EH0b7Gbw1pfUwmXiTtWnN.jpeg)",

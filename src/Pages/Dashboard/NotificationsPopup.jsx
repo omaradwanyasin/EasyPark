@@ -11,7 +11,7 @@ export default function NotificationsPopup({ userId }) {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7140/api/notifications/${userId}`
+          `https://easyparkfinal.azurewebsites.net/api/notifications/${userId}`
         );
         const unreadNotifications = response.data.filter(
           (notification) => notification.status === "unread"
