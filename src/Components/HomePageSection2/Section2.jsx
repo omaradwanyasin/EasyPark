@@ -5,7 +5,13 @@ import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 function Section2() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/service');
+  };
   return (
     <div className="main" data-aos="zoom-in">
       <div>
@@ -57,7 +63,8 @@ function Section2() {
       </div>
       <div className="pp">
         <img src={img}></img>
-        <button>Find your space</button>
+        
+        <button onClick={handleClick}>Find your space</button>
       </div>
     </div>
   );
