@@ -7,7 +7,7 @@ const SignalRProvider = ({ children }) => {
   const [connection, setConnection] = useState(null);
 
   useEffect(() => {
-    const userId = "668031355831b901ecff7d31"; // Use the actual user ID from localStorage or another auth source
+    const userId = "666818f0864cb7ece12ac43a"; // Use the actual user ID from localStorage or another auth source
     if (!userId) {
       console.error("User ID not found in localStorage");
       return;
