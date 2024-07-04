@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { jwtDecode } from "jwt-decode"; // Adjust the import for jwtDecode
+import { jwtDecode } from "jwt-decode"; // Adjusted the import for jwtDecode
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -57,9 +57,10 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
+
   const handleSubmit = async (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
-    const formElements = event.currentTarget.elements as FormElements; // Cast event elements to FormElements interface
+    const formElements = event.currentTarget.elements as FormElements;
     const data = {
       email: formElements.email.value,
       password: formElements.password.value,
@@ -86,27 +87,36 @@ export default function Login() {
 
         // Decode the token to extract user information
         if (result.token) {
-          // Decode the JWT token
           const decodedToken: any = jwtDecode(result.token);
           console.log(result.token, decodedToken);
+
           // Extract user information from the decoded token
           const userEmail = decodedToken.nameid;
           const userName = decodedToken.unique_name;
           const userId = decodedToken.UserId;
-          const userRole = data.persistent ? "garageOwner" : "normalUser"; // Determine the user role
+          const userRole = data.persistent ? "garageOwner" : "normalUser";
 
           // Store user information in localStorage
+          localStorage.setItem("userEmail", userEmail);
+          localStorage.setItem("userName", userName);
+          localStorage.setItem("userId", userId);
+          console.log(userId + "this is th user id");
+          localStorage.setItem("authToken", result.token);
+          localStorage.setItem("IsLogged", "true");
+          localStorage.setItem("userRole", userRole);
+
+          // Log in the user in the context (if needed for state management)
           login({
             userEmail: userEmail,
             userName: userName,
             userId: userId,
-            email: userEmail,
             authToken: result.token,
             IsLogged: "true",
             userRole: userRole,
           });
         }
 
+        // Navigate based on user role
         if (data.persistent) {
           navigate("/GarageDashBoard");
         } else {
@@ -123,7 +133,6 @@ export default function Login() {
   };
 
   useEffect(() => {
-    // Redirect authenticated users to the dashboard upon mounting
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
       navigate("/GarageDashBoard");

@@ -7,13 +7,12 @@ import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import "./DDashboardPage.css";
-import { useContext } from "react";
-import { SignalRContext } from "../../signalRService";
+import { useSignalR } from "../../signalRService";
 
 export default function UserCard(props) {
   const [isVisible, setIsVisible] = React.useState(true);
   const [isAccepted, setIsAccepted] = React.useState(false);
-  const connection = useContext(SignalRContext); // Access connection from context
+  const connection = useSignalR(); // Access connection from context
 
   const handleReject = async () => {
     try {
@@ -29,7 +28,13 @@ export default function UserCard(props) {
       props.decreaseCounter(); // Decrease counter on reject
       props.onReject(props.id); // Notify parent component about the rejection
       const message = "Your reservation has been rejected.";
-      await connection.invoke("SendNotification", message, "error", "0");
+      await connection.invoke(
+        "SendNotification",
+        message,
+        "error",
+        props.userId
+      );
+      console.log(`Rejected reservation for user ${props.userId}`);
     } catch (error) {
       console.error(
         "Error deleting reservation:",
@@ -43,7 +48,13 @@ export default function UserCard(props) {
     if (!isAccepted) {
       props.increaseCounter(); // Increase counter on accept
       const message = "Your reservation has been accepted.";
-      await connection.invoke("SendNotification", message, "success", "0");
+      await connection.invoke(
+        "SendNotification",
+        message,
+        "success",
+        props.userId
+      );
+      console.log(`Accepted reservation for user ${props.userId}`);
       setIsAccepted(true);
     }
   };

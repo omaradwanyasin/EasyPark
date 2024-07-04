@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -8,8 +8,8 @@ import { useAuth } from "../../contexts/AuthContext";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const {isLoggedin, logout}=useAuth()
-  
+  const { isLoggedin, logout } = useAuth();
+
   const handleSignOut = () => {
     logout();
     navigate("/home");

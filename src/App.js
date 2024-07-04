@@ -53,7 +53,6 @@ function App() {
         </div>
       ) : (
         <SignalRProvider>
-          {/* Wrap the app with SignalRProvider */}
           <AuthProvider>
             <BrowserRouter>
               <ScrollToTop />
@@ -64,14 +63,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/Garageowner" element={<GarageOwner />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route
-                  path="/GarageDashBoard"
-                  element={
-                    
-                      <DashboardPage />
-                    
-                  }
-                />
+                <Route path="/GarageDashBoard" element={<DashboardPage />} />
                 <Route path="/Garageowner/Garage" element={<Garage />} />
                 <Route path="/test2" element={<SignMap />} />
                 <Route path="/service" element={<Nservice />} />
@@ -88,8 +80,7 @@ function App() {
                 />
                 <Route path="/homePageIntro" element={<HomePageIntro />} />
               </Routes>
-              <NotificationListener />{" "}
-              {/* Add NotificationListener to listen for notifications */}
+              <NotificationListener />
             </BrowserRouter>
           </AuthProvider>
         </SignalRProvider>

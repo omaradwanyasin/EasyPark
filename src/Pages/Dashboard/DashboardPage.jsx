@@ -48,19 +48,14 @@ function DashboardPage() {
         throw new Error("Failed to fetch reservation data");
       }
       const data = await response.json();
-      console.log(data);
 
       // Extract necessary information from data
       const formattedReservations = data.map((reservation) => {
-        localStorage.setItem(
-          `resID${reservation.id}`,
-          `phone${reservation.phone}`
-        );
-        console.log(reservation.id);
         return {
           reservation_id: reservation.id,
           name: reservation.name,
           phone_number: reservation.phone,
+          userId: reservation.userId, // Make sure you have userId in your reservation data
         };
       });
       setReservations(formattedReservations); // Update reservations from formatted data
@@ -112,7 +107,7 @@ function DashboardPage() {
 
   const handleReject = (reservationId) => {
     setReservations((prevReservations) =>
-      prevReservations.filter((reservation) => reservation.id !== reservationId)
+      prevReservations.filter((reservation) => reservation.reservation_id !== reservationId)
     );
   };
 
@@ -132,7 +127,7 @@ function DashboardPage() {
                   id={reservation.reservation_id}
                   name={reservation.name}
                   phone={reservation.phone_number}
-                  userId={userInfo.id}
+                  userId={reservation.userId} // Pass userId to UserCard
                   increaseCounter={increase}
                   decreaseCounter={decrease}
                   onReject={handleReject}
