@@ -230,7 +230,7 @@ export default function Signup() {
                   </div>
                 </FormControl>
                 <FormControl required>
-                  <FormLabel>Suport Heavey Cars ? </FormLabel>
+                  <FormLabel>Support Heavy Cars ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup name="heavyCars">
                       <Radio value="yes" label="Yes" color="danger" />
