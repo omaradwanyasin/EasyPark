@@ -82,7 +82,6 @@ function DashboardPage() {
     const userEmail = localStorage.getItem("userEmail");
     const userName = localStorage.getItem("userName");
     const userId = localStorage.getItem("userId");
-
     if (userEmail && userName && userId) {
       setUserInfo({ email: userEmail, name: userName, id: userId });
       setIsLoggedIn(true); // Set isLoggedIn to true when user info is available
@@ -95,11 +94,7 @@ function DashboardPage() {
     }
   };
 
-  const decrease = () => {
-    if (counter > 0) {
-      setCounter((prev) => prev - 1);
-    }
-  };
+
 
   const handleToggleChange = (event, newValue) => {
     setToggleValue(newValue);
@@ -129,7 +124,6 @@ function DashboardPage() {
                   phone={reservation.phone_number}
                   userId={reservation.userId} // Pass userId to UserCard
                   increaseCounter={increase}
-                  decreaseCounter={decrease}
                   onReject={handleReject}
                 />
               ))}
@@ -150,7 +144,7 @@ function DashboardPage() {
                 </Fab>
               )}
               {toggleValue !== "off" && (
-                <Fab color="error" aria-label="add" onClick={decrease}>
+                <Fab color="error" aria-label="add" >
                   <RemoveIcon />
                 </Fab>
               )}
