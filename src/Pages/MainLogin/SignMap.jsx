@@ -59,7 +59,7 @@ function SignMap({ onLocationChange }) {
                         longitude={markerPosition.longitude}
                         latitude={markerPosition.latitude}
                     >
-                        <img src={user_icon} alt="Marker" />
+                        <img src={user_icon} alt="Marker" className="userImg" />
                     </Marker>
                 )}
             </MapGL>
