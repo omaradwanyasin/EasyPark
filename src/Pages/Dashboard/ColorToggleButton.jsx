@@ -13,7 +13,7 @@ export default function ColorToggleButton({
   const initSignalRConnection = async () => {
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl("https://easyparkfinal.azurewebsites.net/garageHubs") // Ensure this URL matches your backend endpoint
+        .withUrl("https://easypark.azurewebsites.net/garageHubs") // Ensure this URL matches your backend endpoint
         .configureLogging(LogLevel.Information)
         .build();
 

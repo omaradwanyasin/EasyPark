@@ -14,7 +14,7 @@ const SignalRProvider = ({ children }) => {
     }
 
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://easyparkfinal.azurewebsites.net/notificationHub?userId=${userId}`)
+      .withUrl(`https://easypark.azurewebsites.net/notificationHub?userId=${userId}`)
       .withAutomaticReconnect()
       .build();
 

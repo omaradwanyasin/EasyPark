@@ -81,7 +81,7 @@ export default function Signup() {
 
     try {
       const response = await fetch(
-        "https://easyparkfinal.azurewebsites.net/signup",
+        "https://easypark.azurewebsites.net/signup",
         {
           method: "POST",
           headers: {

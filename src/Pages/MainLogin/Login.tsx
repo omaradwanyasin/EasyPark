@@ -69,8 +69,8 @@ export default function Login() {
 
     try {
       const apiUrl = data.persistent
-        ? "https://easyparkfinal.azurewebsites.net/GarageOwnerSignin"
-        : "https://easyparkfinal.azurewebsites.net/signin";
+        ? "https://easypark.azurewebsites.net/GarageOwnerSignin"
+        : "https://easypark.azurewebsites.net/signin";
 
       const response = await fetch(apiUrl, {
         method: "POST",

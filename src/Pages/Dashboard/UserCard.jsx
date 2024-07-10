@@ -17,7 +17,7 @@ export default function UserCard(props) {
   const handleReject = async () => {
     try {
       const response = await axios.delete(
-        `https://easyparkfinal.azurewebsites.net/api/Reservation/deleteReservation?reservationid=${props.id}`
+        `https://easypark.azurewebsites.net/api/Reservation/deleteReservation?reservationid=${props.id}`
       );
       if (response.status !== 200) {
         throw new Error(

@@ -87,7 +87,7 @@ export default function Signup() {
     console.log(data);
     try {
       const response = await fetch(
-        "https://easyparkfinal.azurewebsites.net/parkings",
+        "https://easypark.azurewebsites.net/parkings",
         {
           method: "POST",
           headers: {

@@ -122,7 +122,7 @@ export default function GarageOwner() {
 
     try {
       const response = await fetch(
-        "https://easyparkfinal.azurewebsites.net/OwnerSignUp",
+        "https://easypark.azurewebsites.net/OwnerSignUp",
         {
           method: "POST",
           headers: {

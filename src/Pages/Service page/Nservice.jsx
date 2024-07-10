@@ -37,7 +37,7 @@ export default function RentalDashboard() {
 
   useEffect(() => {
     // Fetch data from your API
-    fetch("https://easyparkfinal.azurewebsites.net/parkings")
+    fetch("https://easypark.azurewebsites.net/parkings")
       .then((response) => response.json())
       .then((data) => {
         setParkings(data);
@@ -104,7 +104,7 @@ export default function RentalDashboard() {
   useEffect(() => {
     // Establish connection to SignalR hub
     const connection = new HubConnectionBuilder()
-      .withUrl("https://easyparkfinal.azurewebsites.net/garageHubs")
+      .withUrl("https://easypark.azurewebsites.net/garageHubs")
       .configureLogging(LogLevel.Information)
       .build();
 

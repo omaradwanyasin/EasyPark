@@ -22,7 +22,7 @@ function DashboardPage() {
   const fetchParkingData = async () => {
     try {
       const response = await fetch(
-        `https://easyparkfinal.azurewebsites.net/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
+        `https://easypark.azurewebsites.net/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch parking data");
@@ -42,7 +42,7 @@ function DashboardPage() {
   const fetchReservations = async () => {
     try {
       const response = await fetch(
-        `https://easyparkfinal.azurewebsites.net/api/Reservation/reservation?garageId=${garageid}`
+        `https://easypark.azurewebsites.net/api/Reservation/reservation?garageId=${garageid}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch reservation data");

@@ -10,7 +10,6 @@ import Button from "@mui/joy/Button";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
-
 export default function CreditCardForm({ onNextStep }) {
   const [formData, setFormData] = useState({
     cardNumber: "",
@@ -68,7 +67,7 @@ export default function CreditCardForm({ onNextStep }) {
         };
 
         const response = await fetch(
-          `https://easyparkfinal.azurewebsites.net/api/Reservation/AddReservation`,
+          `https://easypark.azurewebsites.net/api/Reservation/AddReservation`,
           {
             method: "POST",
             headers: {
