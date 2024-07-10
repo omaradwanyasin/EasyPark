@@ -224,17 +224,17 @@ export default function Signup() {
                   <FormLabel>Contain Charging Point ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup name="chargingPoint">
-                      <Radio value="yes" label="Yes" color="danger" />
-                      <Radio value="no" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="success" />
+                      <Radio value="no" label="No" color="danger" />
                     </RadioGroup>
                   </div>
                 </FormControl>
                 <FormControl required>
-                  <FormLabel>Suport Heavey Cars ? </FormLabel>
+                  <FormLabel>Support Heavy Cars ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup name="heavyCars">
-                      <Radio value="yes" label="Yes" color="danger" />
-                      <Radio value="no" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="success" />
+                      <Radio value="no" label="No" color="danger" />
                     </RadioGroup>
                   </div>
                 </FormControl>
@@ -242,8 +242,8 @@ export default function Signup() {
                   <FormLabel>Wifi Available ? </FormLabel>
                   <div className="cheackBox">
                     <RadioGroup name="wifi">
-                      <Radio value="yes" label="Yes" color="danger" />
-                      <Radio value="no" label="No" color="success" />
+                      <Radio value="yes" label="Yes" color="success" />
+                      <Radio value="no" label="No" color="danger" />
                     </RadioGroup>
                   </div>
                 </FormControl>

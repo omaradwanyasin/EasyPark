@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Signup from "./Pages/MainLogin/Signup.tsx";
 import Home from "./Pages/Home page/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import GarageOwner from "./Pages/MainLogin/GarageOwner.tsx";
 import Contact from "./Pages/Contact/Contact";
 import DashboardPage from "./Pages/Dashboard/DashboardPage";
@@ -54,7 +54,7 @@ function App() {
       ) : (
         <SignalRProvider>
           <AuthProvider>
-            <BrowserRouter>
+            <HashRouter>
               <ScrollToTop />
               <Routes>
                 <Route index element={<Home />} />
@@ -63,7 +63,12 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/Garageowner" element={<GarageOwner />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/GarageDashBoard" element={<DashboardPage />} />
+
+                <Route path="/GarageDashBoard" element={
+                  <Protected requiredRole="garageOwner">
+                    <DashboardPage />
+                  </Protected>
+                } />
                 <Route path="/Garageowner/Garage" element={<Garage />} />
                 <Route path="/test2" element={<SignMap />} />
                 <Route path="/service" element={<Nservice />} />
@@ -81,7 +86,7 @@ function App() {
                 <Route path="/homePageIntro" element={<HomePageIntro />} />
               </Routes>
               <NotificationListener />
-            </BrowserRouter>
+            </HashRouter>
           </AuthProvider>
         </SignalRProvider>
       )}

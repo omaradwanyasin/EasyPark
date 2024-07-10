@@ -25,7 +25,6 @@ export default function UserCard(props) {
         );
       }
       setIsVisible(false);
-      props.decreaseCounter(); // Decrease counter on reject
       props.onReject(props.id); // Notify parent component about the rejection
       const message = "Your reservation has been rejected.";
       await connection.invoke(
