@@ -94,15 +94,15 @@ function DashboardPage() {
     }
   };
 
-
-
   const handleToggleChange = (event, newValue) => {
     setToggleValue(newValue);
   };
 
   const handleReject = (reservationId) => {
     setReservations((prevReservations) =>
-      prevReservations.filter((reservation) => reservation.reservation_id !== reservationId)
+      prevReservations.filter(
+        (reservation) => reservation.reservation_id !== reservationId
+      )
     );
   };
 
@@ -144,7 +144,7 @@ function DashboardPage() {
                 </Fab>
               )}
               {toggleValue !== "off" && (
-                <Fab color="error" aria-label="add" >
+                <Fab color="error" aria-label="add">
                   <RemoveIcon />
                 </Fab>
               )}
