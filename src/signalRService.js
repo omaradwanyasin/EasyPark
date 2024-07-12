@@ -7,18 +7,23 @@ const SignalRProvider = ({ children }) => {
   const [connection, setConnection] = useState(null);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId"); // Fetch userId from localStorage
+    const userId = localStorage.getItem("userId");
     if (!userId) {
       console.error("User ID not found in localStorage");
       return;
     }
 
+    console.log("Attempting to connect to SignalR with userId:", userId);
+
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://easypark.azurewebsites.net/notificationHub?userId=${userId}`)
+      .withUrl(
+        `https://easypark.azurewebsites.net/notificationHub?userId=${userId}`
+      )
       .withAutomaticReconnect()
       .build();
 
-    newConnection.start()
+    newConnection
+      .start()
       .then(() => {
         console.log("SignalR connected");
         setConnection(newConnection);
@@ -30,7 +35,11 @@ const SignalRProvider = ({ children }) => {
     });
 
     return () => {
-      newConnection.stop().then(() => console.log("SignalR disconnected"));
+      if (newConnection) {
+        newConnection.stop().then(() => {
+          console.log("SignalR disconnected");
+        });
+      }
     };
   }, []);
 

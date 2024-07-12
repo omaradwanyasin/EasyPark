@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../Dashboard/DDashboardPage.css";
 import ColorToggleButton from "./ColorToggleButton";
 import Fab from "@mui/material/Fab";
@@ -13,13 +13,13 @@ function DashboardPage() {
   const [userInfo, setUserInfo] = useState({});
   const [counter, setCounter] = useState(0);
   const [toggleValue, setToggleValue] = useState("web");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-  const [capacity, setCapacity] = useState(null); // Track capacity
-  const [reservations, setReservations] = useState([]); // Track reservations
-  const garageOwnerId = localStorage.getItem("userId");
-  const garageid = localStorage.getItem("garageid");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [capacity, setCapacity] = useState(null);
+  const [reservations, setReservations] = useState([]);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false); // Track initial load state
 
   const fetchParkingData = async () => {
+    const garageOwnerId = localStorage.getItem("userId");
     try {
       const response = await fetch(
         `https://easypark.azurewebsites.net/GarageOwnerGarageData?GarageOwnerId=${garageOwnerId}`
@@ -32,14 +32,14 @@ function DashboardPage() {
       localStorage.setItem("garageid", data.id);
       localStorage.setItem("capacity", data.capacity);
 
-      setCapacity(data.capacity); // Update capacity from fetched data
+      setCapacity(data.capacity);
     } catch (error) {
       console.error("Error fetching parking data:", error);
-      // Handle error gracefully, maybe show a message to the user
     }
   };
 
-  const fetchReservations = async () => {
+  const fetchReservations = useCallback(async () => {
+    const garageid = localStorage.getItem("garageid");
     try {
       const response = await fetch(
         `https://easypark.azurewebsites.net/api/Reservation/reservation?garageId=${garageid}`
@@ -49,48 +49,55 @@ function DashboardPage() {
       }
       const data = await response.json();
 
-      // Extract necessary information from data
       const formattedReservations = data.map((reservation) => {
         return {
           reservation_id: reservation.id,
           name: reservation.name,
           phone_number: reservation.phone,
-          userId: reservation.userId, // Make sure you have userId in your reservation data
+          userId: reservation.userId,
         };
       });
-      setReservations(formattedReservations); // Update reservations from formatted data
+      setReservations(formattedReservations);
+
+      // Set initial load complete after fetching reservations
+      setInitialLoadComplete(true);
     } catch (error) {
       console.error("Error fetching reservation data:", error);
-      // Handle error gracefully, maybe show a message to the user
     }
-  };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchParkingData();
-      fetchReservations(); // Fetch reservations when user is logged in
-
-      // Set interval to fetch reservations every 3 seconds
-      const intervalId = setInterval(fetchReservations, 3000);
-
-      // Cleanup interval on component unmount
-      return () => clearInterval(intervalId);
-    }
-  }, [isLoggedIn]); // Run when isLoggedIn changes
+  }, []);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
     const userName = localStorage.getItem("userName");
     const userId = localStorage.getItem("userId");
+
     if (userEmail && userName && userId) {
       setUserInfo({ email: userEmail, name: userName, id: userId });
-      setIsLoggedIn(true); // Set isLoggedIn to true when user info is available
+      setIsLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchParkingData();
+      fetchReservations();
+
+      const intervalId = setInterval(fetchReservations, 3000);
+
+      // Cleanup interval on component unmount
+      return () => clearInterval(intervalId);
+    }
+  }, [isLoggedIn, fetchReservations]);
 
   const increase = () => {
     if (counter < capacity) {
       setCounter((prev) => prev + 1);
+    }
+  };
+
+  const decrease = () => {
+    if (counter > 0) {
+      setCounter((prev) => prev - 1);
     }
   };
 
@@ -105,6 +112,11 @@ function DashboardPage() {
       )
     );
   };
+
+  // Render loading state until initial load is complete
+  if (!initialLoadComplete) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <SignalRProvider>
@@ -122,8 +134,9 @@ function DashboardPage() {
                   id={reservation.reservation_id}
                   name={reservation.name}
                   phone={reservation.phone_number}
-                  userId={reservation.userId} // Pass userId to UserCard
+                  userId={reservation.userId}
                   increaseCounter={increase}
+                  decreaseCounter={decrease}
                   onReject={handleReject}
                 />
               ))}
@@ -134,9 +147,9 @@ function DashboardPage() {
             <ColorToggleButton
               value={toggleValue}
               handleToggleChange={handleToggleChange}
-              garageId={garageid} // send the garage ID as a string
+              garageId={localStorage.getItem("garageid")}
             />
-            Counter : {counter}
+            Counter: {counter}
             <div className="buttonaction">
               {toggleValue !== "off" && (
                 <Fab color="success" aria-label="add" onClick={increase}>
@@ -144,7 +157,7 @@ function DashboardPage() {
                 </Fab>
               )}
               {toggleValue !== "off" && (
-                <Fab color="error" aria-label="add">
+                <Fab color="error" aria-label="add" onClick={decrease}>
                   <RemoveIcon />
                 </Fab>
               )}

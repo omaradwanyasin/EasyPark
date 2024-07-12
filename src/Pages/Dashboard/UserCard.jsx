@@ -26,14 +26,19 @@ export default function UserCard(props) {
       }
       setIsVisible(false);
       props.onReject(props.id); // Notify parent component about the rejection
-      const message = "Your reservation has been rejected.";
-      await connection.invoke(
-        "SendNotification",
-        message,
-        "error",
-        props.userId
-      );
-      console.log(`Rejected reservation for user ${props.userId}`);
+
+      if (connection) {
+        const message = "Your reservation has been rejected.";
+        await connection.invoke(
+          "SendNotification",
+          message,
+          "error",
+          props.userId
+        );
+        console.log(`Rejected reservation for user ${props.userId}`);
+      } else {
+        console.error("SignalR connection is not established");
+      }
     } catch (error) {
       console.error(
         "Error deleting reservation:",
@@ -46,15 +51,20 @@ export default function UserCard(props) {
   const handleAccept = async () => {
     if (!isAccepted) {
       props.increaseCounter(); // Increase counter on accept
-      const message = "Your reservation has been accepted.";
-      await connection.invoke(
-        "SendNotification",
-        message,
-        "success",
-        props.userId
-      );
-      console.log(`Accepted reservation for user ${props.userId}`);
-      setIsAccepted(true);
+
+      if (connection) {
+        const message = "Your reservation has been accepted.";
+        await connection.invoke(
+          "SendNotification",
+          message,
+          "success",
+          props.userId
+        );
+        console.log(`Accepted reservation for user ${props.userId}`);
+        setIsAccepted(true);
+      } else {
+        console.error("SignalR connection is not established");
+      }
     }
   };
 

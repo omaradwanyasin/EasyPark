@@ -6,6 +6,7 @@ import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import { Link } from "react-router-dom";
+import IconButtonMenu from "../../../Components/IconButtonMenu.jsx";
 
 export default function HeaderSection({ email, name }) {
   return (
@@ -34,9 +35,9 @@ export default function HeaderSection({ email, name }) {
           gap: 1.5,
         }}
       >
-      <IconButton size="sm" variant="soft" > 
-      <Link to="/home"> 
-          <LocalParkingIcon />
+        <IconButton size="sm" variant="soft">
+          <Link to="/home">
+            <LocalParkingIcon />
           </Link>
         </IconButton>
         <Typography component="h1" fontWeight="xl">
@@ -52,11 +53,7 @@ export default function HeaderSection({ email, name }) {
             display: { xs: "none", sm: "flex" },
           }}
         >
-          <Avatar
-            variant="outlined"
-            size="sm"
-            src="https://media.istockphoto.com/id/1096419446/photo/modern-cheerful-business-man-in-deep-blue-shirt-standing-with-crossed-arms-isolated-on-gray.jpg?s=612x612&w=0&k=20&c=r4f-QedoEjL9KU-H96imU5UI5594wFUj2A9PgD8JXGY="
-          />
+          <IconButtonMenu />
           <Box sx={{ minWidth: 0, flex: 1 }}>
             <Typography level="title-sm">{name}</Typography>
             <Typography level="body-xs">{email}</Typography>
