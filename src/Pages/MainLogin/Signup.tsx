@@ -96,7 +96,7 @@ export default function Signup() {
       }
 
       const result = await response.json();
-      alert(`User created successfully: ${JSON.stringify(result, null, 2)}`);
+      // alert(`User created successfully: ${JSON.stringify(result, null, 2)}`);
       navigate("/Login");
     } catch (error) {
       console.error("There was a problem with the sign-up request:", error);

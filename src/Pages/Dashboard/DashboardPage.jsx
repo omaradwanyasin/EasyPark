@@ -11,12 +11,15 @@ import { SignalRProvider } from "../../signalRService";
 
 function DashboardPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(() => {
+    const savedCounter = localStorage.getItem("counter");
+    return savedCounter !== null ? parseInt(savedCounter, 10) : 0;
+  });
   const [toggleValue, setToggleValue] = useState("web");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [capacity, setCapacity] = useState(null);
   const [reservations, setReservations] = useState([]);
-  const [initialLoadComplete, setInitialLoadComplete] = useState(false); // Track initial load state
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 
   const fetchParkingData = async () => {
     const garageOwnerId = localStorage.getItem("userId");
@@ -49,17 +52,14 @@ function DashboardPage() {
       }
       const data = await response.json();
 
-      const formattedReservations = data.map((reservation) => {
-        return {
-          reservation_id: reservation.id,
-          name: reservation.name,
-          phone_number: reservation.phone,
-          userId: reservation.userId,
-        };
-      });
+      const formattedReservations = data.map((reservation) => ({
+        reservation_id: reservation.id,
+        name: reservation.name,
+        phone_number: reservation.phone,
+        userId: reservation.userId,
+      }));
       setReservations(formattedReservations);
 
-      // Set initial load complete after fetching reservations
       setInitialLoadComplete(true);
     } catch (error) {
       console.error("Error fetching reservation data:", error);
@@ -84,20 +84,31 @@ function DashboardPage() {
 
       const intervalId = setInterval(fetchReservations, 3000);
 
-      // Cleanup interval on component unmount
       return () => clearInterval(intervalId);
     }
   }, [isLoggedIn, fetchReservations]);
 
+  useEffect(() => {
+    localStorage.setItem("counter", counter);
+  }, [counter]);
+
   const increase = () => {
     if (counter < capacity) {
-      setCounter((prev) => prev + 1);
+      setCounter((prev) => {
+        const newCounter = prev + 1;
+        localStorage.setItem("counter", newCounter);
+        return newCounter;
+      });
     }
   };
 
   const decrease = () => {
     if (counter > 0) {
-      setCounter((prev) => prev - 1);
+      setCounter((prev) => {
+        const newCounter = prev - 1;
+        localStorage.setItem("counter", newCounter);
+        return newCounter;
+      });
     }
   };
 
@@ -113,7 +124,6 @@ function DashboardPage() {
     );
   };
 
-  // Render loading state until initial load is complete
   if (!initialLoadComplete) {
     return <div>Loading...</div>;
   }

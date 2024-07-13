@@ -47,7 +47,7 @@ const EmailForm = () => {
         <h2>Write us a Message .. 👇</h2>
         <br />
 
-        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Email :</p>
+        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Name :</p>
         <input
           type="text"
           placeholder="..."
@@ -55,7 +55,7 @@ const EmailForm = () => {
           onChange={(e) => setName(e.target.value)}
           style={s.input}
         />
-        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Name :</p>
+        <p style={{marginBottom:'5px', textAlign: 'left', fontSize: '14px' , marginLeft :'5px'}}>Enter your Email :</p>
         <input
           type="email"
           placeholder="..."
