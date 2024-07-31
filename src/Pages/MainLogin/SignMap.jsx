@@ -7,6 +7,7 @@ function SignMap({ onLocationChange }) {
     const [viewport, setViewport] = useState({
         width: "800px",
         height: "600px",
+        // adding commit for testing
     
     });
     const [markerPosition, setMarkerPosition] = useState(null);
