@@ -1,0 +1,113 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.28855308450816, 32.45831833204167]
+      },
+      "properties": { "prop0": "value0", "parkid": 1 },
+      "name": "abu baker parking",
+      "comments": ["this is first comment", "this another comment"],
+      "City": "Jenin",
+      "status": 1,
+      "info": "some info about the parking",
+      "rating": 4
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.298051051343464, 32.46476896942453]
+      },
+      "properties": {
+        "parkid": 2,
+        "prop0": "value0",
+        "prop1": 0.0
+      },
+      "name": "al cenima parking",
+      "comments": ["this is first comment", "this another comment"],
+      "City": "Jenin",
+      "status": 0,
+      "info": "some info about the parking",
+      "rating": 2,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.30747004823746, 32.46085842933187]
+      },
+      "properties": {
+        "parkid": 3,
+        "prop0": "value0",
+        "prop1": { "this": "that" }
+      },
+      "name": "ibn sena parking",
+      "status": 0,
+      "info": "some info about the parking",
+      "rating": 3,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.29855308450816, 32.45831833204167]
+      },
+      "properties": { "prop0": "value0", "parkid": 1 },
+      "name": "HIAFA parking",
+      "status": 1,
+      "info": "some info about the parking",
+      "rating": 3.5,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.29855308450816, 32.46831833204167]
+      },
+      "properties": { "prop0": "value0", "parkid": 1 },
+      "name": "nablus street parking",
+      "status": 0,
+      "info": "some info about the parking",
+      "rating": 4,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.30855308450816, 32.45931833204167]
+      },
+      "properties": { "prop0": "value0", "parkid": 1 },
+      "name": "al hesbeh parking",
+      "status": 0,
+      "info": "some info about the parking",
+      "rating": 3,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.30855308450816, 32.46931833204167]
+      },
+      "properties": { "prop0": "value0", "parkid": 1 },
+      "name": "gaza parking",
+      "status": 0,
+      "info": "some info about the parking",
+      "rating": 5,
+      "price": "3$",
+      "workingTime": "7:00 AM - 6:00 PM"
+    }
+  ]
+}

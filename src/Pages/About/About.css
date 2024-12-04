@@ -1,0 +1,32 @@
+.about{
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+
+}
+.photo1{
+
+    width: 400px;
+
+
+}
+.Parag{
+    padding-top: 100px;
+    gap: 50px;
+}
+.Parag h1{
+    font-size: 30px;
+}
+.talk{
+    padding-top: 80px;
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+.link{
+    color: chocolate;
+}
